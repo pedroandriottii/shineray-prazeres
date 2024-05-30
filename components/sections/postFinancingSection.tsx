@@ -22,11 +22,10 @@ export default function Home() {
       birthDate: new Date(birthDate).toISOString(),
       hasDriverLicense,
       method,
-      IsConcluded: false,
+      isConcluded: false,
     };
 
     try {
-      console.log(newItem)
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/financing`, {
         method: 'POST',
         headers: {
@@ -38,7 +37,7 @@ export default function Home() {
       if (response.ok) {
         alert('Financing item added successfully!');
       } else {
-        alert('Failed to add financing item.');
+        alert(`Failed to add financing item`);
       }
     } catch (error) {
       console.error('Failed to add financing item', error);
@@ -47,56 +46,70 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1 className="text-center font-bold text-lg">Add Financing Item</h1>
+    <div className='w-full flex items-center flex-col bg-shineray-color-dark'>
+      <h1 className="text-center text-lg p-2 bg-white text-shineray-color-dark rounded-b-xl">Simular Financiamento</h1>
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 p-4">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="border rounded-md p-2"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border rounded-md p-2"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="border rounded-md p-2"
-          required
-        />
-        <input
-          type="text"
-          placeholder="CPF"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          className="border rounded-md p-2"
-          required
-        />
-        <input
-          type="date"
-          placeholder="Birth Date"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
-          className="border rounded-md p-2"
-          required
-        />
+        <div className='flex flex-col'>
+          <label className='text-sm text-white'>Nome</label>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border rounded-md p-2"
+            required
+          />
+        </div>
+        <div className='flex flex-col'>
+          <label className='text-sm text-white'>Email</label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border rounded-md p-2"
+            required
+          />
+        </div>
+        <div className='flex flex-col'>
+          <label className='text-sm text-white'>Telefone</label>
+          <input
+            type="text"
+            placeholder="+55 (XX) XXXXX-XXXX"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="border rounded-md p-2"
+            required
+          />
+        </div>
+        <div className='flex flex-col'>
+          <label className='text-sm text-white'>CPF</label>
+          <input
+            type="text"
+            placeholder="XXX.XXX.XXX-XX"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            className="border rounded-md p-2"
+            required
+          />
+        </div>
+        <div className='flex flex-col'>
+          <input
+            type="date"
+            placeholder="Birth Date"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            className="border rounded-md p-2"
+            required
+          />
+        </div>
         <label>
           <input
             type="checkbox"
             checked={hasDriverLicense}
             onChange={(e) => setHasDriverLicense(e.target.checked)}
           />
-          Has Driver License
+          Possui Habilitação?
         </label>
         <select
           value={method}

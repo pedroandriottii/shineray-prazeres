@@ -73,9 +73,10 @@
 
   body {
     @apply bg-background text-foreground;
+    font-weight: 300;
   }
-}
 
-body {
-  font-weight: 300;
+  .font-light {
+    font-weight: 300;
+  }
 }

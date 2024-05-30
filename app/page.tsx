@@ -4,7 +4,7 @@ import PostFinancingSection from "@/components/sections/postFinancingSection";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <GetFinancingSection />
       <PostFinancingSection />
     </div>
