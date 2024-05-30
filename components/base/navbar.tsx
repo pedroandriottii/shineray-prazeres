@@ -1,15 +1,35 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+            setMenuOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [menuOpen]);
 
     return (
         <div className='relative'>
@@ -32,16 +52,15 @@ const Navbar: React.FC = () => {
             </div>
             {menuOpen && (
                 <div className='fixed w-full inset-0 top-0 left-0 bg-black bg-opacity-50 z-40 flex justify-center items-start'>
-                    <div className='w-full max-w-md bg-white p-8 z-50 flex flex-col items-center'>
+                    <div ref={menuRef} className='w-full max-w-md bg-white p-8 z-50 flex flex-col items-center'>
                         <button onClick={toggleMenu} className='absolute top-4 right-4 text-red-500'>
                             <CloseIcon fontSize='large' />
                         </button>
                         <div className='flex flex-col items-center gap-4'>
-                            <a href="#" className='text-2xl'>Início</a>
-                            <a href="#" className='text-2xl'>Produtos</a>
-                            <a href="#" className='text-2xl'>Sobre Nós</a>
-                            <a href="#" className='text-2xl'>Contato</a>
-                            <a href="#" className='py-2 px-4 text-2xl bg-red-500 text-white rounded-xl'>Login</a>
+                            <Link href={'/'} className='text-2xl' onClick={() => setMenuOpen(false)}>Início</Link>
+                            <Link href={'/#sobre-nos'} className='text-2xl' onClick={() => setMenuOpen(false)}>Sobre Nós</Link>
+                            <Link href={'/catalogo'} className='text-2xl' onClick={() => setMenuOpen(false)}>Catálogo</Link>
+                            <Link href={'/login'} className='py-2 px-4 text-2xl bg-red-500 text-white rounded-xl' onClick={() => setMenuOpen(false)}>Login</Link>
                         </div>
                     </div>
                 </div>
