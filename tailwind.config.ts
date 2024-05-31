@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'parallax': "url('/revisao.jpeg')",
+      },
       colors: {
         'shineray-color-dark': '#D00101',
         border: "hsl(var(--border))",

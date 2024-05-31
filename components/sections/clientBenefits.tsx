@@ -3,6 +3,7 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import BuildIcon from '@mui/icons-material/Build';
 
 import {
     Accordion,
@@ -31,6 +32,17 @@ const ClientBenefits: React.FC = () => {
                 <AccordionItem value="item-2">
                     <AccordionTrigger>
                         <div className='flex items-center gap-2'>
+                            <BuildIcon />
+                            <span>As duas primeiras revisões 100% grátis!</span>
+                        </div>
+                    </AccordionTrigger>
+                    <AccordionContent className='px-2'>
+                        As duas primeiras revisões são por nossa conta!
+                    </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                    <AccordionTrigger>
+                        <div className='flex items-center gap-2'>
                             <SportsMotorsportsIcon style={{ transform: 'scaleX(-1)' }} />
                             <span>Ganhe um Capacete!</span>
                         </div>
@@ -39,7 +51,7 @@ const ClientBenefits: React.FC = () => {
                         Na compra de uma moto, ganhe um capacete!
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3">
+                <AccordionItem value="item-4">
                     <AccordionTrigger>
                         <div className='flex items-center gap-2'>
                             <LocalGasStationIcon />

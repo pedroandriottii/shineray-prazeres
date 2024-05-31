@@ -21,7 +21,8 @@ function Footer() {
                     loading="lazy"
                 ></iframe>
             </div>
-            <div className='p-4 flex justify-between'>
+            <div className='p-4 flex justify-between underline text-slate-600'>
+                <p>Início</p>
                 <p>Sobre Nós</p>
                 <p>Catálogo</p>
             </div>

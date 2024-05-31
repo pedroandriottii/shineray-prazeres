@@ -40,15 +40,23 @@ const Navbar: React.FC = () => {
                     height={40}
                     alt='Shineray Prazeres Logo'
                 />
-                <button onClick={toggleMenu}>
-                    {menuOpen ? (
-                        <span className='text-red-500'>
-                            <CloseIcon fontSize='large' />
-                        </span>
-                    ) : (
-                        <MenuIcon fontSize='large' />
-                    )}
-                </button>
+                <div className='hidden md:flex space-x-8 items-center'>
+                    <Link href={'/'} className='text-lg'>Início</Link>
+                    <Link href={'/#sobre-nos'} className='text-lg'>Sobre Nós</Link>
+                    <Link href={'/catalogo'} className='text-lg'>Catálogo</Link>
+                    <Link href={'/login'} className='py-2 px-4 text-lg bg-red-500 text-white rounded-xl'>Login</Link>
+                </div>
+                <div className='md:hidden'>
+                    <button onClick={toggleMenu}>
+                        {menuOpen ? (
+                            <span className='text-red-500'>
+                                <CloseIcon fontSize='large' />
+                            </span>
+                        ) : (
+                            <MenuIcon fontSize='large' />
+                        )}
+                    </button>
+                </div>
             </div>
             {menuOpen && (
                 <div className='fixed w-full inset-0 top-0 left-0 bg-black bg-opacity-50 z-40 flex justify-center items-start'>
