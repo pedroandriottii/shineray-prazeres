@@ -1,6 +1,7 @@
 import About from "@/components/sections/about";
 import { DynamicCarousel } from "@/components/sections/dynamicCarousel";
-import PostFinancingSection from "@/components/sections/postFinancingSection";
+import ClientBenefits from "@/components/sections/clientBenefits";
+import PanelAccess from "@/components/sections/panelAccess";
 import { WhatsApp } from "@mui/icons-material";
 import Image from "next/image";
 
@@ -17,7 +18,10 @@ export default function Home() {
         </p>
       </div>
       <About />
+      <h1 className="flex justify-center uppercase p-2 text-shineray-color-dark font-bold">Catálogo</h1>
       <DynamicCarousel />
+      <ClientBenefits />
+      <PanelAccess />
     </div>
   );
 }
