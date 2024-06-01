@@ -34,12 +34,14 @@ const Navbar: React.FC = () => {
     return (
         <div className='relative'>
             <div className='flex bg-white p-4 items-center justify-between'>
-                <Image
-                    src={'/logo.png'}
-                    width={180}
-                    height={40}
-                    alt='Shineray Prazeres Logo'
-                />
+                <Link href={'/'}>
+                    <Image
+                        src={'/logo.png'}
+                        width={180}
+                        height={40}
+                        alt='Shineray Prazeres Logo'
+                    />
+                </Link>
                 <div className='hidden md:flex space-x-8 items-center'>
                     <Link href={'/'} className='text-lg'>Início</Link>
                     <Link href={'/#sobre-nos'} className='text-lg'>Sobre Nós</Link>

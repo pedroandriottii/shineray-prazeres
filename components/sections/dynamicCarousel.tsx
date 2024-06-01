@@ -22,8 +22,9 @@ export function DynamicCarousel() {
                         height={100}
                         alt="Jef"
                         className="w-full" />
-                    <div className='w-full p-4'>
-                        <h1>JEF-150</h1>
+                    <div className='flex  justify-between w-full p-4'>
+                        <h1>JEF-150 2024</h1>
+                        <h1>R$ 10.000,00</h1>
                     </div>
                 </CarouselItem>
                 <CarouselItem>
@@ -33,8 +34,9 @@ export function DynamicCarousel() {
                         height={100}
                         alt="Jef"
                         className="w-full" />
-                    <div className='w-full p-4'>
-                        <h1>SHI-150</h1>
+                    <div className='flex justify-between w-full p-4'>
+                        <h1>SHI-1502024</h1>
+                        <h1>R$ 10.000,00</h1>
                     </div>
                 </CarouselItem>
                 <CarouselItem>

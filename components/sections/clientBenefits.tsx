@@ -64,11 +64,11 @@ const ClientBenefits: React.FC = () => {
                 </AccordionItem>
             </Accordion>
             <Link href={'/catalogo'}>
-                <div className='p-4 flex justify-center items-center'>
-                    <h1>
+                <div className='p-2 flex justify-center items-center'>
+                    <h1 className='flex bg-white w-full text-shineray-color-dark text-center shadow-md p-2 justify-between'>
                         Veja os modelos disponíveis!
+                        <ChevronRightIcon />
                     </h1>
-                    <ChevronRightIcon />
                 </div>
             </Link>
 

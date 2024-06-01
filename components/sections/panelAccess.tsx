@@ -7,7 +7,7 @@ const PanelAccess: React.FC = () => {
             <h1 className='flex justify-center text-shineray-color-dark uppercase font-bold'>
                 Área do Cliente
             </h1>
-            <p>Nossos clientes possuem acesso à um painel com informações sobre sua moto, serviços e garantias.</p>
+            <p className='text-center'>Nossos clientes possuem acesso à um painel com informações sobre sua moto, serviços e garantias.</p>
             <Link href={'/login'}>
                 <div className='flex justify-center p-2 rounded-2xl text-center bg-shineray-color-dark text-white m-2'>
                     Fazer Login
