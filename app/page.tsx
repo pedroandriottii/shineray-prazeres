@@ -4,8 +4,6 @@ import ClientBenefits from "@/components/sections/clientBenefits";
 import PanelAccess from "@/components/sections/panelAccess";
 import { WhatsApp } from "@mui/icons-material";
 import Image from "next/image";
-import CreateMoto from "@/components/CreateMoto";
-
 
 export default function Home() {
   return (
@@ -29,9 +27,6 @@ export default function Home() {
       <DynamicCarousel />
       <ClientBenefits />
       <PanelAccess />
-      <div>
-        <CreateMoto />
-      </div>
     </div >
   );
 }

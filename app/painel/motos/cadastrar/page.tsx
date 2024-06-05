@@ -1,11 +1,10 @@
+import CreateMoto from '@/components/CreateMoto';
 import React from 'react';
 
 const Page: React.FC = () => {
-    // Your code here
-
     return (
         <div>
-            CADASTRAR MOTOCA
+            <CreateMoto />
         </div>
     );
 };

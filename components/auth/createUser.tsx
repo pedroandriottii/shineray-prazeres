@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const CreateUser = () => {
@@ -7,6 +8,7 @@ const CreateUser = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -38,8 +40,10 @@ const CreateUser = () => {
 
             const data = await response.json();
             console.log('User created successfully:', data);
+
         } catch (error) {
             console.error('Error:', error);
+            router.push('/clientes');
         }
     };
 

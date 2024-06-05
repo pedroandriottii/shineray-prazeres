@@ -10,18 +10,15 @@ const Page: React.FC = () => {
     const userId = Cookies.get('userId');
     return (
         <div>
-            <h1 className='bg-green-500'>ROLA - {role}</h1>
-            <h1 className='bg-purple-200'>AIDI - {userId}</h1>
+            <h1 className='bg-green-500'>ROLE - {role}</h1>
+            <h1 className='bg-purple-200'>ID - {userId}</h1>
             {role === 'ADMIN' && (
                 <div>
-                    <h1>PAGINA DO ADM</h1>
-                    <Link href={'/painel/cadastro/cliente'}>
-                        Cadastrar Cliente
-                    </Link>
-                    <Link href={'/painel/cadastro/moto'}>
-                        Cadastrar Moto
-                    </Link>
-                    <GetFinancingSection />
+                    <h1>Gestão</h1>
+                    <div>
+                        <h1>Últimos Financiamentos</h1>
+                        <GetFinancingSection />
+                    </div>
                 </div>
             )}
             {role === 'CLIENT' && (
