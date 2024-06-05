@@ -1,10 +1,11 @@
-import LoginSection from '@/components/auth/loginSection';
+import CreateUser from '@/components/auth/createUser';
 import React from 'react';
 
 const Page: React.FC = () => {
+
     return (
         <div>
-            <LoginSection />
+            <CreateUser />
         </div>
     );
 };

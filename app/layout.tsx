@@ -5,6 +5,9 @@ import Navbar from "@/components/base/navbar";
 import Banner from "@/components/base/banner";
 import Footer from "@/components/base/footer";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { AuthProvider } from "@/context/AuthContext";
+
+
 
 const bebas = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
@@ -23,19 +26,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${bebas.className} font-light`}>
-        <div className="fixed top-0 left-0 w-full z-50">
-          <Navbar />
-          <Banner />
-        </div>
-        <div className="pt-[7rem]">
-          {children}
-          {/* <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg">
+      <AuthProvider>
+        <body className={`${bebas.className} font-light`}>
+          <div className="fixed top-0 left-0 w-full z-50">
+            <Navbar />
+            <Banner />
+          </div>
+          <div className="pt-[7rem]">
+            {children}
+            {/* <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg">
             <WhatsAppIcon fontSize="large" />
           </a> */}
-        </div>
-        <Footer />
-      </body>
+          </div>
+          <Footer />
+        </body>
+      </AuthProvider>
     </html>
   );
 }

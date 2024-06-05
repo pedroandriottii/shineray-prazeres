@@ -1,10 +1,11 @@
-import LoginSection from '@/components/auth/loginSection';
 import React from 'react';
 
 const Page: React.FC = () => {
+    // Your code here
+
     return (
         <div>
-            <LoginSection />
+            CADASTRAR MOTOCA
         </div>
     );
 };
