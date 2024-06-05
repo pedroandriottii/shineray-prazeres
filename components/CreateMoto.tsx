@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import Cookies from 'js-cookie';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
+
 
 const CreateMoto: React.FC = () => {
   const [name, setName] = useState('');
@@ -14,6 +18,7 @@ const CreateMoto: React.FC = () => {
   const [specs, setSpecs] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -44,9 +49,11 @@ const CreateMoto: React.FC = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
+      router.push('/painel/motos')
+      toast.success('Moto cadastrada com sucesso!');
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
+      toast.error('Houve um problema ao cadastrar a moto.');
     }
   };
 
@@ -92,6 +99,7 @@ const CreateMoto: React.FC = () => {
         </div>
         <Button type="submit" className="mt-4 w-full">Cadastrar Moto</Button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

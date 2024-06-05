@@ -1,9 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 
 interface Motorcycle {
@@ -61,21 +58,24 @@ const Page: React.FC = () => {
             <div className='grid grid-flow-row gap-10'>
                 {motorcycles.map((motorcycle) => (
                     <div key={motorcycle.id} className="motorcycle-card">
-                        <Card className='flex p-2 flex-col'>
-                            <img className='w-full rounded-md' src={motorcycle.imageUrl} alt={motorcycle.name} width={200} height={150} />
-                            <div className='flex justify-between items-center'>
-                                <p className='flex items-center gap-2'>
-                                    <h2 className='flex text-center py-2 uppercase justify-center font-bold text-shineray-color-dark'>{motorcycle.name}</h2>
-                                    <p>{motorcycle.year}</p>
-                                </p>
-                                <p>R${motorcycle.price}</p>
-                            </div>
-                            <p>{motorcycle.description}</p>
-                            <p>{motorcycle.model}</p>
-                            <p><span className='text-shineray-color-dark uppercase'>Cor: </span>{motorcycle.color}</p>
-                            <span className='text-shineray-color-dark uppercase flex justify-center'>Ficha Técnica:</span>
-                            <p className='flex text-center justify-center'>{motorcycle.specs}</p>
-                        </Card>
+                        <Link href={`/catalogo/${motorcycle.id}`}>
+                            <Card className='flex p-2 flex-col'>
+                                <img className='w-full rounded-md' src={motorcycle.imageUrl} alt={motorcycle.name} width={200} height={150} />
+                                <div className='flex justify-between items-center'>
+                                    <p className='flex items-center gap-2'>
+                                        <h2 className='flex text-center py-2 uppercase justify-center font-bold text-shineray-color-dark'>{motorcycle.name}</h2>
+                                        <p>{motorcycle.year}</p>
+                                    </p>
+                                    <p>R${motorcycle.price}</p>
+                                </div>
+                                <p>{motorcycle.description}</p>
+                                <p>{motorcycle.model}</p>
+                                <p><span className='text-shineray-color-dark uppercase'>Cor: </span>{motorcycle.color}</p>
+                                <span className='text-shineray-color-dark uppercase flex justify-center'>Ficha Técnica:</span>
+                                <p className='flex text-center justify-center'>{motorcycle.specs}</p>
+                            </Card>
+                        </Link>
+
                     </div>
                 ))}
             </div>
