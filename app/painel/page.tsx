@@ -14,11 +14,7 @@ const Page: React.FC = () => {
             <h1 className='bg-purple-200'>ID - {userId}</h1>
             {role === 'ADMIN' && (
                 <div>
-                    <h1>Gestão</h1>
-                    <div>
-                        <h1>Últimos Financiamentos</h1>
-                        <GetFinancingSection />
-                    </div>
+                    <GetFinancingSection />
                 </div>
             )}
             {role === 'CLIENT' && (

@@ -1,8 +1,8 @@
 "use client";
-
 import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import Cookies from 'js-cookie';
 
 const CreateMoto: React.FC = () => {
   const [name, setName] = useState('');
@@ -17,6 +17,7 @@ const CreateMoto: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const token = Cookies.get('accessToken');
 
     const formData = new FormData();
     formData.append('name', name);
@@ -32,10 +33,10 @@ const CreateMoto: React.FC = () => {
     formData.append('description', description);
 
     try {
-      const response = await fetch('http://localhost:3000/motorcycles', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/motorcycles`, {
         method: 'POST',
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ZTQ0MmU5My0wMTBhLTRlYjQtOGQ1MS1kYjE3YmE1MDIyMTEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTc2MTU3MzYsImV4cCI6MTcyNjI1NTczNn0.9aZvlAkQ_9rx7CPppwopuzMWVEs099ZWMELSDAnEOfY'
+          'Authorization': `Bearer ${token}`,
         },
         body: formData,
       });
@@ -44,7 +45,6 @@ const CreateMoto: React.FC = () => {
         throw new Error('Network response was not ok');
       }
 
-      // Handle the response as needed
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
     }

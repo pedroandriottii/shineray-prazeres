@@ -67,13 +67,13 @@ const Page: React.FC = () => {
 
     return (
         <div className='p-4'>
-            <div className='flex items-center gap-6'>
+            <div className='flex items-center gap-6 p-4 justify-center'>
                 <span className='text-shineray-color-dark'>
                     <PersonIcon fontSize='large' />
                 </span>
                 <h1 className='text-2xl uppercase text-shineray-color-dark text-center'>Clientes</h1>
             </div>
-            <Card>
+            <Card className='bg-slate-300'>
                 <Table>
                     <TableHeader>
                         <TableRow>

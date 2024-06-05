@@ -22,7 +22,7 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     return (
         <html lang="en">
             <AuthProvider>
-                <body className={`${Font.className} font-light`}>
+                <body className={`${Font.className} font-light bg-[#1F1F1F]`} >
                     <div className="white p-2 flex justify-between items-center">
                         <Image
                             src={'/logo_revisao.png'}
@@ -31,22 +31,25 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                             alt="Logomarca Shineray Prazeres"
                         />
                         <div className="flex justify-around gap-10">
-                            <Link href={'/painel/motos'}>
-                                <Button>Estoque</Button>
+                            <Link href={'/painel'}>
+                                <Button variant='outline'>Painel</Button>
+                            </Link>
+                            <Link href={'/painel/motos'} >
+                                <Button variant='outline'>Estoque</Button>
                             </Link>
                             <Link href={'/painel/clientes'}>
-                                <Button>Clientes</Button>
+                                <Button variant='outline'>Clientes</Button>
                             </Link>
                             <Link href={'/painel/servicos'}>
-                                <Button>Serviços</Button>
+                                <Button variant='outline'>Serviços</Button>
                             </Link>
                             <Link href={'/painel/financiamentos'}>
-                                <Button>Financiamentos</Button>
+                                <Button variant='outline'>Financiamentos</Button>
                             </Link>
                         </div>
                         <Logout />
                     </div>
-                    <main className="bg-[#1F1F1F]">{children}</main>
+                    {children}
                 </body>
             </AuthProvider>
         </html>
