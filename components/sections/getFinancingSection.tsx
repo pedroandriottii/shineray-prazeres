@@ -68,7 +68,7 @@ const GetFinancingSection: React.FC = () => {
                     </TableRow>
                 </TableHeader>
                 {financingItems.map(item => (
-                    <TableBody>
+                    <TableBody key={item.id}>
                         <TableRow className='hover:bg-slate-200'>
                             <TableCell>{item.name}</TableCell>
                             <TableCell>{item.email}</TableCell>
