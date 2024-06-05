@@ -7,8 +7,6 @@ import Footer from "@/components/base/footer";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { AuthProvider } from "@/context/AuthContext";
 
-
-
 const bebas = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
@@ -41,6 +39,7 @@ export default function RootLayout({
           <Footer />
         </body>
       </AuthProvider>
+
     </html>
   );
 }

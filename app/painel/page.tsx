@@ -1,24 +1,13 @@
 'use client'
 import GetFinancingSection from '@/components/sections/getFinancingSection';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Cookies from 'js-cookie';
 
 const Page: React.FC = () => {
-    const [role, setRole] = useState<string>('');
-    const [userId, setUserId] = useState<string>('');
-
-    useEffect(() => {
-        const role = localStorage.getItem('role');
-        const userId = localStorage.getItem('userId');
-
-        if (role) {
-            setRole(role);
-        }
-        if (userId) {
-            setUserId(userId);
-        }
-    })
-
+    const role = Cookies.get('role');
+    const userId = Cookies.get('userId');
     return (
         <div>
             <h1 className='bg-green-500'>ROLA - {role}</h1>

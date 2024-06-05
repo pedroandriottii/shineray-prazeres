@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 const LoginSection: React.FC = () => {
     const { setAccessToken } = useAuth();
@@ -44,30 +47,37 @@ const LoginSection: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className='flex flex-col items-center p-6 gap-2'>
+            <h1 className='uppercase text-shineray-color-dark text-xl'>Login</h1>
+            <p className='text-center text-slate-400'>Faça o login e acompanhe os seus serviços aqui na Revisão Motos!</p>
             <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                <div className='flex gap-4 flex-col'>
+                    <div>
+                        <Label htmlFor="email">Email:</Label>
+                        <Input
+                            type="email"
+                            id="email"
+                            value={email}
+                            placeholder='cliente@email.com'
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <Label htmlFor="password">Senha:</Label>
+                        <Input
+                            type="password"
+                            id="password"
+                            value={password}
+                            placeholder='********'
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <Button type="submit" className='bg-shineray-color-dark flex w-full hover:bg-red-500'>Login</Button>
                 </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Login</button>
+
             </form>
         </div>
     );

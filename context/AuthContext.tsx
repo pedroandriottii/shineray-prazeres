@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useContext, createContext, ReactNode, useEffect } from 'react';
 import jwt from 'jsonwebtoken';
+import Cookies from 'js-cookie';
 
 interface AuthContextType {
     accessToken: string | null;
@@ -32,14 +33,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const handleSetAccessToken = (token: string | null) => {
         if (token) {
-            localStorage.setItem('accessToken', token);
-            localStorage.setItem('role', role);
-            localStorage.setItem('userId', userId);
-            console.log(role, userId)
+            Cookies.set('accessToken', token);
+            Cookies.set('role', role);
+            Cookies.set('userId', userId);
         } else {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('role');
-            localStorage.removeItem('userId');
+            Cookies.remove('accessToken');
+            Cookies.remove('role');
+            Cookies.remove('userId');
         }
         setAccessToken(token);
     };
