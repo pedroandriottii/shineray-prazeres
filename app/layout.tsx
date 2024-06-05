@@ -7,7 +7,7 @@ import Footer from "@/components/base/footer";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { AuthProvider } from "@/context/AuthContext";
 
-const bebas = Montserrat({ subsets: ["latin"], weight: ["400"] });
+const Font = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Shineray Prazeres",
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={`${bebas.className} font-light`}>
+        <body className={`${Font.className} font-light`}>
           <div className="fixed top-0 left-0 w-full z-50">
             <Navbar />
             <Banner />

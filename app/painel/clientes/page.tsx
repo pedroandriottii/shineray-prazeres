@@ -1,11 +1,23 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import PersonIcon from '@mui/icons-material/Person';
+
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { Card } from '@/components/ui/card';
 
 interface Client {
     id: number;
     name: string;
     email: string;
+    role: string;
 }
 
 const Page: React.FC = () => {
@@ -54,15 +66,33 @@ const Page: React.FC = () => {
     }
 
     return (
-        <div>
-            <h1>Clients</h1>
-            <ul>
-                {clients.map((client) => (
-                    <li key={client.id}>
-                        {client.name} - {client.email}
-                    </li>
-                ))}
-            </ul>
+        <div className='p-4'>
+            <div className='flex items-center gap-6'>
+                <span className='text-shineray-color-dark'>
+                    <PersonIcon fontSize='large' />
+                </span>
+                <h1 className='text-2xl uppercase text-shineray-color-dark text-center'>Clientes</h1>
+            </div>
+            <Card>
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Nome</TableHead>
+                            <TableHead>E-mail</TableHead>
+                            <TableHead>Role</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    {clients.map(item => (
+                        <TableBody key={item.id}>
+                            <TableRow className='hover:bg-slate-200'>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.email}</TableCell>
+                                <TableCell>{item.role}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    ))}
+                </Table>
+            </Card>
         </div>
     );
 };
