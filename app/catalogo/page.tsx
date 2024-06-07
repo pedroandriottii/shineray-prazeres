@@ -26,7 +26,7 @@ const Page: React.FC = () => {
     useEffect(() => {
         const fetchMotorcycles = async () => {
             try {
-                const response = await fetch('http://localhost:3000/motorcycles', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/motorcycles`, {
                 });
 
                 if (!response.ok) {
@@ -75,7 +75,6 @@ const Page: React.FC = () => {
                                 <p className='flex text-center justify-center'>{motorcycle.specs}</p>
                             </Card>
                         </Link>
-
                     </div>
                 ))}
             </div>

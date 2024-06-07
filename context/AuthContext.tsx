@@ -14,8 +14,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [accessToken, setAccessToken] = useState<string | null>(null);
-    const [role, setRole] = useState<string>('');
-    const [userId, setUserId] = useState<string>('');
+    const [role, setRole] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -33,13 +33,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const handleSetAccessToken = (token: string | null) => {
         if (token) {
+            const decoded = jwt.decode(token);
+            if (decoded) {
+                const { userId, role } = decoded as { userId: string, role: string };
+                setRole(role);
+                setUserId(userId);
+                Cookies.set('role', role);
+                Cookies.set('userId', userId);
+            }
             Cookies.set('accessToken', token);
-            Cookies.set('role', role);
-            Cookies.set('userId', userId);
         } else {
             Cookies.remove('accessToken');
             Cookies.remove('role');
             Cookies.remove('userId');
+            setRole(null);
+            setUserId(null);
         }
         setAccessToken(token);
     };

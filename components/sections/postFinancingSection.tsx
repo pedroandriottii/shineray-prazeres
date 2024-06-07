@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 
@@ -91,7 +92,7 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
             type="date"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
-            className="border rounded-md p-2"
+            className="flex flex-1 border rounded-md p-2 w-full"
             required
           />
         </div>
@@ -107,13 +108,13 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
         <select
           value={method}
           onChange={(e) => setMethod(e.target.value)}
-          className="border rounded-md p-2"
+          className="border rounded-md p-2 w-full"
         >
           <option value="COM_ENTRADA">Com Entrada</option>
           <option value="SEM_ENTRADA">Sem Entrada</option>
           <option value="A_VISTA">A Vista</option>
         </select>
-        <button type="submit" className="bg-blue-500 text-white rounded-md p-2">Submit</button>
+        <Button type="submit" variant='outline' className='flex w-full'>Enviar</Button>
       </form>
     </div>
   );
