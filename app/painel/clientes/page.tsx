@@ -132,9 +132,6 @@ const Page: React.FC = () => {
                 body: JSON.stringify(newClient),
             });
 
-            console.log(response);
-            console.log(newClient);
-
             if (response.ok) {
                 toast.success('Cliente cadastrado com sucesso!');
                 setClients(prevClients => [...prevClients, newClient as Client]);

@@ -33,15 +33,10 @@ const Navbar: React.FC = () => {
 
     return (
         <div className='relative'>
-            <div className='flex bg-white p-4 items-center justify-between'>
-                <Link href={'/'}>
-                    <Image
-                        src={'/logo.png'}
-                        width={180}
-                        height={40}
-                        alt='Shineray Prazeres Logo'
-                    />
-                </Link>
+            <div className='flex p-4 items-center justify-between bg-shineray-color-dark'>
+                <h1 className='uppercase tracking-wider text-md text-white text-center'>
+                    conquiste sua shineray
+                </h1>
                 <div className='hidden md:flex space-x-8 items-center'>
                     <Link href={'/'} className='text-lg'>Início</Link>
                     <Link href={'/#sobre-nos'} className='text-lg'>Sobre Nós</Link>
@@ -55,7 +50,9 @@ const Navbar: React.FC = () => {
                                 <CloseIcon fontSize='large' />
                             </span>
                         ) : (
-                            <MenuIcon fontSize='large' />
+                            <span>
+                                <MenuIcon fontSize='large' className='text-white' />
+                            </span>
                         )}
                     </button>
                 </div>

@@ -50,6 +50,7 @@ const Services: React.FC = () => {
     const [selectedClient, setSelectedClient] = useState<string>('');
     const router = useRouter();
     const token = Cookies.get('accessToken');
+    const role = Cookies.get('role');
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -166,9 +167,11 @@ const Services: React.FC = () => {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Lista de Serviços</h1>
-            <Link href="/painel/servicos/cadastrar">
-                <Button className="mb-4">Cadastrar Serviço</Button>
-            </Link>
+            {role === 'ADMIN' && (
+                <Link href="/painel/servicos/cadastrar">
+                    <Button className="mb-4">Cadastrar Serviço</Button>
+                </Link>
+            )}
             <div className="grid grid-flow-row gap-10 lg:grid-cols-6">
                 {services.map((service) => (
                     <Card key={service.id} className="flex p-2 flex-col">
@@ -176,63 +179,65 @@ const Services: React.FC = () => {
                         <p>{service.description}</p>
                         <p>Preço: R${service.price}</p>
                         <p>Tipo: {service.type}</p>
-                        <p>User: {service.user?.name}</p>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="outline" onClick={() => { setEditService(service); setSelectedClient(service.userId || '') }}>Editar Serviço</Button>
-                            </DialogTrigger>
-                            {editService && editService.id === service.id && (
-                                <DialogContent className="sm:max-w-[425px]">
-                                    <DialogHeader>
-                                        <DialogTitle>Editar Serviço</DialogTitle>
-                                        <DialogDescription>Edite seu serviço e clique para salvar quando concluir</DialogDescription>
-                                    </DialogHeader>
-                                    <form onSubmit={handleEdit}>
-                                        <div className="mb-4">
-                                            <Label htmlFor="name">Nome</Label>
-                                            <Input type="text" id="name" name="name" value={editService.name} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="description">Descrição</Label>
-                                            <textarea id="description" name="description" value={editService.description} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="price">Preço</Label>
-                                            <Input type="number" id="price" name="price" value={editService.price} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="type">Tipo</Label>
-                                            <Input type="text" id="type" name="type" value={editService.type} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="client">Cliente</Label>
-                                            <select id="client" name="userId" value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
-                                                <option value="">Selecione um cliente</option>
-                                                {clients.map((client) => (
-                                                    <option key={client.id} value={client.id}>{client.name}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <Button type="submit" className="mt-4 w-full">Atualizar Serviço</Button>
-                                    </form>
-                                </DialogContent>
-                            )}
-                        </Dialog>
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <Button variant="destructive">Deletar Serviço</Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
-                                    <AlertDialogDescription>Esta ação não pode ser desfeita. Você perderá o serviço para sempre.</AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => handleDelete(service.id)}>Continuar</AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
+                        {role === 'ADMIN' && (
+                            <>
+                                <p>Usuário: {service.user?.name}</p><Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button variant="outline" onClick={() => { setEditService(service); setSelectedClient(service.userId || ''); }}>Editar Serviço</Button>
+                                    </DialogTrigger>
+                                    {editService && editService.id === service.id && (
+                                        <DialogContent className="sm:max-w-[425px]">
+                                            <DialogHeader>
+                                                <DialogTitle>Editar Serviço</DialogTitle>
+                                                <DialogDescription>Edite seu serviço e clique para salvar quando concluir</DialogDescription>
+                                            </DialogHeader>
+                                            <form onSubmit={handleEdit}>
+                                                <div className="mb-4">
+                                                    <Label htmlFor="name">Nome</Label>
+                                                    <Input type="text" id="name" name="name" value={editService.name} onChange={handleChange} required />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <Label htmlFor="description">Descrição</Label>
+                                                    <textarea id="description" name="description" value={editService.description} onChange={handleChange} required />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <Label htmlFor="price">Preço</Label>
+                                                    <Input type="number" id="price" name="price" value={editService.price} onChange={handleChange} required />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <Label htmlFor="type">Tipo</Label>
+                                                    <Input type="text" id="type" name="type" value={editService.type} onChange={handleChange} required />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <Label htmlFor="client">Cliente</Label>
+                                                    <select id="client" name="userId" value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
+                                                        <option value="">Selecione um cliente</option>
+                                                        {clients.map((client) => (
+                                                            <option key={client.id} value={client.id}>{client.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <Button type="submit" className="mt-4 w-full">Atualizar Serviço</Button>
+                                            </form>
+                                        </DialogContent>
+                                    )}
+                                </Dialog><AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button variant="destructive">Deletar Serviço</Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
+                                            <AlertDialogDescription>Esta ação não pode ser desfeita. Você perderá o serviço para sempre.</AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => handleDelete(service.id)}>Continuar</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </>
+                        )}
                     </Card>
                 ))}
             </div>

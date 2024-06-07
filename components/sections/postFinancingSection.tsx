@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface PostFinancingSectionProps {
   motorcycleId: number;
@@ -42,18 +44,18 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
       });
 
       if (response.ok) {
-        alert('Financing item added successfully!');
+        toast.success('Simulação de Financiamento Enviada para Análise!');
       } else {
-        alert(`Failed to add financing item`);
+        toast.error('Falha ao enviar a simulação de financiamento. Tente novamente mais tarde.');
       }
     } catch (error) {
-      console.error('Failed to add financing item', error);
-      alert('An error occurred while adding the financing item.');
+      toast.error('Falha ao enviar a simulação de financiamento. Tente novamente mais tarde.');
     }
   };
 
   return (
     <div className='w-full flex items-center flex-col bg-shineray-color-dark'>
+      <ToastContainer />
       <h1 className="text-center text-lg p-2 bg-white text-shineray-color-dark rounded-b-xl">Simular Financiamento</h1>
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 p-4">
         <div className='flex flex-col'>

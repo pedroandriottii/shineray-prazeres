@@ -1,7 +1,5 @@
 'use client'
 import GetFinancingSection from '@/components/sections/getFinancingSection';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import React from 'react';
 import Cookies from 'js-cookie';
 
