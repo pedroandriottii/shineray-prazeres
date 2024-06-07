@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import InputMask from 'react-input-mask';
 
 interface PostFinancingSectionProps {
   motorcycleId: number;
@@ -38,9 +39,6 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
         },
         body: JSON.stringify(newItem),
       });
-
-      console.log(response)
-      console.log(newItem)
 
       if (response.ok) {
         alert('Financing item added successfully!');
@@ -81,44 +79,31 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
         </div>
         <div className='flex flex-col'>
           <label className='text-sm text-white'>Telefone</label>
-          <input
-            type="text"
-            placeholder="+55 (XX) XXXXX-XXXX"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="border rounded-md p-2"
-            required
-          />
+          <InputMask mask="+5\5 (99) 99999-9999" value={phone} onChange={(e) => setPhone(e.target.value)} className="border rounded-md p-2" placeholder='+55 (99) 99999-9999' />
         </div>
         <div className='flex flex-col'>
           <label className='text-sm text-white'>CPF</label>
-          <input
-            type="text"
-            placeholder="XXX.XXX.XXX-XX"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            className="border rounded-md p-2"
-            required
-          />
+          <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="border rounded-md p-2" placeholder='CPF' />
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col flex-1'>
+          <label htmlFor="" className='text-sm text-white'>Data de Nascimento</label>
           <input
             type="date"
-            placeholder="Birth Date"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
             className="border rounded-md p-2"
             required
           />
         </div>
-        <label>
+        <div className='flex items-center gap-2 text-white'>
           <input
             type="checkbox"
             checked={hasDriverLicense}
             onChange={(e) => setHasDriverLicense(e.target.checked)}
           />
-          Possui Habilitação?
-        </label>
+          <label htmlFor="">Possui Habilitação?</label>
+        </div>
+
         <select
           value={method}
           onChange={(e) => setMethod(e.target.value)}
