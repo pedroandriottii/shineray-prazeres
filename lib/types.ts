@@ -10,4 +10,5 @@ export interface FinancingItem {
     isConcluded: boolean;
     createdAt: string;
     updatedAt: string;
+    motorcycleId: number;
 }

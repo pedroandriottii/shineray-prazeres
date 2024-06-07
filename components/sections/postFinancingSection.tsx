@@ -2,7 +2,11 @@
 
 import React, { useState } from 'react';
 
-export default function Home() {
+interface PostFinancingSectionProps {
+  motorcycleId: number;
+}
+
+const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleId }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,6 +27,7 @@ export default function Home() {
       hasDriverLicense,
       method,
       isConcluded: false,
+      motorcycleId,
     };
 
     try {
@@ -33,6 +38,9 @@ export default function Home() {
         },
         body: JSON.stringify(newItem),
       });
+
+      console.log(response)
+      console.log(newItem)
 
       if (response.ok) {
         alert('Financing item added successfully!');
@@ -125,3 +133,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default PostFinancingSection;

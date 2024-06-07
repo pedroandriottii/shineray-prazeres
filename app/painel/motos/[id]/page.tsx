@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import PostFinancingSection from '@/components/sections/postFinancingSection';
 
 interface Motorcycle {
     id: number;
@@ -34,7 +33,7 @@ const Page: React.FC = () => {
 
         const fetchMotorcycle = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/motorcycles/${id}`, {
+                const response = await fetch(`http://localhost:3000/motorcycles/${id}`, {
                 });
 
                 if (!response.ok) {
@@ -76,7 +75,6 @@ const Page: React.FC = () => {
                     <p>Specs: {motorcycle.specs}</p>
                 </>
             )}
-            {motorcycle && <PostFinancingSection motorcycleId={motorcycle.id} />}
         </div>
 
     );
