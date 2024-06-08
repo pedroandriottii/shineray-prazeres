@@ -10,10 +10,7 @@ import { useRouter } from 'next/navigation';
 
 const CreateMoto: React.FC = () => {
   const [name, setName] = useState('');
-  const [chassi, setChassi] = useState('');
   const [price, setPrice] = useState('');
-  const [year, setYear] = useState('');
-  const [model, setModel] = useState('');
   const [color, setColor] = useState('');
   const [specs, setSpecs] = useState('');
   const [image, setImage] = useState<File | null>(null);
@@ -26,10 +23,7 @@ const CreateMoto: React.FC = () => {
 
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('chassi', chassi);
     formData.append('price', price);
-    formData.append('year', year);
-    formData.append('model', model);
     formData.append('color', color);
     formData.append('specs', specs);
     if (image) {
@@ -62,24 +56,12 @@ const CreateMoto: React.FC = () => {
       <h2 className="text-2xl font-bold mb-4">Cadastrar Moto</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Modelo</label>
           <Input type="text" id="name" name="name" placeholder="Nome" className="mt-1 block w-full" value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="chassi" className="block text-sm font-medium text-gray-700">Chassi</label>
-          <Input type="text" id="chassi" name="chassi" placeholder="Chassi" className="mt-1 block w-full" value={chassi} onChange={(e) => setChassi(e.target.value)} required />
         </div>
         <div className="mb-4">
           <label htmlFor="price" className="block text-sm font-medium text-gray-700">Preço</label>
           <Input type="text" id="price" name="price" placeholder="Preço" className="mt-1 block w-full" value={price} onChange={(e) => setPrice(e.target.value)} required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="year" className="block text-sm font-medium text-gray-700">Ano</label>
-          <Input type="text" id="year" name="year" placeholder="Ano" className="mt-1 block w-full" value={year} onChange={(e) => setYear(e.target.value)} required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="model" className="block text-sm font-medium text-gray-700">Modelo</label>
-          <Input type="text" id="model" name="model" placeholder="Modelo" className="mt-1 block w-full" value={model} onChange={(e) => setModel(e.target.value)} required />
         </div>
         <div className="mb-4">
           <label htmlFor="color" className="block text-sm font-medium text-gray-700">Cor</label>
@@ -94,8 +76,8 @@ const CreateMoto: React.FC = () => {
           <textarea id="description" name="description" placeholder="Descrição" className="mt-1 block w-full p-2 border rounded-md" value={description} onChange={(e) => setDescription(e.target.value)} required />
         </div>
         <div className="mb-4">
-          <label htmlFor="specs" className="block text-sm font-medium text-gray-700">Specs</label>
-          <textarea id="specs" name="specs" placeholder="specs" className="mt-1 block w-full p-2 border rounded-md" value={specs} onChange={(e) => setSpecs(e.target.value)} required />
+          <label htmlFor="specs" className="block text-sm font-medium text-gray-700">Ficha Técnica</label>
+          <textarea id="specs" name="specs" placeholder="Ficha Técnica" className="mt-1 block w-full p-2 border rounded-md" value={specs} onChange={(e) => setSpecs(e.target.value)} required />
         </div>
         <Button type="submit" className="mt-4 w-full">Cadastrar Moto</Button>
       </form>

@@ -5,6 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputMask from 'react-input-mask';
+import { useRouter } from 'next/navigation';
 
 import {
     Dialog,
@@ -40,6 +41,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface Client {
     id: number;
@@ -49,6 +51,10 @@ interface Client {
     password: string;
     phone: string;
     cpf: string;
+    motorcycle: string;
+    chassi: string;
+    color: string;
+    saleDate: string;
 }
 
 const Page: React.FC = () => {
@@ -59,10 +65,16 @@ const Page: React.FC = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
+    const [motorcycle, setMotorcycle] = useState('');
+    const [chassi, setChassi] = useState('');
+    const [color, setColor] = useState('');
+    const [saleDate, setSaleDate] = useState('');
     const [role, setRole] = useState('CLIENT');
     const [generatedPassword, setGeneratedPassword] = useState<string | null>(null);
     const [showPasswordDialog, setShowPasswordDialog] = useState(false);
     const [showRegisterDialog, setShowRegisterDialog] = useState(false);
+
+    const router = useRouter();
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -120,6 +132,10 @@ const Page: React.FC = () => {
             role,
             phone,
             cpf,
+            motorcycle,
+            chassi,
+            color,
+            saleDate: new Date(saleDate).toISOString(),
         };
 
         try {
@@ -154,6 +170,10 @@ const Page: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const handleRowClick = (id: number) => {
+        router.push(`/painel/clientes/${id}`);
+    };
+
     return (
         <div className='p-4'>
             <ToastContainer />
@@ -170,12 +190,13 @@ const Page: React.FC = () => {
                             <Button className='bg-shineray-color-dark text-white hover:bg-white hover:text-shineray-color-dark'>Cadastrar Cliente</Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[425px]">
-                            <DialogHeader>
+                            <DialogHeader className='flex items-center'>
                                 <DialogTitle>Cadastrar Cliente</DialogTitle>
                                 <DialogDescription>
                                     Insira as informações do Cliente
                                 </DialogDescription>
                             </DialogHeader>
+
                             <form onSubmit={handleRegister} className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="name" className="text-right">
@@ -213,6 +234,54 @@ const Page: React.FC = () => {
                                     <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="col-span-3 border rounded-md p-2" placeholder='CPF' />
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="text" className="text-right">
+                                        Moto
+                                    </Label>
+                                    <Input
+                                        id="text"
+                                        type="text"
+                                        value={motorcycle}
+                                        onChange={(e) => setMotorcycle(e.target.value)}
+                                        className="col-span-3"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="text" className="text-right">
+                                        Chassi
+                                    </Label>
+                                    <Input
+                                        id="text"
+                                        type="text"
+                                        value={chassi}
+                                        onChange={(e) => setChassi(e.target.value)}
+                                        className="col-span-3"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="text" className="text-right">
+                                        Cor
+                                    </Label>
+                                    <Input
+                                        id="text"
+                                        type="text"
+                                        value={color}
+                                        onChange={(e) => setColor(e.target.value)}
+                                        className="col-span-3"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="text" className="text-right">
+                                        Data da Venda
+                                    </Label>
+                                    <Input
+                                        type="date"
+                                        value={saleDate}
+                                        onChange={(e) => setSaleDate(e.target.value)}
+                                        className="col-span-3"
+                                        required
+                                    />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="role" className="text-right">
                                         Cargo
                                     </Label>
@@ -229,6 +298,7 @@ const Page: React.FC = () => {
                                         </SelectContent>
                                     </Select>
                                 </div>
+
                                 <DialogFooter>
                                     <Button type="submit">Cadastrar</Button>
                                 </DialogFooter>
@@ -246,19 +316,19 @@ const Page: React.FC = () => {
                             <TableHead className='text-white font-bold text-xl'>Função</TableHead>
                         </TableRow>
                     </TableHeader>
-                    {clients.map(item => (
-                        <TableBody key={item.id}>
-                            <TableRow className='hover:bg-shineray-color-dark hover:rounded-2xl'>
+                    <TableBody>
+                        {clients.map(item => (
+                            <TableRow key={item.id} className='hover:bg-shineray-color-dark hover:rounded-2xl cursor-pointer' onClick={() => handleRowClick(item.id)}>
                                 <TableCell className='text-white font-md'>{item.name}</TableCell>
                                 <TableCell className='text-white font-md'>{item.email}</TableCell>
-                                <TableCell className='text-white font-md'>{item.phone}</TableCell>
                                 <TableCell className='text-white font-md'>{item.cpf}</TableCell>
+                                <TableCell className='text-white font-md'>{item.phone}</TableCell>
                                 <TableCell className='text-white font-md'>
                                     {item.role === 'ADMIN' ? <Badge variant='destructive'>Gestor</Badge> : <Badge variant='default'>Cliente</Badge>}
                                 </TableCell>
                             </TableRow>
-                        </TableBody>
-                    ))}
+                        ))}
+                    </TableBody>
                 </Table>
                 <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
                     <DialogContent className="sm:max-w-[425px]">
@@ -276,8 +346,8 @@ const Page: React.FC = () => {
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
-            </Card>
-        </div>
+            </Card >
+        </div >
     );
 };
 

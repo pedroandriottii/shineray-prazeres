@@ -37,7 +37,7 @@ const Page: React.FC = () => {
     useEffect(() => {
         const fetchMotorcycles = async () => {
             try {
-                const response = await fetch('http://localhost:3000/motorcycles', {});
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/motorcycles`, {});
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch motorcycles');
@@ -56,7 +56,7 @@ const Page: React.FC = () => {
     }, []);
 
     const handleEdit = async (event: React.FormEvent) => {
-        
+
         event.preventDefault();
         if (!editMotorcycle) return;
         const token = Cookies.get('accessToken');
@@ -69,7 +69,7 @@ const Page: React.FC = () => {
         formData.append('model', editMotorcycle.model);
         formData.append('color', editMotorcycle.color);
         formData.append('specs', editMotorcycle.specs);
-        
+
         if (image) {
             formData.append('image', image);
         }
@@ -223,14 +223,14 @@ const Page: React.FC = () => {
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                                 <AlertDialogHeader>
-                                <AlertDialogTitle>Voce tem certeza valter??</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    Esta acao nao pode ser desfeita. voce vai perder pra sempre a sua motoca.
-                                </AlertDialogDescription>
+                                    <AlertDialogTitle>Voce tem certeza valter??</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Esta acao nao pode ser desfeita. voce vai perder pra sempre a sua motoca.
+                                    </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDelete(motorcycle.id)}>Continuar</AlertDialogAction>
+                                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleDelete(motorcycle.id)}>Continuar</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

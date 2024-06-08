@@ -12,19 +12,18 @@ interface PostFinancingSectionProps {
 
 const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleId }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [cpf, setCpf] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [hasDriverLicense, setHasDriverLicense] = useState(false);
   const [method, setMethod] = useState('COM_ENTRADA');
+  const [value, setValue] = useState('');
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const newItem = {
       name,
-      email,
       phone,
       cpf,
       birthDate: new Date(birthDate).toISOString(),
@@ -32,6 +31,7 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
       method,
       isConcluded: false,
       motorcycleId,
+      value: method === 'COM_ENTRADA' ? parseFloat(value) : null,
     };
 
     try {
@@ -42,6 +42,9 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
         },
         body: JSON.stringify(newItem),
       });
+
+      console.log(response)
+      console.log(newItem)
 
       if (response.ok) {
         toast.success('Simulação de Financiamento Enviada para Análise!');
@@ -65,17 +68,6 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
             placeholder="Nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border rounded-md p-2"
-            required
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-sm text-white'>Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             className="border rounded-md p-2"
             required
           />
@@ -116,6 +108,21 @@ const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleI
           <option value="SEM_ENTRADA">Sem Entrada</option>
           <option value="A_VISTA">A Vista</option>
         </select>
+
+        {method === 'COM_ENTRADA' && (
+          <div className='flex flex-col'>
+            <label className='text-sm text-white'>Valor da Entrada</label>
+            <input
+              type="number"
+              placeholder="R$"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              className="border rounded-md p-2"
+              required={method === 'COM_ENTRADA'}
+            />
+          </div>
+        )}
+
         <Button type="submit" variant='outline' className='flex w-full'>Enviar</Button>
       </form>
     </div>

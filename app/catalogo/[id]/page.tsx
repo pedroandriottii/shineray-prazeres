@@ -66,14 +66,11 @@ const Page: React.FC = () => {
             {motorcycle && (
                 <>
                     <img src={motorcycle.imageUrl} alt={motorcycle.name} width={600} height={400} />
-                    <h1>{motorcycle.name}</h1>
-                    <p>Chassi: {motorcycle.chassi}</p>
+                    <h1>Modelo: {motorcycle.name}</h1>
                     <p>Price: ${motorcycle.price}</p>
-                    <p>Year: {motorcycle.year}</p>
-                    <p>Model: {motorcycle.model}</p>
                     <p>Color: {motorcycle.color}</p>
                     <p>Description: {motorcycle.description}</p>
-                    <p>Specs: {motorcycle.specs}</p>
+                    <p>Ficha Técnica: {motorcycle.specs}</p>
                 </>
             )}
             {motorcycle && <PostFinancingSection motorcycleId={motorcycle.id} />}

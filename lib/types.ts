@@ -1,7 +1,6 @@
 export interface FinancingItem {
     id: number;
     name: string;
-    email: string;
     phone: string;
     cpf: string;
     birthDate: string;
@@ -11,4 +10,10 @@ export interface FinancingItem {
     createdAt: string;
     updatedAt: string;
     motorcycleId: number;
+    value: number;
+}
+
+export interface Motorcycle {
+    id: number;
+    name: string;
 }
