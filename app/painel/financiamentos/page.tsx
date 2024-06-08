@@ -4,8 +4,7 @@ import React from 'react';
 const Page: React.FC = () => {
 
     return (
-        <div className='p-4'>
-            <h1></h1>
+        <div>
             <GetFinancingSection />
         </div>
     );

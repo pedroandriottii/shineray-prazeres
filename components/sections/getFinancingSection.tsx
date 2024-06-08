@@ -124,48 +124,63 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
         }
     }
 
+    const getDisplayValue = (field: string | number | boolean | null) => {
+        switch (field) {
+            case null:
+                return '--';
+            case 'SEM_ENTRADA':
+                return 'Sem Entrada';
+            case 'COM_ENTRADA':
+                return 'Com Entrada';
+            case 'A_VISTA':
+                return 'À Vista';
+            default:
+                return field;
+        }
+    }
+
     return (
         <div className='p-4'>
             <ToastContainer />
-            <div className='flex items-center gap-6 p-4 justify-center'>
-                <span className='text-shineray-color-dark'>
-                    <AttachMoneyIcon fontSize='large' />
-                </span>
-                <h1 className='text-2xl uppercase text-shineray-color-dark text-center'>Financiamentos</h1>
-            </div>
-            <Card className='bg-slate-300'>
-                <Table>
+            <Card className='bg-[#373737]'>
+                <div className='flex items-center p-4 text-shineray-color-dark gap-4'>
+                    <span>
+                        <AttachMoneyIcon fontSize='large' />
+                    </span>
+                    <h1 className='text-2xl uppercase text-center'>Financiamentos</h1>
+                </div>
+                <Table className='bg-[#373737]'>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Moto</TableHead>
-                            <TableHead>Nome</TableHead>
-                            <TableHead>Telefone</TableHead>
-                            <TableHead>CPF</TableHead>
-                            <TableHead>Data de Nascimento</TableHead>
-                            <TableHead>Método</TableHead>
-                            <TableHead>Entrada</TableHead>
-                            <TableHead>CNH</TableHead>
-                            <TableHead>Concluída?</TableHead>
-                            <TableHead>Ações</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Moto</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Nome</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Telefone</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>CPF</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Data de Nascimento</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Método</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Entrada</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>CNH</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Status</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Ações</TableHead>
                         </TableRow>
                     </TableHeader>
                     {financingItems.map(item => (
                         <TableBody key={item.id}>
-                            <TableRow className='hover:bg-slate-200'>
+                            <TableRow className='hover:bg-shineray-color-dark '>
                                 <Link href={`/painel/motos/${item.motorcycleId}`}>
-                                    <TableCell className='flex items-center justify-between underline'>{motorcycles[item.motorcycleId]?.name || 'Loading...'}
+                                    <TableCell className='text-white font-md underline'>{motorcycles[item.motorcycleId]?.name || 'Loading...'}
                                     </TableCell>
                                 </Link>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{item.phone}</TableCell>
-                                <TableCell>{item.cpf}</TableCell>
-                                <TableCell>{new Date(item.birthDate).toLocaleDateString()}</TableCell>
-                                <TableCell>{item.method}</TableCell>
-                                <TableCell>R$ {item.value}</TableCell>
-                                <TableCell>{item.hasDriverLicense ? <Badge className='bg-green-600 hover:bg-green-500'>Possui</Badge> : <Badge variant='destructive'>Não Possui</Badge>}</TableCell>
+                                <TableCell className='text-white'>{item.name}</TableCell>
+                                <TableCell className='text-white'>{item.phone}</TableCell>
+                                <TableCell className='text-white'>{item.cpf}</TableCell>
+                                <TableCell className='text-white'>{new Date(item.birthDate).toLocaleDateString()}</TableCell>
+                                <TableCell className='text-white'>{getDisplayValue(item.method)}</TableCell>
+                                <TableCell className='text-white'>R$ {getDisplayValue(item.value)}</TableCell>
+                                <TableCell className='text-white'>{item.hasDriverLicense ? <Badge className='bg-green-600 hover:bg-green-500'>Possui</Badge> : <Badge variant='destructive'>Não Possui</Badge>}</TableCell>
                                 <AlertDialog >
                                     <AlertDialogTrigger asChild >
-                                        <TableCell>{item.isConcluded ? <Badge className='bg-green-600 hover:bg-green-500'>Concluída</Badge> : <Badge variant='destructive' className=' cursor-pointer'>Pendente</Badge>}</TableCell>
+                                        <TableCell>{item.isConcluded ? <Badge className='bg-green-600 hover:bg-green-500'>Concluída</Badge> : <Badge variant='destructive' className='cursor-pointer'>Pendente</Badge>}</TableCell>
                                     </AlertDialogTrigger>
                                     <AlertDialogContent>
                                         <AlertDialogHeader>
@@ -202,8 +217,9 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
                         </TableBody>
                     ))}
                 </Table>
-            </Card>
+            </Card >
         </div>
+
     );
 }
 

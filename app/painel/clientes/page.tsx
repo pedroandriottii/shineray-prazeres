@@ -215,12 +215,12 @@ const Page: React.FC = () => {
             <ToastContainer />
             <Card className='bg-[#373737]'>
                 <div className='flex items-center justify-between p-4'>
-                    <div className='flex items-center gap-6'>
-                        <span className='text-shineray-color-dark'>
+                    <div className='flex items-center gap-6 text-shineray-color-dark'>
+                        <span className=''>
                             <PersonIcon fontSize='large' />
                         </span>
 
-                        <h1 className='text-2xl uppercase text-shineray-color-dark text-center'>Clientes</h1>
+                        <h1 className='text-2xl uppercase text-center'>Clientes</h1>
                     </div>
                     <div className="flex justify-center gap-4">
                         <InputMask
