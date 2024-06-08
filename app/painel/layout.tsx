@@ -33,26 +33,25 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                             alt="Logomarca Shineray Prazeres"
                         />
                         <div className="flex justify-around gap-10">
+                            <Link href={'/painel'}>
+                                <Button variant='outline'>Painel</Button>
+                            </Link>
                             {role === 'ADMIN' && (
                                 <>
                                     <Link href={'/painel/motos'}>
                                         <Button variant='outline'>Estoque</Button>
-                                    </Link><Link href={'/painel/clientes'}>
+                                    </Link>
+                                    <Link href={'/painel/clientes'}>
                                         <Button variant='outline'>Clientes</Button>
-                                    </Link><Link href={'/painel/financiamentos'}>
+                                    </Link>
+                                    <Link href={'/painel/financiamentos'}>
                                         <Button variant='outline'>Financiamentos</Button>
                                     </Link>
                                 </>
                             )}
-                            <Link href={'/painel'}>
-                                <Button variant='outline'>Painel</Button>
-                            </Link>
-                            <Link href={'/painel/servicos'}>
-                                <Button variant='outline'>Serviços</Button>
-                            </Link>
                             {role === 'CLIENT' && (
-                                <Link href={'/painel/minha-shineray'}>
-                                    <Button variant='outline'>Minha Shineray</Button>
+                                <Link href={'/painel/servicos'}>
+                                    <Button variant='outline'>Serviços</Button>
                                 </Link>
                             )}
                         </div>

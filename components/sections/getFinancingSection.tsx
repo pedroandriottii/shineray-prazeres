@@ -21,7 +21,11 @@ import {
 } from "@/components/ui/table";
 import Link from 'next/link';
 
-const GetFinancingSection: React.FC = () => {
+interface GetFinancingSectionProps {
+    isConcluded?: boolean;
+}
+
+const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }) => {
     const [financingItems, setFinancingItems] = useState<FinancingItem[]>([]);
     const [motorcycles, setMotorcycles] = useState<Record<number, Motorcycle>>({});
 
@@ -47,7 +51,7 @@ const GetFinancingSection: React.FC = () => {
                 }
 
                 const data: FinancingItem[] = await response.json();
-                setFinancingItems(data);
+                setFinancingItems(isConcluded !== undefined ? data.filter(item => item.isConcluded === isConcluded) : data);
 
                 const motorcycleIds = data.map((item: FinancingItem) => item.motorcycleId);
                 fetchMotorcycles(motorcycleIds);
@@ -75,7 +79,28 @@ const GetFinancingSection: React.FC = () => {
         };
 
         fetchFinancingItems();
-    }, []);
+    }, [isConcluded]);
+
+    const handleConclude = async (id: number) => {
+        const token = Cookies.get('accessToken');
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/financing/${id}/conclude`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            setFinancingItems((prev) => prev.filter((m) => m.id !== id));
+            toast.success('Financiamento Concluído com sucesso!');
+        } catch (error) {
+            toast.error('Houve um problema ao concluir o Financiamento.');
+        }
+    };
 
     const handleDelete = async (id: number) => {
         const token = Cookies.get('accessToken');
@@ -138,7 +163,24 @@ const GetFinancingSection: React.FC = () => {
                                 <TableCell>{item.method}</TableCell>
                                 <TableCell>R$ {item.value}</TableCell>
                                 <TableCell>{item.hasDriverLicense ? <Badge className='bg-green-600 hover:bg-green-500'>Possui</Badge> : <Badge variant='destructive'>Não Possui</Badge>}</TableCell>
-                                <TableCell>{item.isConcluded ? <Badge className='bg-green-600 hover:bg-green-500'>Concluída</Badge> : <Badge variant='destructive'>Pendente</Badge>}</TableCell>
+                                <AlertDialog >
+                                    <AlertDialogTrigger asChild >
+                                        <TableCell>{item.isConcluded ? <Badge className='bg-green-600 hover:bg-green-500'>Concluída</Badge> : <Badge variant='destructive' className=' cursor-pointer'>Pendente</Badge>}</TableCell>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Mudar para Concluído?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Esta acao nao pode ser desfeita.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => handleConclude(item.id)}>Continuar</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+
                                 <AlertDialog>
                                     <AlertDialogTrigger asChild>
                                         <TableCell><span className='text-blue-400 cursor-pointer'><DeleteIcon /></span></TableCell>

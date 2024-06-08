@@ -41,7 +41,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 interface Client {
     id: number;
@@ -73,40 +72,42 @@ const Page: React.FC = () => {
     const [generatedPassword, setGeneratedPassword] = useState<string | null>(null);
     const [showPasswordDialog, setShowPasswordDialog] = useState(false);
     const [showRegisterDialog, setShowRegisterDialog] = useState(false);
+    const [searchCpf, setSearchCpf] = useState('');
+
 
     const router = useRouter();
 
     useEffect(() => {
-        const fetchClients = async () => {
-            try {
-                const token = Cookies.get('accessToken');
-                if (!token) {
-                    setError('Token not found');
-                    setLoading(false);
-                    return;
-                }
-
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch clients');
-                }
-
-                const data = await response.json();
-                setClients(data);
-            } catch (err) {
-                setError((err as Error).message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchClients();
     }, []);
+
+    const fetchClients = async () => {
+        try {
+            const token = Cookies.get('accessToken');
+            if (!token) {
+                setError('Token not found');
+                setLoading(false);
+                return;
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch clients');
+            }
+
+            const data = await response.json();
+            setClients(data);
+        } catch (err) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const generatePassword = () => {
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -162,6 +163,41 @@ const Page: React.FC = () => {
         }
     };
 
+    const handleSearch = async () => {
+        setLoading(true);
+        try {
+            const token = Cookies.get('accessToken');
+            if (!token) {
+                setError('Token not found');
+                setLoading(false);
+                return;
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users?cpf=${searchCpf}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch clients');
+            }
+
+            const text = await response.text();
+            if (text) {
+                const data = JSON.parse(text);
+                setClients(data);
+            } else {
+                setClients([]);
+            }
+        } catch (err) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -183,136 +219,151 @@ const Page: React.FC = () => {
                         <span className='text-shineray-color-dark'>
                             <PersonIcon fontSize='large' />
                         </span>
+
                         <h1 className='text-2xl uppercase text-shineray-color-dark text-center'>Clientes</h1>
                     </div>
-                    <Dialog open={showRegisterDialog} onOpenChange={setShowRegisterDialog}>
-                        <DialogTrigger asChild>
-                            <Button className='bg-shineray-color-dark text-white hover:bg-white hover:text-shineray-color-dark'>Cadastrar Cliente</Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
-                            <DialogHeader className='flex items-center'>
-                                <DialogTitle>Cadastrar Cliente</DialogTitle>
-                                <DialogDescription>
-                                    Insira as informações do Cliente
-                                </DialogDescription>
-                            </DialogHeader>
+                    <div className="flex justify-center gap-4">
+                        <InputMask
+                            mask="999.999.999-99"
+                            value={searchCpf}
+                            onChange={(e) => setSearchCpf(e.target.value)}
+                            className="border rounded-md p-1"
+                            placeholder='Pesquisar por CPF'
+                        />
+                        <Button onClick={handleSearch} className='bg-shineray-color-dark text-white hover:bg-white hover:text-shineray-color-dark'>
+                            Pesquisar
+                        </Button>
+                    </div>
+                    <div>
+                        <Dialog open={showRegisterDialog} onOpenChange={setShowRegisterDialog}>
+                            <DialogTrigger asChild>
+                                <Button className='bg-shineray-color-dark text-white hover:bg-white hover:text-shineray-color-dark'>Cadastrar Cliente</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px]">
+                                <DialogHeader className='flex items-center'>
+                                    <DialogTitle>Cadastrar Cliente</DialogTitle>
+                                    <DialogDescription>
+                                        Insira as informações do Cliente
+                                    </DialogDescription>
+                                </DialogHeader>
 
-                            <form onSubmit={handleRegister} className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right">
-                                        Nome
-                                    </Label>
-                                    <Input
-                                        id="name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="col-span-3"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">
-                                        E-mail
-                                    </Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="col-span-3"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">
-                                        Telefone
-                                    </Label>
-                                    <InputMask mask="+5\5 (99) 99999-9999" value={phone} onChange={(e) => setPhone(e.target.value)} className="col-span-3 border rounded-md p-2" placeholder='+55 (99) 99999-9999' />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">
-                                        CPF
-                                    </Label>
-                                    <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="col-span-3 border rounded-md p-2" placeholder='CPF' />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="text" className="text-right">
-                                        Moto
-                                    </Label>
-                                    <Input
-                                        id="text"
-                                        type="text"
-                                        value={motorcycle}
-                                        onChange={(e) => setMotorcycle(e.target.value)}
-                                        className="col-span-3"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="text" className="text-right">
-                                        Chassi
-                                    </Label>
-                                    <Input
-                                        id="text"
-                                        type="text"
-                                        value={chassi}
-                                        onChange={(e) => setChassi(e.target.value)}
-                                        className="col-span-3"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="text" className="text-right">
-                                        Cor
-                                    </Label>
-                                    <Input
-                                        id="text"
-                                        type="text"
-                                        value={color}
-                                        onChange={(e) => setColor(e.target.value)}
-                                        className="col-span-3"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="text" className="text-right">
-                                        Data da Venda
-                                    </Label>
-                                    <Input
-                                        type="date"
-                                        value={saleDate}
-                                        onChange={(e) => setSaleDate(e.target.value)}
-                                        className="col-span-3"
-                                        required
-                                    />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="role" className="text-right">
-                                        Cargo
-                                    </Label>
-                                    <Select onValueChange={(value) => setRole(value)} defaultValue={role}>
-                                        <SelectTrigger className="col-span-3">
-                                            <SelectValue placeholder="Selecione um Cargo" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectGroup>
-                                                <SelectLabel>Cargo</SelectLabel>
-                                                <SelectItem value="CLIENT">Cliente</SelectItem>
-                                                <SelectItem value="ADMIN">Administrador</SelectItem>
-                                            </SelectGroup>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
+                                <form onSubmit={handleRegister} className="grid gap-4 py-4">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="name" className="text-right">
+                                            Nome
+                                        </Label>
+                                        <Input
+                                            id="name"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className="col-span-3"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="email" className="text-right">
+                                            E-mail
+                                        </Label>
+                                        <Input
+                                            id="email"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="col-span-3"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="phone" className="text-right">
+                                            Telefone
+                                        </Label>
+                                        <InputMask mask="+5\5 (99) 99999-9999" value={phone} onChange={(e) => setPhone(e.target.value)} className="col-span-3 border rounded-md p-2" placeholder='+55 (99) 99999-9999' />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="cpf" className="text-right">
+                                            CPF
+                                        </Label>
+                                        <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="col-span-3 border rounded-md p-2" placeholder='CPF' />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="motorcycle" className="text-right">
+                                            Moto
+                                        </Label>
+                                        <Input
+                                            id="motorcycle"
+                                            type="text"
+                                            value={motorcycle}
+                                            onChange={(e) => setMotorcycle(e.target.value)}
+                                            className="col-span-3"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="chassi" className="text-right">
+                                            Chassi
+                                        </Label>
+                                        <Input
+                                            id="chassi"
+                                            type="text"
+                                            value={chassi}
+                                            onChange={(e) => setChassi(e.target.value)}
+                                            className="col-span-3"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="color" className="text-right">
+                                            Cor
+                                        </Label>
+                                        <Input
+                                            id="color"
+                                            type="text"
+                                            value={color}
+                                            onChange={(e) => setColor(e.target.value)}
+                                            className="col-span-3"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="saleDate" className="text-right">
+                                            Data da Venda
+                                        </Label>
+                                        <Input
+                                            type="date"
+                                            value={saleDate}
+                                            onChange={(e) => setSaleDate(e.target.value)}
+                                            className="col-span-3"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="role" className="text-right">
+                                            Cargo
+                                        </Label>
+                                        <Select onValueChange={(value) => setRole(value)} defaultValue={role}>
+                                            <SelectTrigger className="col-span-3">
+                                                <SelectValue placeholder="Selecione um Cargo" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>Cargo</SelectLabel>
+                                                    <SelectItem value="CLIENT">Cliente</SelectItem>
+                                                    <SelectItem value="ADMIN">Administrador</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
 
-                                <DialogFooter>
-                                    <Button type="submit">Cadastrar</Button>
-                                </DialogFooter>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
+                                    <DialogFooter>
+                                        <Button type="submit">Cadastrar</Button>
+                                    </DialogFooter>
+                                </form>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                 </div>
                 <Table >
                     <TableHeader >
                         <TableRow>
                             <TableHead className='text-white font-bold text-xl'>Nome</TableHead>
                             <TableHead className='text-white font-bold text-xl'>E-mail</TableHead>
-                            <TableHead className='text-white font-bold text-xl'>Telefone</TableHead>
                             <TableHead className='text-white font-bold text-xl'>CPF</TableHead>
+                            <TableHead className='text-white font-bold text-xl'>Telefone</TableHead>
                             <TableHead className='text-white font-bold text-xl'>Função</TableHead>
                         </TableRow>
                     </TableHeader>

@@ -5,14 +5,12 @@ import Cookies from 'js-cookie';
 
 const Page: React.FC = () => {
     const role = Cookies.get('role');
-    const userId = Cookies.get('userId');
     return (
         <div>
-            <h1 className='bg-green-500'>ROLE - {role}</h1>
-            <h1 className='bg-purple-200'>ID - {userId}</h1>
             {role === 'ADMIN' && (
                 <div>
-                    <GetFinancingSection />
+                    <h1>FINANCIAMENTOS NÃO CONCLUÍDOS</h1>
+                    <GetFinancingSection isConcluded={false} />
                 </div>
             )}
             {role === 'CLIENT' && (
@@ -20,7 +18,6 @@ const Page: React.FC = () => {
                     <h1>PAGINA DO CLIENTE</h1>
                 </div>
             )}
-
         </div>
     );
 };
