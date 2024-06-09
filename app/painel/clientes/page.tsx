@@ -41,20 +41,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
-interface Client {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    password: string;
-    phone: string;
-    cpf: string;
-    motorcycle: string;
-    chassi: string;
-    color: string;
-    saleDate: string;
-}
+import { Client } from '@/lib/types';
 
 const Page: React.FC = () => {
     const [clients, setClients] = useState<Client[]>([]);
@@ -148,6 +135,8 @@ const Page: React.FC = () => {
                 },
                 body: JSON.stringify(newClient),
             });
+            console.log(response)
+            console.log(newClient)
 
             if (response.ok) {
                 toast.success('Cliente cadastrado com sucesso!');

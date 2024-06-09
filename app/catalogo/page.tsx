@@ -3,21 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
-interface Motorcycle {
-    id: number;
-    name: string;
-    chassi: string;
-    price: number;
-    year: number;
-    model: string;
-    color: string;
-    imageUrl: string;
-    description: string;
-    specs: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import { Motorcycle } from '@/lib/types';
 
 const Page: React.FC = () => {
     const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
@@ -61,7 +47,7 @@ const Page: React.FC = () => {
                     <div key={motorcycle.id} className="motorcycle-card">
                         <Link href={`/catalogo/${motorcycle.id}`}>
                             <Card className='flex p-2 flex-col'>
-                                <img className='w-full rounded-md' src={motorcycle.imageUrl} alt={motorcycle.name} width={200} height={150} />
+                                <img className='w-full rounded-md' src={motorcycle.imageUrls[0]} alt={motorcycle.name} width={200} height={150} />
                                 <div className='flex justify-between items-center'>
                                     <h2 className='flex text-center py-2 uppercase justify-center font-bold text-shineray-color-dark'>{motorcycle.name}</h2>
                                     <p>R${motorcycle.price}</p>
@@ -74,7 +60,7 @@ const Page: React.FC = () => {
                     </div>
                 ))}
             </div>
-        </div >
+        </div>
     );
 };
 

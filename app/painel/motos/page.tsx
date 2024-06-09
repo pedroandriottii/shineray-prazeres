@@ -10,21 +10,7 @@ import { toast } from 'react-toastify';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-
-interface Motorcycle {
-    id: number;
-    name: string;
-    chassi: string;
-    price: number;
-    year: number;
-    model: string;
-    color: string;
-    imageUrl: string;
-    description: string;
-    specs: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import { Motorcycle } from '@/lib/types';
 
 const Page: React.FC = () => {
     const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
@@ -148,7 +134,7 @@ const Page: React.FC = () => {
                     <div key={motorcycle.id} className="motorcycle-card">
                         <Link href={`/painel/motos/${motorcycle.id}`}>
                             <Card className='flex p-2 flex-col'>
-                                <img className='w-full rounded-md' src={motorcycle.imageUrl} alt={motorcycle.name} width={200} height={150} />
+                                <img className='w-full rounded-md' src={motorcycle.imageUrls[0]} alt={motorcycle.name} width={200} height={150} />
                                 <div className='flex justify-between items-center'>
                                     <p className='flex items-center gap-2'>
                                         <h2 className='flex text-center py-2 uppercase justify-center font-bold text-shineray-color-dark'>{motorcycle.name}</h2>

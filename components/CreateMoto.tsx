@@ -6,16 +6,29 @@ import Cookies from 'js-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-
+import { Progress } from './ui/progress';
 
 const CreateMoto: React.FC = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [color, setColor] = useState('');
   const [specs, setSpecs] = useState('');
-  const [image, setImage] = useState<File | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const [description, setDescription] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const router = useRouter();
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const selectedFiles = Array.from(event.target.files);
+      if (selectedFiles.length > 10) {
+        toast.error('Você pode enviar no máximo 10 imagens.');
+      } else {
+        setImages(selectedFiles);
+      }
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,12 +39,13 @@ const CreateMoto: React.FC = () => {
     formData.append('price', price);
     formData.append('color', color);
     formData.append('specs', specs);
-    if (image) {
-      formData.append('image', image);
-    }
+    images.forEach((image) => {
+      formData.append('images', image);
+    });
     formData.append('description', description);
 
     try {
+      setIsLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/motorcycles`, {
         method: 'POST',
         headers: {
@@ -43,11 +57,14 @@ const CreateMoto: React.FC = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      router.push('/painel/motos')
+
+      router.push('/painel/motos');
       toast.success('Moto cadastrada com sucesso!');
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
       toast.error('Houve um problema ao cadastrar a moto.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,8 +85,8 @@ const CreateMoto: React.FC = () => {
           <Input type="text" id="color" name="color" placeholder="Cor" className="mt-1 block w-full" value={color} onChange={(e) => setColor(e.target.value)} required />
         </div>
         <div className="mb-4">
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagem</label>
-          <Input type="file" id="image" name="image" className="mt-1 block w-full" onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)} required />
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagens (máximo 10)</label>
+          <Input type="file" id="image" name="images" className="mt-1 block w-full" multiple onChange={handleImageChange} required />
         </div>
         <div className="mb-4">
           <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descrição</label>
@@ -79,7 +96,12 @@ const CreateMoto: React.FC = () => {
           <label htmlFor="specs" className="block text-sm font-medium text-gray-700">Ficha Técnica</label>
           <textarea id="specs" name="specs" placeholder="Ficha Técnica" className="mt-1 block w-full p-2 border rounded-md" value={specs} onChange={(e) => setSpecs(e.target.value)} required />
         </div>
-        <Button type="submit" className="mt-4 w-full">Cadastrar Moto</Button>
+        {isLoading && (
+          <div className="mb-4">
+            <Progress value={uploadProgress} />
+          </div>
+        )}
+        <Button type="submit" className="mt-4 w-full" disabled={isLoading}>Cadastrar Moto</Button>
       </form>
       <ToastContainer />
     </div>

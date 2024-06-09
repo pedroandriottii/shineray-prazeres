@@ -2,7 +2,6 @@ import About from "@/components/sections/about";
 import { DynamicCarousel } from "@/components/sections/dynamicCarousel";
 import ClientBenefits from "@/components/sections/clientBenefits";
 import PanelAccess from "@/components/sections/panelAccess";
-import { WhatsApp } from "@mui/icons-material";
 import Image from "next/image";
 
 export default function Home() {
