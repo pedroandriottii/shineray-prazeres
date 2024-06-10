@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import Cookies from 'js-cookie';
 import { Client, Service } from '@/lib/types';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const ClientPanel: React.FC = () => {
     const id = Cookies.get('userId');
@@ -13,6 +17,9 @@ const ClientPanel: React.FC = () => {
     const [loadingUserData, setLoadingUserData] = useState(true);
     const [loadingServices, setLoadingServices] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [rating, setRating] = useState<number>(0);
+    const [message, setMessage] = useState<string>('');
+    const [currentServiceId, setCurrentServiceId] = useState<number | null>(null);
 
     useEffect(() => {
         if (id) {
@@ -67,6 +74,32 @@ const ClientPanel: React.FC = () => {
         }
     };
 
+    const handleAvaliate = async (serviceId: number) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services/${serviceId}/avaliate`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rating, message }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit rating');
+            }
+
+            const updatedService = await response.json();
+            setServices((prevServices) => prevServices.map((service) => service.id === updatedService.id ? updatedService : service));
+            setRating(0);
+            setMessage('');
+            setCurrentServiceId(null);
+        } catch (error) {
+            console.error('Failed to submit rating', error);
+            alert('Failed to submit rating');
+        }
+    };
+
     if (loadingUserData || loadingServices) {
         return <div>Loading...</div>;
     }
@@ -97,7 +130,7 @@ const ClientPanel: React.FC = () => {
                 <div className='text-red-500'>Cliente não encontrado</div>
             )}
 
-            <h2 className="text-2xl font-bold mb-4">Meus Serviços</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Meus Serviços</h2>
             {services.length > 0 ? (
                 <div className="grid grid-flow-row gap-10 lg:grid-cols-6">
                     {services.map((service) => (
@@ -109,11 +142,47 @@ const ClientPanel: React.FC = () => {
                             {service.price && (
                                 <p><strong>Preço:</strong> {service.price}</p>
                             )}
-                            {service.rating && (
-                                <p><strong>Avaliação:</strong> {service.rating}</p>
+                            {service.rating !== null && (
+                                <h1>Obrigado pela Avaliação!</h1>
                             )}
-                            {service.message && (
-                                <p><strong>Mensagem:</strong> {service.message}</p>
+                            {service.rating === null && (
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button onClick={() => setCurrentServiceId(service.id)}>Avaliar Serviço</Button>
+                                    </DialogTrigger>
+                                    {currentServiceId === service.id && (
+                                        <DialogContent>
+                                            <DialogHeader>
+                                                <DialogTitle>Avaliar Serviço</DialogTitle>
+                                                <DialogDescription>Insira sua avaliação abaixo</DialogDescription>
+                                            </DialogHeader>
+                                            <div className="mb-4">
+                                                <Label htmlFor="rating">Avaliação (1 a 5)</Label>
+                                                <Input
+                                                    type="number"
+                                                    id="rating"
+                                                    value={rating}
+                                                    onChange={(e) => setRating(Number(e.target.value))}
+                                                    min={1}
+                                                    max={5}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="mb-4">
+                                                <Label htmlFor="message">Mensagem</Label>
+                                                <textarea
+                                                    id="message"
+                                                    value={message}
+                                                    onChange={(e) => setMessage(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                            <DialogFooter>
+                                                <Button onClick={() => handleAvaliate(service.id)}>Enviar Avaliação</Button>
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    )}
+                                </Dialog>
                             )}
                         </Card>
                     ))}
