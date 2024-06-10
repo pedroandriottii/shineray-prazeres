@@ -247,20 +247,7 @@ const ClientDetailPage: React.FC = () => {
                                                     required
                                                 />
                                             </div>
-                                            <div className="grid grid-cols-4 items-center gap-4">
-                                                <Label htmlFor="price" className="text-right">
-                                                    Preço
-                                                </Label>
-                                                <Input
-                                                    id="price"
-                                                    type="number"
-                                                    value={price}
-                                                    placeholder='R$ 0,00'
-                                                    onChange={(e) => setPrice(e.target.value)}
-                                                    className="col-span-3"
-                                                    required
-                                                />
-                                            </div>
+
                                             <div className="grid grid-cols-4 items-center gap-4">
                                                 <Label htmlFor="type" className="text-right">
                                                     Tipo
@@ -278,6 +265,23 @@ const ClientDetailPage: React.FC = () => {
                                                     </SelectContent>
                                                 </Select>
                                             </div>
+
+                                            {type === 'PAGO' && (
+                                                <div className="grid grid-cols-4 items-center gap-4">
+                                                    <Label htmlFor="price" className="text-right">
+                                                        Preço
+                                                    </Label>
+                                                    <Input
+                                                        id="price"
+                                                        type="number"
+                                                        value={price}
+                                                        placeholder='R$ 0,00'
+                                                        onChange={(e) => setPrice(e.target.value)}
+                                                        className="col-span-3"
+                                                        required
+                                                    />
+                                                </div>
+                                            )}
                                             <div className="grid grid-cols-4 items-center gap-4">
                                                 <Label htmlFor="date" className="text-right">
                                                     Data

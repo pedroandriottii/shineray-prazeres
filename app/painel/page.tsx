@@ -1,22 +1,20 @@
-'use client'
+'use client';
 import GetFinancingSection from '@/components/sections/getFinancingSection';
 import React from 'react';
 import Cookies from 'js-cookie';
+import ClientPanel from '@/components/ClientPanel';
 
 const Page: React.FC = () => {
     const role = Cookies.get('role');
+
     return (
         <div>
             {role === 'ADMIN' && (
-                <div>
-                    <GetFinancingSection isConcluded={false} />
-                </div>
+                <GetFinancingSection isConcluded={false} />
             )}
             {role === 'CLIENT' && (
-                <div>
-                    <h1>PAGINA DO CLIENTE</h1>
-                </div>
-            )}
+                <ClientPanel />
+            )};
         </div>
     );
 };
