@@ -25,7 +25,7 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         <html lang="en">
             <AuthProvider>
                 <body className={`${Font.className} font-light bg-[#121212]`} >
-                    <div className="white p-2 flex justify-between items-center">
+                    <div className="white px-6 py-4 flex justify-between items-center">
                         <Image
                             src={'/logo_revisao.png'}
                             width={60}

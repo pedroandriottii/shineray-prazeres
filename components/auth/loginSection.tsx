@@ -38,10 +38,8 @@ const LoginSection: React.FC = () => {
             const data = await response.json();
             setAccessToken(data.accessToken);
             setError('');
-            console.log('Login successful:', data);
             router.push('/painel')
         } catch (error: any) {
-            console.error('Error:', error);
             setError(error.message);
         }
     };

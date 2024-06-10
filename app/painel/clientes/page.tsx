@@ -200,9 +200,11 @@ const Page: React.FC = () => {
     };
 
     return (
-        <div className='p-4'>
-            <ToastContainer />
-            <Card className='bg-[#373737]'>
+        <div className='p-6 flex flex-col gap-6'>
+            <Card className='p-2 border-none bg-shineray-color-dark text-center text-2xl uppercase text-white rounded-sm'>
+                Área do Cliente
+            </Card>
+            <Card className='bg-[#373737] border-none'>
                 <div className='flex items-center justify-between p-4'>
                     <div className='flex items-center gap-6 text-shineray-color-dark'>
                         <span className=''>
@@ -387,6 +389,7 @@ const Page: React.FC = () => {
                     </DialogContent>
                 </Dialog>
             </Card >
+            <ToastContainer />
         </div >
     );
 };

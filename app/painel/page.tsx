@@ -9,7 +9,6 @@ const Page: React.FC = () => {
         <div>
             {role === 'ADMIN' && (
                 <div>
-                    <h1>FINANCIAMENTOS NÃO CONCLUÍDOS</h1>
                     <GetFinancingSection isConcluded={false} />
                 </div>
             )}

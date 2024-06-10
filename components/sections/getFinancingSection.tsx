@@ -140,9 +140,8 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
     }
 
     return (
-        <div className='p-4'>
-            <ToastContainer />
-            <Card className='bg-[#373737]'>
+        <div >
+            <Card className='bg-[#373737] border-none'>
                 <div className='flex items-center p-4 text-shineray-color-dark gap-4'>
                     <span>
                         <AttachMoneyIcon fontSize='large' />
@@ -166,7 +165,7 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
                     </TableHeader>
                     {financingItems.map(item => (
                         <TableBody key={item.id}>
-                            <TableRow className='hover:bg-shineray-color-dark '>
+                            <TableRow className='hover:bg-shineray-color-dark'>
                                 <Link href={`/painel/motos/${item.motorcycleId}`}>
                                     <TableCell className='text-white font-md underline'>{motorcycles[item.motorcycleId]?.name || 'Loading...'}
                                     </TableCell>
@@ -218,6 +217,7 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
                     ))}
                 </Table>
             </Card >
+            <ToastContainer />
         </div>
 
     );

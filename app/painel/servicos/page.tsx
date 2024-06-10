@@ -37,7 +37,6 @@ interface Client {
 
 enum ServiceType {
     GARANTIA = 'GARANTIA',
-    GRATIS = 'GRATIS',
     PAGO = 'PAGO'
 }
 

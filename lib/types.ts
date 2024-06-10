@@ -41,3 +41,14 @@ export interface Client {
     color: string;
     saleDate: string;
 }
+
+export interface Service {
+    id: number;
+    name: string;
+    price: number;
+    type: string;
+    date: string;
+    kilometers: number;
+    rating?: number;
+    message?: string;
+}
