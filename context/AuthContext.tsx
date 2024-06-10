@@ -2,13 +2,7 @@
 import React, { useState, useContext, createContext, ReactNode, useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import Cookies from 'js-cookie';
-
-interface AuthContextType {
-    accessToken: string | null;
-    role: string | null;
-    userId: string | null;
-    setAccessToken: (token: string | null) => void;
-}
+import { AuthContextType } from '@/lib/types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

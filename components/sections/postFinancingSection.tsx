@@ -1,16 +1,13 @@
 'use client';
-
 import { Button } from '@/components/ui/button';
+import { FinancingItem } from '@/lib/types';
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-interface PostFinancingSectionProps {
-  motorcycleId: number;
-}
 
-const PostFinancingSection: React.FC<PostFinancingSectionProps> = ({ motorcycleId }) => {
+const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [cpf, setCpf] = useState('');

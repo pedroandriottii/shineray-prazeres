@@ -1,3 +1,10 @@
+export interface AuthContextType {
+    accessToken: string | null;
+    role: string | null;
+    userId: string | null;
+    setAccessToken: (token: string | null) => void;
+}
+
 export interface FinancingItem {
     id: number;
     name: string;
@@ -16,10 +23,7 @@ export interface FinancingItem {
 export interface Motorcycle {
     id: number;
     name: string;
-    chassi: string;
     price: number;
-    year: number;
-    model: string;
     color: string;
     imageUrls: string[];
     description: string;
@@ -51,4 +55,12 @@ export interface Service {
     kilometers: number;
     rating?: number;
     message?: string;
+}
+
+export interface Avaliation {
+    id: number;
+    rating: number;
+    message: string;
+    serviceId: number;
+    createdAt: string;
 }

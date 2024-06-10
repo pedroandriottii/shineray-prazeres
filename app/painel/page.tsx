@@ -3,25 +3,14 @@ import GetFinancingSection from '@/components/sections/getFinancingSection';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import ClientPanel from '@/components/ClientPanel';
+import { Avaliation } from '@/lib/types';
 
-interface Avaliation {
-    id: number;
-    rating: number;
-    message: string;
-    serviceId: number;
-    createdAt: string;
-}
-
-interface AvaliationAverage {
-    averageRating: number;
-    count: number;
-}
 
 const Page: React.FC = () => {
     const role = Cookies.get('role');
     const token = Cookies.get('accessToken');
     const [avaliations, setAvaliations] = useState<Avaliation[]>([]);
-    const [averageRating, setAverageRating] = useState<AvaliationAverage | null>(null);
+    const [averageRating, setAverageRating] = useState<Avaliation | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -91,8 +80,7 @@ const Page: React.FC = () => {
                             <div>
                                 {averageRating && (
                                     <div className="mb-4">
-                                        <p><strong>Média das Avaliações:</strong> {averageRating.averageRating}</p>
-                                        <p><strong>Total de Avaliações:</strong> {averageRating.count}</p>
+                                        <p><strong>Média das Avaliações:</strong> {averageRating.rating}</p>
                                     </div>
                                 )}
                                 <ul>

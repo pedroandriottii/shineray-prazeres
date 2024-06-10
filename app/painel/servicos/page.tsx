@@ -5,12 +5,13 @@ import { Card } from '@/components/ui/card';
 import Cookies from 'js-cookie';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 
 import { useRouter } from 'next/navigation';
+import { Client } from '@/lib/types';
 
 interface Service {
     id: number;
@@ -28,11 +29,6 @@ interface Service {
     };
     createdAt: string;
     updatedAt: string;
-}
-
-interface Client {
-    id: string;
-    name: string;
 }
 
 enum ServiceType {
@@ -166,11 +162,6 @@ const Services: React.FC = () => {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Lista de Serviços</h1>
-            {role === 'ADMIN' && (
-                <Link href="/painel/servicos/cadastrar">
-                    <Button className="mb-4">Cadastrar Serviço</Button>
-                </Link>
-            )}
             <div className="grid grid-flow-row gap-10 lg:grid-cols-6">
                 {services.map((service) => (
                     <Card key={service.id} className="flex p-2 flex-col">
