@@ -1,15 +1,66 @@
 import React from 'react';
 import { Poppins } from 'next/font/google';
 
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Card } from '../ui/card';
+
+
 const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 const CatalogSection: React.FC = () => {
     return (
         <div className={`${Font.className}flex flex-col px-6`}>
-            <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white items-center'>
+            <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white'>
                 <h1 className='text-xl'>CATÁLOGO</h1>
                 <p className='underline pr-6 text-sm'>Ver mais</p>
                 <div className="absolute right-0 bottom-0 border-corner"></div>
+            </div>
+            <div>
+                <Carousel className='py-6'>
+                    <CarouselContent>
+                        <CarouselItem className="lg:basis-1/3 flex flex-col">
+                            <img src={'/jef.jpg'} alt="" />
+                            <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
+                                <p className=''>Urban 150 EFI</p>
+                                <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ 12.000</p>
+                                <div className="absolute right-28 top-0 border-corner-catalog"></div>
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem className="lg:basis-1/3 flex flex-col">
+                            <img src={'/jef.jpg'} alt="" />
+                            <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
+                                <p className=''>Urban 150 EFI</p>
+                                <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ 12.000</p>
+                                <div className="absolute right-28 top-0 border-corner-catalog"></div>
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem className="lg:basis-1/3 flex flex-col">
+                            <img src={'/jef.jpg'} alt="" />
+                            <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
+                                <p className=''>Urban 150 EFI</p>
+                                <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ 12.000</p>
+                                <div className="absolute right-28 top-0 border-corner-catalog"></div>
+                            </div>
+                        </CarouselItem>
+                        <CarouselItem className="lg:basis-1/3 flex flex-col">
+                            <img src={'/jef.jpg'} alt="" />
+                            <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
+                                <p className=''>Urban 150 EFI</p>
+                                <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ 12.000</p>
+                                <div className="absolute right-28 top-0 border-corner-catalog"></div>
+                            </div>
+                        </CarouselItem>
+                    </CarouselContent>
+                </Carousel>
+            </div>
+            <div className='flex justify-center'>
+                <h1 className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-60`}>Solicite seu Financiamento!</h1>
             </div>
         </div>
     );
