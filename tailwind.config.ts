@@ -23,6 +23,7 @@ const config = {
       },
       colors: {
         'shineray-color-dark': '#D00101',
+        'shineray-black': '#000000',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

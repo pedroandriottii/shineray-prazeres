@@ -3,10 +3,13 @@ import { DynamicCarousel } from "@/components/sections/dynamicCarousel";
 import ClientBenefits from "@/components/sections/clientBenefits";
 import PanelAccess from "@/components/sections/panelAccess";
 import Image from "next/image";
+import HeroSection from "@/components/home/HeroSection";
+import Navbar from "@/components/base/navbar";
 
 export default function Home() {
   return (
-    <div className="" id='sobre-nos' >
+    <div>
+      <HeroSection />
       <div className="flex items-center justify-around p-4">
         <Image
           src={'/logo.png'}

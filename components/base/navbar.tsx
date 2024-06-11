@@ -1,77 +1,28 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import MenuIcon from '@mui/icons-material/Menu';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import PhoneIcon from '@mui/icons-material/Phone';
 import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link';
+import { Inter } from 'next/font/google';
+
+const font = Inter({ subsets: ['latin'], weight: ['400'] });
 
 const Navbar: React.FC = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const menuRef = useRef<HTMLDivElement>(null);
-
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
-    };
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-            setMenuOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        if (menuOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [menuOpen]);
-
     return (
-        <div className='relative'>
-            <div className='flex p-4 items-center justify-between bg-shineray-color-dark'>
-                <h1 className='uppercase tracking-wider text-md text-white text-center'>
-                    conquiste sua shineray
-                </h1>
-                <div className='hidden md:flex space-x-8 items-center'>
-                    <Link href={'/'} className='text-lg'>Início</Link>
-                    <Link href={'/#sobre-nos'} className='text-lg'>Sobre Nós</Link>
-                    <Link href={'/catalogo'} className='text-lg'>Catálogo</Link>
-                    <Link href={'/login'} className='py-2 px-4 text-lg bg-red-500 text-white rounded-xl'>Login</Link>
+        <div className={`${font.className} bg-shineray-black text-white flex justify-between text-xs items-center p-2`}>
+            <MenuIcon />
+            <div className='flex items-center gap-4'>
+                <div className='flex items-center gap-1'>
+                    <PhoneIcon style={{ color: 'transparent', stroke: 'white', strokeWidth: 2 }} />
+                    <span>(81) 98814-5906</span>
                 </div>
-                <div className='md:hidden'>
-                    <button onClick={toggleMenu}>
-                        {menuOpen ? (
-                            <span className='text-red-500'>
-                                <CloseIcon fontSize='large' />
-                            </span>
-                        ) : (
-                            <span>
-                                <MenuIcon fontSize='large' className='text-white' />
-                            </span>
-                        )}
-                    </button>
+                <div className='flex items-center gap-1'>
+                    <InstagramIcon />
+                    <span>@shinerayprazeres</span>
                 </div>
             </div>
-            {menuOpen && (
-                <div className='fixed w-full inset-0 top-0 left-0 bg-black bg-opacity-50 z-40 flex justify-center items-start'>
-                    <div ref={menuRef} className='w-full max-w-md bg-white p-8 z-50 flex flex-col items-center'>
-                        <button onClick={toggleMenu} className='absolute top-4 right-4 text-red-500'>
-                            <CloseIcon fontSize='large' />
-                        </button>
-                        <div className='flex flex-col items-center gap-4'>
-                            <Link href={'/'} className='text-2xl' onClick={() => setMenuOpen(false)}>Início</Link>
-                            <Link href={'/#sobre-nos'} className='text-2xl' onClick={() => setMenuOpen(false)}>Sobre Nós</Link>
-                            <Link href={'/catalogo'} className='text-2xl' onClick={() => setMenuOpen(false)}>Catálogo</Link>
-                            <Link href={'/login'} className='py-2 px-4 text-2xl bg-red-500 text-white rounded-xl' onClick={() => setMenuOpen(false)}>Login</Link>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
