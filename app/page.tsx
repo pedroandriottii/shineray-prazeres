@@ -5,12 +5,16 @@ import PanelAccess from "@/components/sections/panelAccess";
 import Image from "next/image";
 import HeroSection from "@/components/home/HeroSection";
 import Navbar from "@/components/base/navbar";
+import CatalogSection from "@/components/home/CatalogSection";
+import AboutSection from "@/components/home/AboutSection";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col gap-6">
       <HeroSection />
-      <div className="flex items-center justify-around p-4">
+      <AboutSection />
+      <CatalogSection />
+      {/* <div className="flex items-center justify-around p-4">
         <Image
           src={'/logo.png'}
           width={100}
@@ -28,7 +32,7 @@ export default function Home() {
       <h1 className="flex justify-center uppercase p-2 text-shineray-color-dark font-bold">Catálogo</h1>
       <DynamicCarousel />
       <ClientBenefits />
-      <PanelAccess />
+      <PanelAccess /> */}
     </div >
   );
 }

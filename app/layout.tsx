@@ -27,10 +27,10 @@ export default function RootLayout({
         <body className={`${Font.className} font-light`}>
           <Navbar />
           {children}
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg">
+          {/* <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg">
             <WhatsAppIcon fontSize="large" />
-          </a>
-          <Footer />
+          </a> */}
+          {/* <Footer /> */}
         </body>
       </AuthProvider>
 
