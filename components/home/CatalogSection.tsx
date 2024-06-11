@@ -60,7 +60,7 @@ const CatalogSection: React.FC = () => {
                 </Carousel>
             </div>
             <div className='flex justify-center'>
-                <h1 className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-60`}>Solicite seu Financiamento!</h1>
+                <h1 className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80`}>Solicite seu Financiamento!</h1>
             </div>
         </div>
     );

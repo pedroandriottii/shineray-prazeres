@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import PhoneIcon from '@mui/icons-material/Phone';
 import { Inter } from 'next/font/google';
 
 const FontInter = Inter({ subsets: ['latin'], weight: ['400'] });
@@ -34,7 +33,6 @@ const HeroSection: React.FC = () => {
             </div>
             <div className="flex items-center p-2 bottom-0 bg-shineray-color-dark text-white text-center py-2 px-6 text-xs">
                 <p className='mr-4'>Precisa de ajuda? Liga para a gente:</p>
-                <PhoneIcon style={{ color: 'transparent', stroke: 'white', strokeWidth: 2 }} />
                 <p className='ml-2'>(81) 98814-5903</p>
             </div>
         </div >
