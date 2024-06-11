@@ -65,7 +65,6 @@ const Page: React.FC = () => {
                         ))}
                     </Carousel>
                     <div className='flex justify-between w-full p-4'>
-                        <h1>{motorcycle.name} {motorcycle.year}</h1>
                         <h1>R$ {motorcycle.price}</h1>
                     </div>
                     <h1>Modelo: {motorcycle.name}</h1>
@@ -73,9 +72,9 @@ const Page: React.FC = () => {
                     <p>Color: {motorcycle.color}</p>
                     <p>Description: {motorcycle.description}</p>
                     <p>Ficha Técnica: {motorcycle.specs}</p>
+                    {motorcycle && <PostFinancingSection motorcycleId={motorcycle.id} id={0} name={''} phone={''} cpf={''} birthDate={''} hasDriverLicense={false} method={''} isConcluded={false} createdAt={''} updatedAt={''} value={0} />}
                 </>
             )}
-            {motorcycle && <PostFinancingSection motorcycleId={motorcycle.id} />}
         </div>
 
     );

@@ -49,10 +49,7 @@ const Page: React.FC = () => {
 
         const formData = new FormData();
         formData.append('name', editMotorcycle.name);
-        formData.append('chassi', editMotorcycle.chassi);
         formData.append('price', editMotorcycle.price.toString());
-        formData.append('year', editMotorcycle.year.toString());
-        formData.append('model', editMotorcycle.model);
         formData.append('color', editMotorcycle.color);
         formData.append('specs', editMotorcycle.specs);
 
@@ -139,14 +136,9 @@ const Page: React.FC = () => {
                             <Card className='flex p-2 flex-col'>
                                 <img className='w-full rounded-md' src={motorcycle.imageUrls[0]} alt={motorcycle.name} width={200} height={150} />
                                 <div className='flex justify-between items-center'>
-                                    <p className='flex items-center gap-2'>
-                                        <h2 className='flex text-center py-2 uppercase justify-center font-bold text-shineray-color-dark'>{motorcycle.name}</h2>
-                                        <p>{motorcycle.year}</p>
-                                    </p>
                                     <p>R${motorcycle.price}</p>
                                 </div>
                                 <p>{motorcycle.description}</p>
-                                <p>{motorcycle.model}</p>
                                 <p><span className='text-shineray-color-dark uppercase'>Cor: </span>{motorcycle.color}</p>
                                 <span className='text-shineray-color-dark uppercase flex justify-center pt-2'>Ficha Técnica:</span>
                                 <p className='flex text-center justify-center'>{motorcycle.specs}</p>
@@ -169,21 +161,10 @@ const Page: React.FC = () => {
                                             <Label htmlFor="name">Nome</Label>
                                             <Input type="text" id="name" name="name" value={editMotorcycle.name} onChange={handleChange} required />
                                         </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="chassi">Chassi</Label>
-                                            <Input type="text" id="chassi" name="chassi" value={editMotorcycle.chassi} onChange={handleChange} required />
-                                        </div>
+
                                         <div className="mb-4">
                                             <Label htmlFor="price">Preço</Label>
                                             <Input type="text" id="price" name="price" value={editMotorcycle.price} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="year">Ano</Label>
-                                            <Input type="text" id="year" name="year" value={editMotorcycle.year} onChange={handleChange} required />
-                                        </div>
-                                        <div className="mb-4">
-                                            <Label htmlFor="model">Modelo</Label>
-                                            <Input type="text" id="model" name="model" value={editMotorcycle.model} onChange={handleChange} required />
                                         </div>
                                         <div className="mb-4">
                                             <Label htmlFor="color">Cor</Label>
