@@ -1,17 +1,23 @@
 import React from 'react';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import PlaceIcon from '@mui/icons-material/Place';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Poppins } from 'next/font/google';
+
+const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 function Footer() {
     return (
-        <div className='bg-slate-200'>
+        <div className={Font.className}>
             <div className='flex items-center justify-center p-2'>
-                <span className='text-shineray-color-dark'>
-                    <PlaceIcon />
-                </span>
-                <h1 className='text-shineray-color-dark text-xl text-center p-2 uppercase'>Nossa Localização</h1>
+                <Image
+                    src={'/base/locationIcon.svg'}
+                    width={24}
+                    height={24}
+                    alt='Localização'
+                />
+                <h1 className='text-xl text-center p-2 uppercase text-bold'>Nossa Localização</h1>
             </div>
             <div className='flex w-full items-center align-center justify-center'>
                 <iframe
@@ -23,9 +29,9 @@ function Footer() {
                 ></iframe>
             </div>
             <div>
-                <h2 className='text-center p-2 text-shineray-color-dark'>Rua Arão Lins de Andrade, 950, Prazeres - Jaboatão dos Guararapes - PE - Brasil</h2>
+                <h2 className='text-center p-2 text-sm'>Rua Arão Lins de Andrade, 950, Prazeres - Jaboatão dos Guararapes - PE - Brasil</h2>
             </div>
-            <div className='p-4 flex justify-between underline text-slate-600'>
+            <div className='p-4 flex justify-around underline '>
                 <Link href={'/'}>
                     <p>Início</p>
                 </Link>
