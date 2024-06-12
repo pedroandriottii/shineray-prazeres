@@ -47,6 +47,9 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                                     <Link href={'/painel/financiamentos'}>
                                         <Button variant='outline'>Financiamentos</Button>
                                     </Link>
+                                    <Link href={'/painel/avaliacoes'}>
+                                        <Button variant='outline'>Avaliações</Button>
+                                    </Link>
                                 </>
                             )}
                             {role === 'CLIENT' && (

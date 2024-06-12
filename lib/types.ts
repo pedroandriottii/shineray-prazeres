@@ -63,4 +63,5 @@ export interface Avaliation {
     message: string;
     serviceId: number;
     createdAt: string;
+    user: Client;
 }

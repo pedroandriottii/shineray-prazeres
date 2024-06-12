@@ -167,7 +167,7 @@ const GetFinancingSection: React.FC<GetFinancingSectionProps> = ({ isConcluded }
                         <TableBody key={item.id}>
                             <TableRow className='hover:bg-shineray-color-dark'>
                                 <Link href={`/painel/motos/${item.motorcycleId}`}>
-                                    <TableCell className='text-white font-md underline'>{motorcycles[item.motorcycleId]?.name || 'Loading...'}
+                                    <TableCell className='text-white font-md underline'>{motorcycles[item.motorcycleId]?.name}
                                     </TableCell>
                                 </Link>
                                 <TableCell className='text-white'>{item.name}</TableCell>

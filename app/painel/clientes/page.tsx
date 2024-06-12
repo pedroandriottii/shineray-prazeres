@@ -207,10 +207,7 @@ const Page: React.FC = () => {
             <Card className='bg-[#373737] border-none'>
                 <div className='flex items-center justify-between p-4'>
                     <div className='flex items-center gap-6 text-shineray-color-dark'>
-                        <span className=''>
-                            <PersonIcon fontSize='large' />
-                        </span>
-
+                        <PersonIcon fontSize='large' />
                         <h1 className='text-2xl uppercase text-center'>Clientes</h1>
                     </div>
                     <div className="flex justify-center gap-4">
@@ -348,7 +345,7 @@ const Page: React.FC = () => {
                         </Dialog>
                     </div>
                 </div>
-                <Table >
+                <Table>
                     <TableHeader >
                         <TableRow>
                             <TableHead className='text-white font-bold text-xl'>Nome</TableHead>
