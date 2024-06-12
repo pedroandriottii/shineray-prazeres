@@ -7,6 +7,7 @@ import HeroSection from "@/components/home/HeroSection";
 import Navbar from "@/components/base/navbar";
 import CatalogSection from "@/components/home/CatalogSection";
 import AboutSection from "@/components/home/AboutSection";
+import Benefits from "@/components/home/Benefits";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <CatalogSection />
+      <Benefits />
       {/* <div className="flex items-center justify-around p-4">
         <Image
           src={'/logo.png'}

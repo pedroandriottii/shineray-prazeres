@@ -20,6 +20,7 @@ const config = {
     extend: {
       backgroundImage: {
         'parallax': "url('/revisao.jpeg')",
+        'benefits': "url('/home/bg-benefits.png')",
       },
       colors: {
         'shineray-color-dark': '#D00101',
