@@ -11,26 +11,26 @@ const FontPoppins = Poppins({ subsets: ['latin'], weight: ['300'] });
 
 const Benefits: React.FC = () => {
   return (
-    <section>
-      <div className='bg-benefits bg-cover bg-black'>
-        <div className='md:justify-center md:items-center flex text-white px-6 md:min-h-[35vh] md:max-h-[640px]'>
+    <section className='w-full'>
+      <div className='bg-benefits bg-cover w-full bg-black h-full md:min-h-[600px] md:max-h-[600px] md:flex md:items-center md:justify-center'>
+        <div className='md:justify-center md:items-center flex text-white max-w-[1700px] w-full'>
           <div className='flex md:my-auto flex-col flex-1 items-center justify-center py-10 md:py-14 gap-10 md:gap-20 '>
             <h3 className={`${FontInter.className} text-lg text-center md:text-2xl uppercase underline underline-offset-4`}>Benefícios para nossos clientes</h3>
-            <div className={`${FontPoppins.className} flex flex-col gap-4 md:flex-row`}>
-              <div className='flex md:aspect-square md:flex-1 md:max-w-[200px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
-                <Image src={threeStars} alt='Três estrelas' width={40} height={40} />
+            <div className={`${FontPoppins.className} flex px-6 lg:px-12 flex-col gap-4 md:flex-row md:w-full md:justify-between`}>
+              <div className='flex md:aspect-square md:flex-1 md:max-w-[250px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 md:gap-4 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
+                <Image src={threeStars} alt='Três estrelas' width={120} height={120} className='w-[45px] sm:w-[80px] md:w-[100px]' />
                 <p>Garantia de 1 ano!</p>
               </div>
-              <div className='flex md:aspect-square md:flex-1 md:max-w-[200px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
-                <Image src={tools} alt='Três estrelas' width={35} height={35} />
+              <div className='flex md:aspect-square md:flex-1 md:max-w-[250px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 md:gap-4 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
+                <Image src={tools} alt='Três estrelas' width={120} height={120} className='w-[35px] sm:w-[60px] md:w-[80px]' />
                 <p>As duas primeiras revisões 100% gratuitas!</p>
               </div>
-              <div className='flex md:aspect-square md:flex-1 md:max-w-[200px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
-                <Image src={capacete} alt='Três estrelas' width={35} height={35} />
+              <div className='flex md:aspect-square md:flex-1 md:max-w-[250px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 md:gap-4 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
+                <Image src={capacete} alt='Três estrelas' width={120} height={120} className='w-[35px] sm:w-[60px] md:w-[80px]' />
                 <p>Ganhe um Capacete!</p>
               </div>
-              <div className='flex md:aspect-square md:flex-1 md:max-w-[200px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
-                <Image src={gasolina} alt='Três estrelas' width={35} height={35} />
+              <div className='flex md:aspect-square md:flex-1 md:max-w-[250px] md:items-center md:justify-center md:flex-col md:text-center md:px-4 md:py-4 text-lg gap-2 md:gap-4 items-center border-2 px-3 py-3 rounded-lg bg-black/60'>
+                <Image src={gasolina} alt='Três estrelas' width={120} height={120} className='w-[35px] sm:w-[60px] md:w-[80px]' />
                 <p>Saia com o tanque cheio!</p>
               </div>
             </div>
