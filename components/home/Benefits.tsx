@@ -5,6 +5,7 @@ import gasolina from '@/public/home/gasolina.svg';
 import capacete from '@/public/home/capacete.svg';
 import tools from '@/public/home/tools.svg';
 import { Inter, Poppins } from 'next/font/google';
+import Link from 'next/link';
 
 const FontInter = Inter({ subsets: ['latin'], weight: ['500', '700'] });
 const FontPoppins = Poppins({ subsets: ['latin'], weight: ['300'] });
@@ -39,9 +40,12 @@ const Benefits: React.FC = () => {
       </div>
       <div className='w-full flex pt-6 justify-center'>
         <a href="#">
-          <button className='font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80 md:mt-4'>
-            Veja os modelos disponíveis!
-          </button>
+          <Link href={'/catalogo'}>
+            <button className='font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80 md:mt-4'>
+              Veja os modelos disponíveis!
+            </button>
+          </Link>
+
         </a>
       </div>
     </section>

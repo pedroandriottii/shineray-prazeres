@@ -8,6 +8,7 @@ import home from '@/public/home/home.svg'
 import motorcycle from '@/public/home/motorcycle.svg'
 import profile from '@/public/home/profile.svg'
 import folheto from '@/public/home/folheto.svg'
+import Link from 'next/link';
 const font = Inter({ subsets: ['latin'], weight: ['400'] });
 
 const Navbar: React.FC = () => {
@@ -20,48 +21,58 @@ const Navbar: React.FC = () => {
                     </SheetHeader>
                     <div className='mt-6 px-5 flex flex-col gap-4'>
                         <div className='flex text-white text-lg'>
-                            <a href="#" className='flex items-center gap-3'>
-                                <Image 
-                                    src={home}
-                                    width={25}
-                                    height={25}
-                                    alt='Home'
-                                />
-                                Início
-                            </a>
+                            <Link href={'/'}>
+                                <span className='flex items-center gap-3'>
+                                    <Image
+                                        src={home}
+                                        width={25}
+                                        height={25}
+                                        alt='Home'
+                                    />
+                                    Início
+                                </span>
+                            </Link>
+
                         </div>
                         <div className='flex text-white text-lg'>
-                            <a href="#" className='flex items-center gap-3'>
-                                <Image 
-                                    src={motorcycle}
-                                    width={25}
-                                    height={25}
-                                    alt='sore nós'
-                                />
-                                Sobre nos
-                            </a>
+                            <Link href={'/#sobre-nos'}>
+                                <span className='flex items-center gap-3'>
+                                    <Image
+                                        src={motorcycle}
+                                        width={25}
+                                        height={25}
+                                        alt='sore nós'
+                                    />
+                                    Sobre nos
+                                </span>
+                            </Link>
                         </div>
                         <div className='flex text-white text-lg'>
-                            <a href="#" className='flex items-center gap-3'>
-                                <Image 
-                                    src={folheto}
-                                    width={25}
-                                    height={25}
-                                    alt='Catalogo'
-                                />
-                                Catalogo
-                            </a>
+                            <Link href={'/catalogo'}>
+                                <span className='flex items-center gap-3'>
+                                    <Image
+                                        src={folheto}
+                                        width={25}
+                                        height={25}
+                                        alt='Catalogo'
+                                    />
+                                    Catalogo
+                                </span>
+                            </Link>
                         </div>
                         <div className='flex text-white text-lg'>
-                            <a href="#" className='flex items-center gap-3'>
-                                <Image 
-                                    src={profile}
-                                    width={25}
-                                    height={25}
-                                    alt='ver perfil'
-                                />
-                                Login
-                            </a>
+                            <Link href={'/login'}>
+                                <span className='flex items-center gap-3'>
+                                    <Image
+                                        src={profile}
+                                        width={25}
+                                        height={25}
+                                        alt='ver perfil'
+                                    />
+                                    Login
+                                </span>
+                            </Link>
+
                         </div>
                     </div>
                 </SheetContent>
@@ -69,50 +80,58 @@ const Navbar: React.FC = () => {
             {/* DESKTOP */}
             <div className='flex items-center justify-between max-md:justify-end w-full gap-4'>
                 <div className=' px-5 flex flex-col md:flex-row gap-4 max-md:hidden'>
-                    <div className='flex text-white text-lg'>
-                        <a href="#" className='flex items-center gap-3'>
-                            <Image 
-                                src={home}
-                                width={25}
-                                height={25}
-                                alt='Home'
-                            />
-                            Início
-                        </a>
-                    </div>
-                    <div className='flex text-white text-lg'>
-                        <a href="#" className='flex items-center gap-3'>
-                            <Image 
-                                src={motorcycle}
-                                width={25}
-                                height={25}
-                                alt='sore nós'
-                            />
-                            Sobre nos
-                        </a>
-                    </div>
-                    <div className='flex text-white text-lg'>
-                        <a href="#" className='flex items-center gap-3'>
-                            <Image 
-                                src={folheto}
-                                width={25}
-                                height={25}
-                                alt='Catalogo'
-                            />
-                            Catalogo
-                        </a>
-                    </div>
-                    <div className='flex text-white text-lg'>
-                        <a href="#" className='flex items-center gap-3'>
-                            <Image 
-                                src={profile}
-                                width={25}
-                                height={25}
-                                alt='ver perfil'
-                            />
-                            Login
-                        </a>
-                    </div>
+                    <Link href={'/'}>
+                        <div className='flex text-white text-lg'>
+                            <span className='flex items-center gap-3'>
+                                <Image
+                                    src={home}
+                                    width={25}
+                                    height={25}
+                                    alt='Home'
+                                />
+                                Início
+                            </span>
+                        </div>
+                    </Link>
+                    <Link href={'/#sobre-nos'}>
+                        <div className='flex text-white text-lg'>
+                            <span className='flex items-center gap-3'>
+                                <Image
+                                    src={motorcycle}
+                                    width={25}
+                                    height={25}
+                                    alt='sore nós'
+                                />
+                                Sobre nos
+                            </span>
+                        </div>
+                    </Link>
+                    <Link href={'/catalogo'}>
+                        <div className='flex text-white text-lg'>
+                            <span className='flex items-center gap-3'>
+                                <Image
+                                    src={folheto}
+                                    width={25}
+                                    height={25}
+                                    alt='Catalogo'
+                                />
+                                Catalogo
+                            </span>
+                        </div>
+                    </Link>
+                    <Link href={'/login'}>
+                        <div className='flex text-white text-lg'>
+                            <span className='flex items-center gap-3'>
+                                <Image
+                                    src={profile}
+                                    width={25}
+                                    height={25}
+                                    alt='ver perfil'
+                                />
+                                Login
+                            </span>
+                        </div>
+                    </Link>
                 </div>
                 <div className=' flex'>
                     <div className='flex items-center gap-1'>
@@ -135,7 +154,7 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

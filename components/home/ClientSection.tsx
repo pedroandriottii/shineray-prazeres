@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const ClientSection: React.FC = () => {
@@ -9,7 +10,9 @@ const ClientSection: React.FC = () => {
             </div>
             <div className='flex flex-col items-center'>
                 <p className='py-4'>Nossos clientes possuem acesso à um painel com informações sobre sua moto, serviços e garantias.</p>
-                <button className='bg-shineray-color-dark rounded-full p-2 text-white w-44'>Fazer Login</button>
+                <Link href={'/login'}>
+                    <button className='bg-shineray-color-dark rounded-full p-2 text-white w-44'>Fazer Login</button>
+                </Link>
             </div>
 
         </div>

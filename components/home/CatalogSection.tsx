@@ -6,6 +6,7 @@ import {
     CarouselContent,
     CarouselItem,
 } from "@/components/ui/carousel"
+import Link from 'next/link';
 
 const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
@@ -14,7 +15,9 @@ const CatalogSection: React.FC = () => {
         <div className={`${Font.className}flex flex-col px-6 max-w-[1700px]`}>
             <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white'>
                 <h2 className='text-xl'>CATÁLOGO</h2>
-                <p className='underline pr-6 text-sm'>Ver mais</p>
+                <Link href={'/catalogo'}>
+                    <p className='underline pr-6 text-sm'>Ver mais</p>
+                </Link>
                 <div className="absolute right-0 bottom-0 border-corner"></div>
             </div>
             <div>
@@ -56,9 +59,9 @@ const CatalogSection: React.FC = () => {
                 </Carousel>
             </div>
             <div className='flex justify-center'>
-                <a href="#">
+                <Link href={'/catalogo'}>
                     <button className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80 md:mt-4`}>Solicite seu Financiamento!</button>
-                </a>
+                </Link>
             </div>
         </div>
     );

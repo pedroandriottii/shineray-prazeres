@@ -47,17 +47,30 @@ const Page: React.FC = () => {
     return (
         <div>
             <div className="relative w-full">
-                <Image
-                    src={'/catalog/hero.svg'}
-                    alt="Hero Background"
-                    width={1920}
-                    height={1080}
-                    objectFit="cover"
-                    quality={100}
-                    className="z-0 md:max-h-[690px] w-full bg-black"
-                />
+                <div className="block md:hidden">
+                    <Image
+                        src={'/catalog/hero.svg'}
+                        alt="Hero Background Mobile"
+                        width={1920}
+                        height={1080}
+                        objectFit="cover"
+                        quality={100}
+                        className="z-0 w-full bg-black"
+                    />
+                </div>
+                <div className="hidden md:block">
+                    <Image
+                        src={'/catalog/heroDesk.svg'}
+                        alt="Hero Background Desktop"
+                        width={1920}
+                        height={1080}
+                        objectFit="cover"
+                        quality={100}
+                        className="z-0 w-full bg-black"
+                    />
+                </div>
                 <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-1`}>
-                    <h1 className="text-2xl lg:text-7xl md:text-5xl  uppercase text-center"><span className='font-extrabold'>Escolha a moto</span> dos seus sonhos!</h1>
+                    <h1 className="text-2xl lg:text-7xl md:text-5xl uppercase text-center"><span className='font-extrabold'>Escolha a moto</span> dos seus sonhos!</h1>
                     <div className="flex items-center gap-2">
                         <img
                             src={'/base/shinerayLogo.png'}
