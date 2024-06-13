@@ -11,7 +11,9 @@ const font = Inter({ subsets: ['latin'], weight: ['400'] });
 const Navbar: React.FC = () => {
     return (
         <div className={`${font.className} bg-shineray-black text-white flex justify-between text-xs items-center p-2`}>
-            <MenuIcon />
+            <span className='md:hidden'>
+                <MenuIcon />
+            </span>
             <div className='flex items-center gap-4'>
                 <div className='flex items-center gap-1'>
                     <Image

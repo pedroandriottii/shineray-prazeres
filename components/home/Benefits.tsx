@@ -37,9 +37,9 @@ const Benefits: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className='w-full flex md:py-12 pt-6 justify-center'>
+      <div className='w-full flex pt-6 justify-center'>
         <a href="#">
-          <button className='font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80'>
+          <button className='font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80 md:mt-4'>
             Veja os modelos disponíveis!
           </button>
         </a>

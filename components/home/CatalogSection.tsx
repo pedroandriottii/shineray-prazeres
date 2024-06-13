@@ -57,7 +57,7 @@ const CatalogSection: React.FC = () => {
             </div>
             <div className='flex justify-center'>
                 <a href="#">
-                    <button className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80`}>Solicite seu Financiamento!</button>
+                    <button className={`font-bold flex justify-center bg-shineray-color-dark text-white p-2 rounded-full w-80 md:mt-4`}>Solicite seu Financiamento!</button>
                 </a>
             </div>
         </div>
