@@ -8,7 +8,7 @@ import Footer from "@/components/base/footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-6 md:gap-12">
+    <div className="flex flex-col gap-6 md:gap-12 items-center">
       <HeroSection />
       <AboutSection />
       <CatalogSection />

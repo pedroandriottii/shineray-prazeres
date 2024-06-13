@@ -11,7 +11,7 @@ const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 const CatalogSection: React.FC = () => {
     return (
-        <div className={`${Font.className}flex flex-col px-6`}>
+        <div className={`${Font.className}flex flex-col px-6 max-w-[1700px]`}>
             <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white'>
                 <h2 className='text-xl'>CATÁLOGO</h2>
                 <p className='underline pr-6 text-sm'>Ver mais</p>

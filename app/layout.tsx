@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/base/navbar";
-import Footer from "@/components/base/footer";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { AuthProvider } from "@/context/AuthContext";
 

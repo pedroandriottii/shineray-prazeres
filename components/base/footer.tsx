@@ -9,7 +9,7 @@ const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 function Footer() {
     return (
-        <div className={Font.className}>
+        <div className={`${Font.className}`}>
             <div className='flex items-center justify-center p-2'>
                 <Image
                     src={'/base/locationIcon.svg'}
