@@ -8,7 +8,7 @@ const FontPoppins = Poppins({ subsets: ['latin'], weight: ['200'] });
 
 const HeroSection: React.FC = () => {
     return (
-        <div className="relative w-full h-[300px]">
+        <div className="relative w-full">
             <Image
                 src={'/home/hero.svg'}
                 alt="Hero Background"
@@ -16,7 +16,7 @@ const HeroSection: React.FC = () => {
                 height={1080}
                 objectFit="cover"
                 quality={100}
-                className="z-0 md:max-h-[690px] w-full h-[300px]"
+                className="z-0 md:max-h-[690px] w-full"
             />
             <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-1`}>
                 <h1 className="text-2xl lg:text-7xl text-center md:text-5xl"><span className='font-extrabold'>CONQUISTE</span> SUA SHINERAY</h1>
