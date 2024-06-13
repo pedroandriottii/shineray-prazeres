@@ -5,11 +5,7 @@ import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Card } from '../ui/card';
-
 
 const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
