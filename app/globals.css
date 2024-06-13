@@ -97,4 +97,12 @@
     border-top: 50px solid #D00101;
     transform: rotateX(180deg);
   }
+
+  .border-corner-catalog-page {
+    content: "";
+    position: absolute;
+    border-left: 50px solid transparent;
+    border-top: 48px solid #D00101;
+    transform: rotateX(180deg);
+  }
 }
