@@ -8,11 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
+import ChangePassword from './auth/changePassword';
 
 const ClientPanel: React.FC = () => {
     const id = Cookies.get('userId');
     const token = Cookies.get('accessToken');
-    const [userData, setUserData] = useState<Client | null>(null);
+    const [userData, setUserData] = useState<Client>();
     const [services, setServices] = useState<Service[]>([]);
     const [loadingUserData, setLoadingUserData] = useState(true);
     const [loadingServices, setLoadingServices] = useState(true);
@@ -20,6 +22,7 @@ const ClientPanel: React.FC = () => {
     const [rating, setRating] = useState<number>(0);
     const [message, setMessage] = useState<string>('');
     const [currentServiceId, setCurrentServiceId] = useState<number | null>(null);
+    const [alterarSenha, setAlterarSenha] = useState<boolean>(false);
 
     useEffect(() => {
         if (id) {
@@ -27,6 +30,10 @@ const ClientPanel: React.FC = () => {
             fetchUserServices(id);
         }
     }, [id]);
+
+    const handleDialogClose = () => {
+        setAlterarSenha(false);
+      };
 
     const fetchUserData = async (userId: string) => {
         try {
@@ -108,8 +115,27 @@ const ClientPanel: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    console.log(userData)
+
     return (
         <div className="p-6">
+            <AlertDialog defaultOpen={userData?.isFirstAccess}>
+                <AlertDialogContent className='max-w-[360px]' >
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Olá, {userData?.name}! Este é seu primeiro login?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Recomendamos que altere sua senha automatica que voce recebeu para sua maior segurança.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter className='flex flex-col sm:flex-col sm:space-x-0 gap-2 mt-4'>
+                        <AlertDialogCancel className='' asChild>
+                            <Button className='bg-black font-semibold hover:bg-gray-800 hover:text-white'>Cancelar</Button>
+                        </AlertDialogCancel>
+                        <AlertDialogAction className='bg-[#CC0000] hover:bg-[#f10000] hover:text-white text-white font-semibold' onClick={() => setAlterarSenha(true)}>Alterar</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+            <ChangePassword clientId={id} isOpen={alterarSenha} onClose={handleDialogClose} />
             <h1 className="text-2xl font-bold mb-4">Painel do Cliente</h1>
             {userData ? (
                 <div className="mb-6">
