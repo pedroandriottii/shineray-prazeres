@@ -44,6 +44,7 @@ export interface Client {
     chassi: string;
     color: string;
     saleDate: string;
+    isFirstAccess: boolean;
 }
 
 export interface Service {
