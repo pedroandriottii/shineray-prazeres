@@ -120,16 +120,18 @@ const ClientPanel: React.FC = () => {
     return (
         <div className="p-6">
             <AlertDialog defaultOpen={userData?.isFirstAccess}>
-                <AlertDialogContent>
+                <AlertDialogContent className='max-w-[360px]' >
                     <AlertDialogHeader>
                         <AlertDialogTitle>Olá, {userData?.name}! Este é seu primeiro login?</AlertDialogTitle>
                         <AlertDialogDescription>
                             Recomendamos que altere sua senha automatica que voce recebeu para sua maior segurança.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => setAlterarSenha(true)}>Alterar</AlertDialogAction>
+                    <AlertDialogFooter className='flex flex-col sm:flex-col sm:space-x-0 gap-2 mt-4'>
+                        <AlertDialogCancel className='' asChild>
+                            <Button className='bg-black font-semibold hover:bg-gray-800 hover:text-white'>Cancelar</Button>
+                        </AlertDialogCancel>
+                        <AlertDialogAction className='bg-[#CC0000] hover:bg-[#f10000] hover:text-white text-white font-semibold' onClick={() => setAlterarSenha(true)}>Alterar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

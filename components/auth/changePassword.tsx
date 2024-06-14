@@ -47,7 +47,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ clientId, isOpen, onClo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className='max-w-[360px]'>
         <DialogHeader>
           <DialogTitle>Digite sua nova senha:</DialogTitle>
           <DialogDescription>
@@ -55,8 +55,8 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ clientId, isOpen, onClo
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid gap-6 py-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="password" className="text-right">
                 Senha
               </Label>
@@ -69,7 +69,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ clientId, isOpen, onClo
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="confirmPassword" className="text-right">
                 Repita sua senha
               </Label>
@@ -85,7 +85,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ clientId, isOpen, onClo
             {error && <p className="text-red-500">{error}</p>}
           </div>
           <DialogFooter>
-            <Button type="submit">Salvar</Button>
+            <Button type="submit" className='mt-6 bg-[#CC0000] w-full hover:bg-[#f10000] hover:text-white text-white font-semibold '>Alterar senha</Button>
           </DialogFooter>
         </form>
       </DialogContent>
