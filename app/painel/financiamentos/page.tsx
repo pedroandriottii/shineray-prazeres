@@ -1,4 +1,4 @@
-import GetFinancingSection from '@/components/sections/getFinancingSection';
+import GetFinancingSection from '@/components/financing/getFinancingSection';
 import { Card } from '@/components/ui/card';
 import React from 'react';
 

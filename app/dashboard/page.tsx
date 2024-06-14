@@ -1,4 +1,4 @@
-import GetFinancingSection from "@/components/sections/getFinancingSection";
+import GetFinancingSection from "@/components/financing/getFinancingSection";
 
 export default function DashBoard() {
     return (

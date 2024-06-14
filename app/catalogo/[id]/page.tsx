@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import PostFinancingSection from '@/components/sections/postFinancingSection';
+import PostFinancingSection from '@/components/financing/postFinancingSection';
 import { Motorcycle } from '@/lib/types';
 import { Carousel, CarouselItem } from '@/components/ui/carousel';
 import Image from 'next/image';
