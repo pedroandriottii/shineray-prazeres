@@ -103,7 +103,6 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
         >
           <option value="COM_ENTRADA">Com Entrada</option>
           <option value="SEM_ENTRADA">Sem Entrada</option>
-          <option value="A_VISTA">A Vista</option>
         </select>
 
         {method === 'COM_ENTRADA' && (
