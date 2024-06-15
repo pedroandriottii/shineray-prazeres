@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Cookies from 'js-cookie';
 import { Client, Service } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
 import ChangePassword from './auth/changePassword';
+import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
+
 
 const ClientPanel: React.FC = () => {
     const id = Cookies.get('userId');
@@ -118,7 +120,8 @@ const ClientPanel: React.FC = () => {
     console.log(userData)
 
     return (
-        <div className="p-6">
+        <div className="bg-white">
+            <div className='p-6'>
             <AlertDialog defaultOpen={userData?.isFirstAccess}>
                 <AlertDialogContent className='max-w-[360px]' >
                     <AlertDialogHeader>
@@ -136,32 +139,50 @@ const ClientPanel: React.FC = () => {
                 </AlertDialogContent>
             </AlertDialog>
             <ChangePassword clientId={id} isOpen={alterarSenha} onClose={handleDialogClose} />
-            <h1 className="text-2xl font-bold mb-4">Painel do Cliente</h1>
+            <h1 className="text-2xl font-bold mb-4">Olá, {userData?.name}! Bem vindo!</h1>
             {userData ? (
                 <div className="mb-6">
-                    <Card className="p-4">
-                        <h2 className="text-lg font-bold mb-2">Meus Dados</h2>
-                        <p><strong>Nome:</strong> {userData.name}</p>
-                        <p><strong>Email:</strong> {userData.email}</p>
-                        <p><strong>Telefone:</strong> {userData.phone}</p>
-                        <p><strong>CPF:</strong> {userData.cpf}</p>
-                        <h2 className="text-lg font-bold mb-2 mt-4">Minha Shineray</h2>
-                        <p><strong>Moto:</strong> {userData.motorcycle}</p>
-                        <p><strong>Chassi:</strong> {userData.chassi}</p>
-                        <p><strong>Cor:</strong> {userData.color}</p>
-                        <p><strong>Data da Venda:</strong> {new Date(userData.saleDate).toLocaleDateString()}</p>
+                    <Card className='mb-6 shadow-lg'>
+                        <CardHeader >
+                            <CardTitle className='text-base'>Meus Dados</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className='text-sm'><strong>Nome:</strong> {userData.name}</p>
+                            <p className='text-sm'><strong>Email:</strong> {userData.email}</p>
+                            <p className='text-sm'><strong>Telefone:</strong> {userData.phone}</p>
+                            <p className='text-sm'><strong>CPF:</strong> {userData.cpf}</p>
+                        </CardContent>
+                    </Card>
+                    <Card className='shadow-lg'>
+                    <CardHeader >
+                            <CardTitle className='text-base'>Minha Shineray</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+
+                        <p className='text-sm'><strong>Moto:</strong> {userData.motorcycle}</p>
+                        <p className='text-sm'><strong>Chassi:</strong> {userData.chassi}</p>
+                        <p className='text-sm'><strong>Cor:</strong> {userData.color}</p>
+                        <p className='text-sm'><strong>Data da Venda:</strong> {new Date(userData.saleDate).toLocaleDateString()}</p>
+                        </CardContent>
                     </Card>
                 </div>
             ) : (
                 <div className='text-red-500'>Cliente não encontrado</div>
             )}
+            </div>
 
-            <h2 className="text-2xl font-bold mb-4 text-white">Meus Serviços</h2>
+            <div className='bg-[#CC0000] p-6'>
+            <h2 className="text-2xl font-bold text-white mb-4 ">Meus Serviços</h2>
             {services.length > 0 ? (
-                <div className="grid grid-flow-row gap-10 lg:grid-cols-6">
+                <Carousel>
+                    <CarouselContent>
                     {services.map((service) => (
-                        <Card key={service.id} className="flex p-2 flex-col">
-                            <h2 className="text-lg font-bold">{service.name}</h2>
+                        <CarouselItem key={service.id}>
+                        <Card key={service.id} className="flex p-2 flex-col flex-1 h-full justify-between">
+                            <CardHeader>
+                                <CardTitle className='text-base'>{service.name}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                             <p><strong>Tipo:</strong> {service.type}</p>
                             <p><strong>Data:</strong> {new Date(service.date).toLocaleDateString()}</p>
                             <p><strong>Quilometragem:</strong> {service.kilometers}</p>
@@ -169,8 +190,9 @@ const ClientPanel: React.FC = () => {
                                 <p><strong>Preço:</strong> {service.price}</p>
                             )}
                             {service.rating !== null && (
-                                <h1>Obrigado pela Avaliação!</h1>
+                                <p className='text-green-500 underline underline-offset-1'>Obrigado pela Avaliação!</p>
                             )}
+                            </CardContent>
                             {service.rating === null && (
                                 <Dialog>
                                     <DialogTrigger asChild>
@@ -211,12 +233,16 @@ const ClientPanel: React.FC = () => {
                                 </Dialog>
                             )}
                         </Card>
+                        </CarouselItem>
                     ))}
-                </div>
+                    </CarouselContent>
+                </Carousel>
             ) : (
                 <p>Sem serviços</p>
             )}
         </div>
+        </div>
+
     );
 };
 
