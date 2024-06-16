@@ -6,12 +6,13 @@ import Cookies from 'js-cookie';
 import { Client, Service } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
 import ChangePassword from './auth/changePassword';
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
-
+import { Textarea } from './ui/textarea';
+import { Rating, Star, ThinRoundedStar } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const ClientPanel: React.FC = () => {
     const id = Cookies.get('userId');
@@ -117,6 +118,16 @@ const ClientPanel: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const myStyles = {
+        itemShapes: Star,
+        activeFillColor: '#cc0000',
+        inactiveFillColor: '#ffffff',
+        inactiveBoxBorderColor: '#cc0000',
+        itemStrokeWidth: 1,
+        inactiveStrokeColor: "#cc0000",
+        activeStrokeColor: "#cc0000",
+      }
+
     console.log(userData)
 
     return (
@@ -177,7 +188,7 @@ const ClientPanel: React.FC = () => {
                 <Carousel>
                     <CarouselContent>
                     {services.map((service) => (
-                        <CarouselItem key={service.id}>
+                        <CarouselItem className='' key={service.id}>
                         <Card key={service.id} className="flex p-2 flex-col flex-1 h-full justify-between">
                             <CardHeader>
                                 <CardTitle className='text-base'>{service.name}</CardTitle>
@@ -204,21 +215,17 @@ const ClientPanel: React.FC = () => {
                                                 <DialogTitle>Avaliar Serviço</DialogTitle>
                                                 <DialogDescription>Insira sua avaliação abaixo</DialogDescription>
                                             </DialogHeader>
-                                            <div className="mb-4">
-                                                <Label htmlFor="rating">Avaliação (1 a 5)</Label>
-                                                <Input
-                                                    type="number"
-                                                    id="rating"
+                                            <div className="mb-4 flex flex-col gap-2 justify-center items-center">
+                                                <Rating
+                                                    itemStyles={myStyles}
                                                     value={rating}
-                                                    onChange={(e) => setRating(Number(e.target.value))}
-                                                    min={1}
-                                                    max={5}
-                                                    required
+                                                    onChange={setRating} 
+                                                    style={{ maxHeight: '50px', maxWidth: '200px' }}
                                                 />
                                             </div>
-                                            <div className="mb-4">
-                                                <Label htmlFor="message">Mensagem</Label>
-                                                <textarea
+                                            <div className="mb-4 flex flex-col gap-2">
+                                                <Label htmlFor="message">Deixe um comentário</Label>
+                                                <Textarea
                                                     id="message"
                                                     value={message}
                                                     onChange={(e) => setMessage(e.target.value)}
@@ -226,7 +233,7 @@ const ClientPanel: React.FC = () => {
                                                 />
                                             </div>
                                             <DialogFooter>
-                                                <Button onClick={() => handleAvaliate(service.id)}>Enviar Avaliação</Button>
+                                                <Button onClick={() => handleAvaliate(service.id)} className='bg-[#cc0000] hover:bg-[#ff0000] font-bold'>Enviar Avaliação</Button>
                                             </DialogFooter>
                                         </DialogContent>
                                     )}

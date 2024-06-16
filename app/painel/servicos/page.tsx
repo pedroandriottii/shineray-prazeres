@@ -162,7 +162,7 @@ const Services: React.FC = () => {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Lista de Serviços</h1>
-            <div className="grid grid-flow-row gap-10 lg:grid-cols-6">
+            <div className="grid grid-cols-2 grid-flow-row gap-10 lg:grid-cols-6">
                 {services.map((service) => (
                     <Card key={service.id} className="flex p-2 flex-col">
                         <h2 className="text-lg font-bold">{service.name}</h2>

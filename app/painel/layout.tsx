@@ -34,7 +34,7 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                         />
                         <div className="flex justify-around gap-10">
                             <Link href={'/painel'}>
-                                <Button variant='outline'>Painel</Button>
+                                <Button className='bg-[#ff0000] text-white font-bold rounded-full border-none px-4 py-2 font-semibold'>Painel</Button>
                             </Link>
                             {role === 'ADMIN' && (
                                 <>
@@ -54,7 +54,7 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                             )}
                             {role === 'CLIENT' && (
                                 <Link href={'/painel/servicos'}>
-                                    <Button variant='outline'>Serviços</Button>
+                                    <Button className='bg-[#ff0000] text-white font-bold rounded-full border-none px-4 py-2 font-semibold'>Serviços</Button>
                                 </Link>
                             )}
                         </div>
