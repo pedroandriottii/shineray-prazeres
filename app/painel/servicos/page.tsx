@@ -205,8 +205,8 @@ const Services: React.FC = () => {
 
     return (
         <div className="p-6 bg-white h-screen">
-            <h1 className="text-2xl font-bold mb-4">Lista de Serviços</h1>
-            <div className="grid grid-cols-2 grid-flow-row gap-4 md:grid-cols-4 lg:grid-cols-6">
+            <h1 className="text-2xl md:text-4xl md:mt-6 md:mb-10 font-bold mb-4">Lista de Serviços</h1>
+            <div className="grid grid-cols-2 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {services.map((service) => (
                     <Card key={service.id} className="flex p-2 flex-col flex-1 h-full justify-between">
                         <CardHeader>
