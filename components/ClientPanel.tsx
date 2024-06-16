@@ -131,7 +131,7 @@ const ClientPanel: React.FC = () => {
     console.log(userData)
 
     return (
-        <div className="bg-white">
+        <div className="bg-white h-[85vh]">
             <div className='p-6'>
             <AlertDialog defaultOpen={userData?.isFirstAccess}>
                 <AlertDialogContent className='max-w-[360px]' >
@@ -150,10 +150,10 @@ const ClientPanel: React.FC = () => {
                 </AlertDialogContent>
             </AlertDialog>
             <ChangePassword clientId={id} isOpen={alterarSenha} onClose={handleDialogClose} />
-            <h1 className="text-2xl font-bold mb-4">Olá, {userData?.name}! Bem vindo!</h1>
+            <h1 className="text-2xl md:text-4xl md:mt-6 md:mb-10 font-bold mb-4">Olá, {userData?.name}! Bem vindo!</h1>
             {userData ? (
-                <div className="mb-6">
-                    <Card className='mb-6 shadow-lg'>
+                <div className="mb-6 flex flex-col md:flex-row justify-center items-start gap-4 min-h-[40vh]">
+                    <Card className='mb-6 shadow-lg w-full md:mb-0'>
                         <CardHeader >
                             <CardTitle className='text-base'>Meus Dados</CardTitle>
                         </CardHeader>
@@ -164,7 +164,7 @@ const ClientPanel: React.FC = () => {
                             <p className='text-sm'><strong>CPF:</strong> {userData.cpf}</p>
                         </CardContent>
                     </Card>
-                    <Card className='shadow-lg'>
+                    <Card className='shadow-lg w-full'>
                     <CardHeader >
                             <CardTitle className='text-base'>Minha Shineray</CardTitle>
                         </CardHeader>
@@ -188,7 +188,7 @@ const ClientPanel: React.FC = () => {
                 <Carousel>
                     <CarouselContent>
                     {services.map((service) => (
-                        <CarouselItem className='' key={service.id}>
+                        <CarouselItem className='md:basis-1/2 lg:basis-1/3' key={service.id}>
                         <Card key={service.id} className="flex p-2 flex-col flex-1 h-full justify-between">
                             <CardHeader>
                                 <CardTitle className='text-base'>{service.name}</CardTitle>
@@ -207,7 +207,7 @@ const ClientPanel: React.FC = () => {
                             {service.rating === null && (
                                 <Dialog>
                                     <DialogTrigger asChild>
-                                        <Button onClick={() => setCurrentServiceId(service.id)}>Avaliar Serviço</Button>
+                                        <Button onClick={() => setCurrentServiceId(service.id)} className='bg-[#cc0000] hover:bg-[#ff0000] font-bold w-full rounded-full'>Avaliar</Button>
                                     </DialogTrigger>
                                     {currentServiceId === service.id && (
                                         <DialogContent>
