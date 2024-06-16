@@ -126,7 +126,7 @@ const ClientPanel: React.FC = () => {
         itemStrokeWidth: 1,
         inactiveStrokeColor: "#cc0000",
         activeStrokeColor: "#cc0000",
-      }
+    }
 
     console.log(userData)
 
@@ -142,10 +142,10 @@ const ClientPanel: React.FC = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className='flex flex-col sm:flex-col sm:space-x-0 gap-2 mt-4'>
+                        <AlertDialogAction className='bg-[#CC0000] hover:bg-[#f10000] hover:text-white text-white font-semibold' onClick={() => setAlterarSenha(true)}>Alterar</AlertDialogAction>
                         <AlertDialogCancel className='' asChild>
                             <Button className='bg-black font-semibold hover:bg-gray-800 hover:text-white'>Cancelar</Button>
                         </AlertDialogCancel>
-                        <AlertDialogAction className='bg-[#CC0000] hover:bg-[#f10000] hover:text-white text-white font-semibold' onClick={() => setAlterarSenha(true)}>Alterar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -233,7 +233,7 @@ const ClientPanel: React.FC = () => {
                                                 />
                                             </div>
                                             <DialogFooter>
-                                                <Button onClick={() => handleAvaliate(service.id)} className='bg-[#cc0000] hover:bg-[#ff0000] font-bold'>Enviar Avaliação</Button>
+                                                <Button onClick={() => handleAvaliate(service.id)} className='bg-[#cc0000] hover:bg-[#ff0000] font-bold w-full'>Enviar Avaliação</Button>
                                             </DialogFooter>
                                         </DialogContent>
                                     )}

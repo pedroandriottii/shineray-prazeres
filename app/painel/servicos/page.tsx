@@ -1,17 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Cookies from 'js-cookie';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 
 import { useRouter } from 'next/navigation';
 import { Client } from '@/lib/types';
+import { Rating, Star } from '@smastrom/react-rating';
+import { Textarea } from '@/components/ui/textarea';
 
 interface Service {
     id: number;
@@ -20,6 +22,9 @@ interface Service {
     price: number;
     type: string;
     userId: string | null;
+    date: string;
+    kilometers: number;
+    rating: number | null;
     user: {
         id: string;
         name: string;
@@ -46,6 +51,19 @@ const Services: React.FC = () => {
     const router = useRouter();
     const token = Cookies.get('accessToken');
     const role = Cookies.get('role');
+    const [currentServiceId, setCurrentServiceId] = useState<number | null>(null);
+    const [rating, setRating] = useState<number>(0);
+    const [message, setMessage] = useState<string>('');
+
+    const myStyles = {
+        itemShapes: Star,
+        activeFillColor: '#cc0000',
+        inactiveFillColor: '#ffffff',
+        inactiveBoxBorderColor: '#cc0000',
+        itemStrokeWidth: 1,
+        inactiveStrokeColor: "#cc0000",
+        activeStrokeColor: "#cc0000",
+    }
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -89,6 +107,32 @@ const Services: React.FC = () => {
         fetchServices();
         fetchClients();
     }, [token]);
+
+    const handleAvaliate = async (serviceId: number) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services/${serviceId}/avaliate`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rating, message }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit rating');
+            }
+
+            const updatedService = await response.json();
+            setServices((prevServices) => prevServices.map((service) => service.id === updatedService.id ? updatedService : service));
+            setRating(0);
+            setMessage('');
+            setCurrentServiceId(null);
+        } catch (error) {
+            console.error('Failed to submit rating', error);
+            alert('Failed to submit rating');
+        }
+    };
 
     const handleEdit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -160,15 +204,60 @@ const Services: React.FC = () => {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-white h-screen">
             <h1 className="text-2xl font-bold mb-4">Lista de Serviços</h1>
-            <div className="grid grid-cols-2 grid-flow-row gap-10 lg:grid-cols-6">
+            <div className="grid grid-cols-2 grid-flow-row gap-4 md:grid-cols-4 lg:grid-cols-6">
                 {services.map((service) => (
-                    <Card key={service.id} className="flex p-2 flex-col">
-                        <h2 className="text-lg font-bold">{service.name}</h2>
-                        <p>{service.description}</p>
-                        <p>Preço: R${service.price}</p>
-                        <p>Tipo: {service.type}</p>
+                    <Card key={service.id} className="flex p-2 flex-col flex-1 h-full justify-between">
+                        <CardHeader>
+                            <CardTitle className='text-base'>{service.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                        <p><strong>Tipo:</strong> {service.type}</p>
+                        <p><strong>Data:</strong> {new Date(service.date).toLocaleDateString()}</p>
+                        <p><strong>Quilometragem:</strong> {service.kilometers}</p>
+                        {service.price && (
+                            <p><strong>Preço:</strong> {service.price}</p>
+                        )}
+                        {service.rating !== null && (
+                            <p className='text-green-500 underline underline-offset-1'>Obrigado pela Avaliação!</p>
+                        )}
+                        </CardContent>
+                        {service.rating === null && (
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button onClick={() => setCurrentServiceId(service.id)}>Avaliar Serviço</Button>
+                                    </DialogTrigger>
+                                    {currentServiceId === service.id && (
+                                        <DialogContent>
+                                            <DialogHeader>
+                                                <DialogTitle>Avaliar Serviço</DialogTitle>
+                                                <DialogDescription>Insira sua avaliação abaixo</DialogDescription>
+                                            </DialogHeader>
+                                            <div className="mb-4 flex flex-col gap-2 justify-center items-center">
+                                                <Rating
+                                                    itemStyles={myStyles}
+                                                    value={rating}
+                                                    onChange={setRating} 
+                                                    style={{ maxHeight: '50px', maxWidth: '200px' }}
+                                                />
+                                            </div>
+                                            <div className="mb-4 flex flex-col gap-2">
+                                                <Label htmlFor="message">Deixe um comentário</Label>
+                                                <Textarea
+                                                    id="message"
+                                                    value={message}
+                                                    onChange={(e) => setMessage(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                            <DialogFooter>
+                                                <Button onClick={() => handleAvaliate(service.id)} className='bg-[#cc0000] hover:bg-[#ff0000] font-bold w-full'>Enviar Avaliação</Button>
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    )}
+                                </Dialog>
+                            )}
                         {role === 'ADMIN' && (
                             <>
                                 <p>Usuário: {service.user?.name}</p><Dialog>
