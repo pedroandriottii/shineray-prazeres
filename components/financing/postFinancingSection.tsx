@@ -2,9 +2,12 @@
 import { Button } from '@/components/ui/button';
 import { FinancingItem } from '@/lib/types';
 import React, { useState } from 'react';
-import InputMask from 'react-input-mask';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+
+import { Select } from '../ui/select';
 
 
 const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
@@ -54,61 +57,82 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
   };
 
   return (
-    <div className='w-full flex items-center flex-col bg-shineray-color-dark'>
+    <div className='w-full flex p-4 items-center flex-col bg-shineray-color-dark'>
       <ToastContainer />
-      <h1 className="text-center text-lg p-2 bg-white text-shineray-color-dark rounded-b-xl">Simular Financiamento</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 p-4">
-        <div className='flex flex-col'>
-          <label className='text-sm text-white'>Nome</label>
-          <input
+      <h3 className="text-center py-3 text-white uppercase font-bold text-2xl">Simule seu financiamento</h3>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-[800px]">
+        <div className='flex flex-col gap-2'>
+          <Label htmlFor='name' className=' text-white'>Nome</Label>
+          <Input
+            id='name'
             type="text"
             placeholder="Nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border rounded-md p-2"
+            className="border rounded-full"
             required
           />
         </div>
-        <div className='flex flex-col'>
-          <label className='text-sm text-white'>Telefone</label>
-          <InputMask mask="+5\5 (99) 99999-9999" value={phone} onChange={(e) => setPhone(e.target.value)} className="border rounded-md p-2" placeholder='+55 (99) 99999-9999' />
+        <div className='flex flex-col gap-2'>
+          <Label htmlFor='phone' className=' text-white'>Telefone</Label>
+          <Input
+            id='phone'
+            type="phone"
+            placeholder="81 99999-9999"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="border rounded-full"
+            required
+          />
         </div>
-        <div className='flex flex-col'>
-          <label className='text-sm text-white'>CPF</label>
-          <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="border rounded-md p-2" placeholder='CPF' />
+        <div className='flex flex-col gap-2'>
+          <Label htmlFor='cpf' className='text-white'>CPF</Label>
+          <Input
+            id='cpf'
+            type="cpf"
+            placeholder="123.456.789-00"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            className="border rounded-full"
+            required
+          />
         </div>
-        <div className='flex flex-col flex-1'>
-          <label htmlFor="" className='text-sm text-white'>Data de Nascimento</label>
-          <input
+        <div className='flex flex-col gap-2'>
+          <Label htmlFor="date" className='text-sm text-white'>Data de Nascimento</Label>
+          <Input
+            id='date'
             type="date"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
-            className="flex flex-1 border rounded-md p-2 w-full"
+            className="border rounded-full"
             required
           />
         </div>
         <div className='flex items-center gap-2 text-white'>
           <input
+            id="cnh"
             type="checkbox"
             checked={hasDriverLicense}
             onChange={(e) => setHasDriverLicense(e.target.checked)}
+            className='border rounded-full p-2 w-5 h-5'
           />
-          <label htmlFor="">Possui Habilitação?</label>
+          <label htmlFor="cnh">Possui Habilitação?</label>
         </div>
 
         <select
           value={method}
           onChange={(e) => setMethod(e.target.value)}
-          className="border rounded-md p-2 w-full"
+          className="border rounded-full p-2 w-full"
         >
           <option value="COM_ENTRADA">Com Entrada</option>
           <option value="SEM_ENTRADA">Sem Entrada</option>
         </select>
 
         {method === 'COM_ENTRADA' && (
-          <div className='flex flex-col'>
-            <label className='text-sm text-white'>Valor da Entrada</label>
-            <input
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor="value" className='text-sm text-white'>Valor da entrada</Label>
+            <Input
+              id='value'
               type="number"
               placeholder="R$"
               value={value}
@@ -119,7 +143,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
           </div>
         )}
 
-        <Button type="submit" variant='outline' className='flex w-full'>Enviar</Button>
+        <Button type="submit" variant='default' className='flex w-full rounded-full mt-4 bg-black'>Enviar</Button>
       </form>
     </div>
   );
