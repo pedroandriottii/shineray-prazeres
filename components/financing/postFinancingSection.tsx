@@ -8,8 +8,9 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import relampago from '@/public/catalog/relampago.svg'
 import zap from '@/public/catalog/zap.svg'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import Image from 'next/image';
+import InputMask from 'react-input-mask';
 
 
 const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
@@ -67,7 +68,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
       <AlertDialog onOpenChange={() => setOpen(!open)} open={open}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className='self-center'><Image alt="teste" src={relampago} width={60} height={60}  /></AlertDialogTitle>
+            <AlertDialogTitle className='self-center'><Image alt="teste" src={relampago} width={60} height={60} /></AlertDialogTitle>
             <AlertDialogDescription className='font-bold text-2xl self-center text-black'>
               Sua simulação foi enviada
             </AlertDialogDescription>
@@ -76,10 +77,10 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
             <p className=' text-center self-center mt-4'>Surgiu alguma dúvida? Entre em contato conosco através do whatsapp!</p>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <a href="#" className='w-full'>
-            <AlertDialogAction className='w-full bg-red-600 hover:bg-red-700 rounded-full' asChild>
-              <Image alt="teste" src={zap} width={30} height={30}  />
-            </AlertDialogAction>
+            <a href="https://api.whatsapp.com/send?phone=5581999564461" className='w-full'>
+              <AlertDialogAction className='w-full bg-red-600 hover:bg-red-700 rounded-full' asChild>
+                <Image alt="teste" src={zap} width={30} height={30} />
+              </AlertDialogAction>
             </a>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -100,27 +101,11 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
         </div>
         <div className='flex flex-col gap-2'>
           <Label htmlFor='phone' className=' text-white'>Telefone</Label>
-          <Input
-            id='phone'
-            type="phone"
-            placeholder="81 99999-9999"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="border rounded-full"
-            required
-          />
+          <InputMask mask="+5\5 (99) 99999-9999" value={phone} onChange={(e) => setPhone(e.target.value)} className="border rounded-full p-2" placeholder='+55 (99) 99999-9999' required />
         </div>
         <div className='flex flex-col gap-2'>
           <Label htmlFor='cpf' className='text-white'>CPF</Label>
-          <Input
-            id='cpf'
-            type="cpf"
-            placeholder="123.456.789-00"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            className="border rounded-full"
-            required
-          />
+          <InputMask mask="999.999.999-99" value={cpf} onChange={(e) => setCpf(e.target.value)} className="border rounded-full p-2" placeholder='CPF' />
         </div>
         <div className='flex flex-col gap-2'>
           <Label htmlFor="date" className='text-sm text-white'>Data de Nascimento</Label>

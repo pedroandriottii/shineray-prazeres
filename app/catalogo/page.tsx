@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Motorcycle } from '@/lib/types';
 import { Poppins } from 'next/font/google';
 import { Inter } from 'next/font/google';
+import Footer from '@/components/base/footer';
 
 const FontPoppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 const FontInter = Inter({ subsets: ['latin'], weight: ['200'] });
@@ -125,6 +126,7 @@ const Page: React.FC = () => {
                     </div>
                 ))}
             </div>
+            <Footer />
         </div>
     );
 };
