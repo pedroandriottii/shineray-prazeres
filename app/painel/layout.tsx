@@ -9,7 +9,7 @@ import { Montserrat } from "next/font/google";
 import Cookies from 'js-cookie';
 
 const Font = Montserrat({ subsets: ["latin"], weight: ["400"] });
-
+// Pedro eu comentei pq o layout agora nao usa mais esse layout pra area logada.
 const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isMounted, setIsMounted] = useState(false);
     const role = Cookies.get('role');
@@ -23,6 +23,8 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     }
     return (
         <html lang="en">
+        {role === 'ADMIN' && (
+
             <AuthProvider>
                 <body className={`${Font.className} font-light bg-[#121212]`} >
                     <div className="white px-6 py-4 flex justify-between items-center">
@@ -34,35 +36,33 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                         />
                         <div className="flex justify-around gap-10">
                             <Link href={'/painel'}>
-                                <Button className='bg-[#ff0000] text-white font-bold rounded-full border-none px-4 py-2 font-semibold'>Painel</Button>
+                                <Button variant="outline" >Painel</Button>
                             </Link>
-                            {role === 'ADMIN' && (
-                                <>
-                                    <Link href={'/painel/motos'}>
-                                        <Button variant='outline'>Estoque</Button>
-                                    </Link>
-                                    <Link href={'/painel/clientes'}>
-                                        <Button variant='outline'>Clientes</Button>
-                                    </Link>
-                                    <Link href={'/painel/financiamentos'}>
-                                        <Button variant='outline'>Financiamentos</Button>
-                                    </Link>
-                                    <Link href={'/painel/avaliacoes'}>
-                                        <Button variant='outline'>Avaliações</Button>
-                                    </Link>
-                                </>
-                            )}
-                            {role === 'CLIENT' && (
-                                <Link href={'/painel/servicos'}>
-                                    <Button className='bg-[#ff0000] text-white font-bold rounded-full border-none px-4 py-2 font-semibold'>Serviços</Button>
-                                </Link>
-                            )}
+                            <Link href={'/painel/motos'}>
+                                <Button variant='outline'>Estoque</Button>
+                            </Link>
+                            <Link href={'/painel/clientes'}>
+                                <Button variant='outline'>Clientes</Button>
+                            </Link>
+                            <Link href={'/painel/financiamentos'}>
+                                <Button variant='outline'>Financiamentos</Button>
+                            </Link>
+                            <Link href={'/painel/avaliacoes'}>
+                                <Button variant='outline'>Avaliações</Button>
+                            </Link>
                         </div>
                         <Logout />
                     </div>
                     {children}
                 </body>
             </AuthProvider>
+        )}
+        {role === 'CLIENT' && (
+            <>
+                {children}
+            </>
+        )}
+        
         </html>
     );
 };
