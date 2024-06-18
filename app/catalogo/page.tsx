@@ -1,9 +1,9 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Motorcycle } from '@/lib/types';
 import { Poppins } from 'next/font/google';
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
 
 const FontPoppins = Poppins({ subsets: ['latin'], weight: ['400'] });
@@ -49,18 +49,18 @@ const Page: React.FC = () => {
             <div className="relative w-full">
                 <div className="block md:hidden">
                     <Image
-                        src={'/catalog/hero.svg'}
+                        src={'/catalog/hero.jpg'}
                         alt="Hero Background Mobile"
                         width={1920}
                         height={1080}
                         objectFit="cover"
                         quality={100}
-                        className="z-0 w-full bg-black"
+                        className="z-0 bg-black/90"
                     />
                 </div>
                 <div className="hidden md:block">
                     <Image
-                        src={'/catalog/heroDesk.svg'}
+                        src={'/catalog/heroDesk.jpg'}
                         alt="Hero Background Desktop"
                         width={1920}
                         height={1080}
@@ -72,14 +72,18 @@ const Page: React.FC = () => {
                 <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-1`}>
                     <h1 className="text-2xl lg:text-7xl md:text-5xl uppercase text-center"><span className='font-extrabold'>Escolha a moto</span> dos seus sonhos!</h1>
                     <div className="flex items-center gap-2">
-                        <img
+                        <Image
                             src={'/base/shinerayLogo.png'}
                             alt='Logomarca Shineray'
+                            width={160}
+                            height={60}
                             className='w-40 md:w-60'
                         />
-                        <img
+                        <Image
                             src={'/base/revisaoLogo.png'}
                             alt='Logomarca Revisão'
+                            width={40}
+                            height={20}
                             className='w-10 md:w-20'
                         />
                     </div>
@@ -101,7 +105,13 @@ const Page: React.FC = () => {
                 {motorcycles.map((motorcycle) => (
                     <div key={motorcycle.id} className="motorcycle-card">
                         <Link href={`/catalogo/${motorcycle.id}`}>
-                            <img className='w-full' src={motorcycle.imageUrls[0]} alt={motorcycle.name} width={200} height={150} />
+                            <Image
+                                className='w-full'
+                                src={motorcycle.imageUrls[0]}
+                                alt={motorcycle.name}
+                                width={200}
+                                height={150}
+                            />
                             <div className='relative flex items-center flex-1 justify-between py-3 z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2 shadow-md'>
                                 <p className='uppercase'>{motorcycle.name}</p>
                                 <p className='absolute right-0 p-3 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ {motorcycle.price}</p>

@@ -13,6 +13,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Motorcycle } from '@/lib/types';
 import 'react-toastify/dist/ReactToastify.css';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import Image from 'next/image';
 
 const Page: React.FC = () => {
     const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
@@ -142,7 +143,13 @@ const Page: React.FC = () => {
                     {motorcycles.map((motorcycle) => (
                         <Card key={motorcycle.id} className='flex flex-col'>
                             <Link href={`/painel/motos/${motorcycle.id}`}>
-                                <img className='w-full rounded-t-md' src={motorcycle.imageUrls[0]} alt={motorcycle.name} width={200} height={150} />
+                                <Image
+                                    className='w-full rounded-t-md'
+                                    src={motorcycle.imageUrls[0]}
+                                    alt={motorcycle.name}
+                                    width={200}
+                                    height={150}
+                                />
                                 <div className='flex flex-col gap-2 p-2'>
                                     <p className='text-center text-xl text-shineray-color-dark uppercase'>{motorcycle.name}</p>
                                     <div className='flex justify-between items-center border-shineray-color-dark border p-1'>
@@ -150,7 +157,6 @@ const Page: React.FC = () => {
                                         <p>R$ {motorcycle.price}</p>
                                     </div>
                                 </div>
-
                             </Link>
                             <div className='grid grid-cols-2'>
                                 <Dialog>
@@ -215,9 +221,8 @@ const Page: React.FC = () => {
                         </Card>
                     ))}
                 </div>
-            </Card >
-
-        </div >
+            </Card>
+        </div>
     );
 };
 

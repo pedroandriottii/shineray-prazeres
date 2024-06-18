@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Motorcycle } from '@/lib/types';
 import { Poppins } from 'next/font/google';
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
@@ -55,14 +55,20 @@ const CatalogSection: React.FC = () => {
                         {motorcycles.slice(0, 3).map((motorcycle) => (
                             <CarouselItem key={motorcycle.id} className="lg:basis-1/3 flex flex-col">
                                 <Link href={`catalogo/${motorcycle.id}`}>
-                                    <img className='w-full' src={motorcycle.imageUrls[0]} alt={motorcycle.name} />
+                                    <Image
+                                        className='w-full'
+                                        src={motorcycle.imageUrls[0]}
+                                        alt={motorcycle.name}
+                                        width={400}
+                                        height={300}
+                                        layout="responsive"
+                                    />
                                     <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
                                         <p className=''>{motorcycle.name}</p>
                                         <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ {motorcycle.price}</p>
                                         <div className="absolute right-28 top-0 border-corner-catalog"></div>
                                     </div>
                                 </Link>
-
                             </CarouselItem>
                         ))}
                         <CarouselItem className="lg:basis-1/3 flex flex-col relative bg-gradient-to-br from-black to-[#797979] items-center justify-center">
