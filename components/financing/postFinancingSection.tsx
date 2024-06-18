@@ -57,7 +57,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
   };
 
   return (
-    <div className='w-full flex p-4 items-center flex-col bg-shineray-color-dark'>
+    <div className='w-full flex p-4 lg:py-12 items-center flex-col bg-shineray-color-dark'>
       <ToastContainer />
       <h3 className="text-center py-3 text-white uppercase font-bold text-2xl">Simule seu financiamento</h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-[800px]">
@@ -137,7 +137,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
               placeholder="R$"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="border rounded-md p-2"
+              className="border rounded-full p-2 w-full"
               required={method === 'COM_ENTRADA'}
             />
           </div>

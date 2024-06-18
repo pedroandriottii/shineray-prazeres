@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { Client } from '@/lib/types';
 import { Rating, Star } from '@smastrom/react-rating';
 import { Textarea } from '@/components/ui/textarea';
+import ClientsLinks from '@/components/ClientsLinks';
 
 interface Service {
     id: number;
@@ -205,6 +206,7 @@ const Services: React.FC = () => {
 
     return (
         <div className="p-6 bg-white h-screen">
+            {role === 'CLIENT' && (<ClientsLinks />)}
             <h1 className="text-2xl md:text-4xl md:mt-6 md:mb-10 font-bold mb-4">Lista de Serviços</h1>
             <div className="grid grid-cols-2 grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {services.map((service) => (

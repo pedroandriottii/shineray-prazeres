@@ -13,6 +13,7 @@ import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 import { Textarea } from './ui/textarea';
 import { Rating, Star, ThinRoundedStar } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
+import ClientsLinks from './ClientsLinks';
 
 const ClientPanel: React.FC = () => {
     const id = Cookies.get('userId');
@@ -133,6 +134,8 @@ const ClientPanel: React.FC = () => {
     return (
         <div className="bg-white h-[85vh]">
             <div className='p-6'>
+            <ClientsLinks />
+
             <AlertDialog defaultOpen={userData?.isFirstAccess}>
                 <AlertDialogContent className='max-w-[360px]' >
                     <AlertDialogHeader>
