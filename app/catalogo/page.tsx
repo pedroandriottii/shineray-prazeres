@@ -115,8 +115,8 @@ const Page: React.FC = () => {
                             />
                             <div className='relative flex items-center flex-1 justify-between py-3 z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2 shadow-md'>
                                 <p className='uppercase'>{motorcycle.name}</p>
-                                <p className='absolute right-0 p-3 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ {motorcycle.price}</p>
-                                <div className="absolute right-28 top-0 border-corner-catalog-page"></div>
+                                <p className='absolute right-0 p-3 bg-shineray-color-dark pl-6 max-w-32 min-w-32'>R$ {motorcycle.price}</p>
+                                <div className="absolute right-32 top-0 border-corner-catalog-page"></div>
                             </div>
                             <div className='flex flex-1 py-2 w-full gap-1'>
                                 <button className='bg-shineray-color-dark w-2/3 text-white p-1 rounded-xl'>Simular Financiamento</button>

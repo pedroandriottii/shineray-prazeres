@@ -72,8 +72,8 @@ const Page: React.FC = () => {
                             <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
                                 <Image
                                     src={url}
-                                    width={100}
-                                    height={100}
+                                    width={200}
+                                    height={150}
                                     alt={motorcycle!.name}
                                     className="w-full"
                                 />
