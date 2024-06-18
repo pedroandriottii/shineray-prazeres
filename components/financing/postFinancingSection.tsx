@@ -6,8 +6,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-
-import { Select } from '../ui/select';
+import relampago from '@/public/catalog/relampago.svg'
+import zap from '@/public/catalog/zap.svg'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
+import Image from 'next/image';
 
 
 const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
@@ -18,6 +20,8 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
   const [hasDriverLicense, setHasDriverLicense] = useState(false);
   const [method, setMethod] = useState('COM_ENTRADA');
   const [value, setValue] = useState('');
+  const [open, setOpen] = useState(false);
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -47,6 +51,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
       console.log(newItem)
 
       if (response.ok) {
+        setOpen(true);
         toast.success('Simulação de Financiamento Enviada para Análise!');
       } else {
         toast.error('Falha ao enviar a simulação de financiamento. Tente novamente mais tarde.');
@@ -59,6 +64,26 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
   return (
     <div className='w-full flex p-4 lg:py-12 items-center flex-col bg-shineray-color-dark'>
       <ToastContainer />
+      <AlertDialog onOpenChange={() => setOpen(!open)} open={open}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className='self-center'><Image alt="teste" src={relampago} width={60} height={60}  /></AlertDialogTitle>
+            <AlertDialogDescription className='font-bold text-2xl self-center text-black'>
+              Sua simulação foi enviada
+            </AlertDialogDescription>
+            <p className='uppercase text-xl self-center mt-4'>Nome da moto</p>
+            <p className='text-center self-center mt-4'>Não se preoucupe, um de nossos vendedores irá entrar em contato com você o mais breve possível!</p>
+            <p className=' text-center self-center mt-4'>Surgiu alguma dúvida? Entre em contato conosco através do whatsapp!</p>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <a href="#" className='w-full'>
+            <AlertDialogAction className='w-full bg-red-600 hover:bg-red-700 rounded-full' asChild>
+              <Image alt="teste" src={zap} width={30} height={30}  />
+            </AlertDialogAction>
+            </a>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <h3 className="text-center py-3 text-white uppercase font-bold text-2xl">Simule seu financiamento</h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-[800px]">
         <div className='flex flex-col gap-2'>
@@ -142,7 +167,6 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
             />
           </div>
         )}
-
         <Button type="submit" variant='default' className='flex w-full rounded-full mt-4 bg-black'>Enviar</Button>
       </form>
     </div>
