@@ -18,6 +18,7 @@ export interface FinancingItem {
     updatedAt: string;
     motorcycleId: number;
     value: number;
+    motorcycleName: string;
 }
 
 export interface Motorcycle {

@@ -13,7 +13,7 @@ import Image from 'next/image';
 import InputMask from 'react-input-mask';
 
 
-const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
+const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId, motorcycleName }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [cpf, setCpf] = useState('');
@@ -55,10 +55,10 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
         setOpen(true);
         toast.success('Simulação de Financiamento Enviada para Análise!');
       } else {
-        toast.error('Falha ao enviar a simulação de financiamento. Tente novamente mais tarde.');
+        toast.error('Falha ao enviar a simulação de financiamento. Verifique se as informações são válidas.');
       }
     } catch (error) {
-      toast.error('Falha ao enviar a simulação de financiamento. Tente novamente mais tarde.');
+      toast.error('Falha ao enviar a simulação de financiamento. Verifique se as informações são válidas.');
     }
   };
 
@@ -72,12 +72,12 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId }) => {
             <AlertDialogDescription className='font-bold text-2xl self-center text-black'>
               Sua simulação foi enviada
             </AlertDialogDescription>
-            <p className='uppercase text-xl self-center mt-4'>Nome da moto</p>
+            <p className='uppercase text-xl self-center mt-4'>{motorcycleName}</p>
             <p className='text-center self-center mt-4'>Não se preoucupe, um de nossos vendedores irá entrar em contato com você o mais breve possível!</p>
             <p className=' text-center self-center mt-4'>Surgiu alguma dúvida? Entre em contato conosco através do whatsapp!</p>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <a href="https://api.whatsapp.com/send?phone=5581999564461" className='w-full'>
+            <a href="https://api.whatsapp.com/send?phone=5581999564461" target='__blank' className='w-full'>
               <AlertDialogAction className='w-full bg-red-600 hover:bg-red-700 rounded-full' asChild>
                 <Image alt="teste" src={zap} width={30} height={30} />
               </AlertDialogAction>

@@ -43,14 +43,14 @@ const Page: React.FC = () => {
 
     React.useEffect(() => {
         if (!api) {
-          return
+            return
         }
-     
+
         setCount(api.scrollSnapList().length)
         setCurrent(api.selectedScrollSnap() + 1)
-     
+
         api.on("select", () => {
-          setCurrent(api.selectedScrollSnap() + 1)
+            setCurrent(api.selectedScrollSnap() + 1)
         })
     }, [api])
 
@@ -68,17 +68,17 @@ const Page: React.FC = () => {
             <div className='px-4 flex justify-center'>
                 <Carousel setApi={setApi} className='flex-1'>
                     <CarouselContent>
-                    {motorcycle!.imageUrls.map((url, index) => (
-                        <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
-                            <Image
-                                src={url}
-                                width={100}
-                                height={100}
-                                alt={motorcycle!.name}
-                                className="w-full"
-                            />
-                        </CarouselItem>
-                    ))}
+                        {motorcycle!.imageUrls.map((url, index) => (
+                            <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
+                                <Image
+                                    src={url}
+                                    width={100}
+                                    height={100}
+                                    alt={motorcycle!.name}
+                                    className="w-full"
+                                />
+                            </CarouselItem>
+                        ))}
                     </CarouselContent>
                 </Carousel>
             </div>
@@ -93,8 +93,8 @@ const Page: React.FC = () => {
                 <p className=''><span className='font-bold text-gray-700'>Descrição:</span> {motorcycle!.description}</p>
                 <p><span className='font-bold text-gray-700'>Ficha Técnica:</span> {motorcycle!.specs}</p>
             </div>
-            
-            <PostFinancingSection motorcycleId={motorcycle!.id} id={0} name={''} phone={''} cpf={''} birthDate={''} hasDriverLicense={false} method={''} isConcluded={false} createdAt={''} updatedAt={''} value={0} />
+
+            <PostFinancingSection motorcycleId={motorcycle!.id} motorcycleName={motorcycle?.name || ''} id={0} name={''} phone={''} cpf={''} birthDate={''} hasDriverLicense={false} method={''} isConcluded={false} createdAt={''} updatedAt={''} value={0} />
         </div>
     );
 };
