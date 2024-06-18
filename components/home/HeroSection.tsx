@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { Poppins } from 'next/font/google';
+import Link from 'next/link';
 
 const FontInter = Inter({ subsets: ['latin'], weight: ['200'] });
 const FontPoppins = Poppins({ subsets: ['latin'], weight: ['200'] });
@@ -11,7 +12,7 @@ const HeroSection: React.FC = () => {
         <div className="relative w-full">
             <div className="block md:hidden">
                 <Image
-                    src={'/home/hero.svg'}
+                    src={'/home/hero.jpg'}
                     alt="Hero Background Mobile"
                     width={1920}
                     height={1080}
@@ -22,7 +23,7 @@ const HeroSection: React.FC = () => {
             </div>
             <div className="hidden md:block">
                 <Image
-                    src={'/home/heroDesk.svg'}
+                    src={'/home/heroDesk.jpg'}
                     alt="Hero Background Desktop"
                     width={1920}
                     height={1080}
@@ -34,14 +35,18 @@ const HeroSection: React.FC = () => {
             <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-1`}>
                 <h1 className="text-2xl lg:text-7xl text-center md:text-5xl"><span className='font-extrabold'>CONQUISTE</span> SUA SHINERAY</h1>
                 <div className="flex items-center gap-2">
-                    <img
+                    <Image
                         src={'/base/shinerayLogo.png'}
                         alt='Logomarca Shineray'
+                        width={160}
+                        height={60}
                         className='w-40 md:w-60'
                     />
-                    <img
+                    <Image
                         src={'/base/revisaoLogo.png'}
                         alt='Logomarca Revisão'
+                        width={40}
+                        height={40}
                         className='w-10 md:w-20'
                     />
                 </div>
@@ -55,7 +60,7 @@ const HeroSection: React.FC = () => {
                         width={16}
                         height={16}
                     />
-                    <p className='ml-2'>(81) 98814-5903</p>
+                    <a href='https://api.whatsapp.com/send?phone=5581999564461' target='__blank' className='ml-2'>(81) 99956-4461</a>
                 </div>
             </div>
         </div >

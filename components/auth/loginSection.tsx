@@ -51,35 +51,39 @@ const LoginSection: React.FC = () => {
         <div className="relative w-full h-full md:h-screen">
             <div className="block md:hidden">
                 <Image
-                    src={'/login/coverImage.svg'}
+                    src={'/login/coverImage.png'}
                     alt="Hero Background Mobile"
                     width={1920}
                     height={1080}
                     objectFit="cover"
                     quality={100}
-                    className="z-0 w-full h-full bg-black/90"
+                    className="z-0 w-full h-full "
                 />
             </div>
             <div className="hidden md:block">
                 <Image
-                    src={'/login/coverImageDesk.svg'}
+                    src={'/login/coverImageDesk.jpg'}
                     alt="Hero Background Desktop"
                     layout="fill"
                     objectFit="cover"
                     quality={100}
-                    className="z-0 bg-black/90"
+                    className="z-0 "
                 />
             </div>
             <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-10`}>
                 <div className="flex items-center gap-2">
-                    <img
+                    <Image
                         src={'/base/shinerayLogo.png'}
                         alt='Logomarca Shineray'
+                        width={160}
+                        height={60}
                         className='w-40 md:w-60'
                     />
-                    <img
+                    <Image
                         src={'/base/revisaoLogo.png'}
                         alt='Logomarca Revisão'
+                        width={40}
+                        height={40}
                         className='w-10 md:w-20'
                     />
                 </div>
