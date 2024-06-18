@@ -165,7 +165,7 @@ const Navbar: React.FC = () => {
                             width={20}
                             height={20}
                         />
-                        <span>(81) 98814-5906</span>
+                        <span>(81) 99956-4461</span>
                     </div>
                     <div className='flex items-center gap-1'>
                         <Image

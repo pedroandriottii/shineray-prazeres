@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { Inter } from 'next/font/google';
@@ -47,27 +47,34 @@ const LoginSection: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        document.body.style.overflowY = 'hidden';
+        return () => {
+            document.body.style.overflowY = 'auto';
+        };
+    }, []);
+
     return (
         <div className="relative w-full h-full md:h-screen">
             <div className="block md:hidden">
                 <Image
-                    src={'/login/coverImage.png'}
+                    src={'/login/coverImage.jpg'}
                     alt="Hero Background Mobile"
                     width={1920}
                     height={1080}
-                    objectFit="cover"
+                    style={{ objectFit: 'cover' }}
                     quality={100}
-                    className="z-0 w-full h-full "
+                    className="z-0 w-full h-full"
                 />
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:block relative w-full h-full">
                 <Image
                     src={'/login/coverImageDesk.jpg'}
                     alt="Hero Background Desktop"
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     quality={100}
-                    className="z-0 "
+                    className="z-0"
                 />
             </div>
             <div className={`${FontInter.className} absolute inset-0 flex flex-col justify-center items-center text-white z-10`}>

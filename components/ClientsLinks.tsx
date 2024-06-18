@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { Button } from './ui/button';
+import Logout from './base/logout';
 
 const ClientsLinks: React.FC = () => {
   return (
@@ -9,8 +10,9 @@ const ClientsLinks: React.FC = () => {
         <Button className='bg-[#cc0000] hover:bg-[#ff0000] text-white font-bold rounded-full border-none px-10 py-2'>Painel</Button>
       </Link>
       <Link href={'/painel/servicos'}>
-          <Button className='bg-[#cc0000] hover:bg-[#ff0000] text-white font-bold rounded-full border-none px-10 py-2'>Serviços</Button>
+        <Button className='bg-[#cc0000] hover:bg-[#ff0000] text-white font-bold rounded-full border-none px-10 py-2'>Serviços</Button>
       </Link>
+      <Logout />
     </div>
   );
 };

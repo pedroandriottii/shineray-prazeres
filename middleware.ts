@@ -5,12 +5,17 @@ export function middleware(req: NextRequest) {
     const token = req.cookies.get('accessToken');
     const { pathname } = req.nextUrl;
 
+    if (pathname === '/login' && token) {
+        return NextResponse.redirect(new URL('/painel', req.nextUrl));
+    }
+
     if (pathname.startsWith('/painel') && !token) {
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
+
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/painel/:path*'],
+    matcher: ['/painel/:path*', '/login'],
 };

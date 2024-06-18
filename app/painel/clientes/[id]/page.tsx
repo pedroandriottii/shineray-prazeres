@@ -32,6 +32,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 const ClientDetailPage: React.FC = () => {
     const pathname = usePathname();
     const id = pathname.split('/').pop();
@@ -167,8 +169,13 @@ const ClientDetailPage: React.FC = () => {
     return (
         <div className='p-6 flex flex-col gap-6'>
             <ToastContainer />
-            <Card className='p-2 border-none bg-shineray-color-dark text-center text-2xl uppercase text-white'>
-                Detalhes do Cliente
+            <Card className='flex items-center justify-between p-2 border-none bg-shineray-color-dark text-2xl uppercase text-white rounded-sm'>
+                <ArrowBackIcon
+                    className='cursor-pointer'
+                    onClick={() => router.back()}
+                />
+                <span className='flex-1 text-center'>Detalhes do Cliente</span>
+                <div className='w-6' />
             </Card>
             {client ? (
                 <div className='flex flex-col gap-6'>
@@ -317,19 +324,21 @@ const ClientDetailPage: React.FC = () => {
                             </div>
                         </div>
                         {services.length > 0 ? (
-                            <ul className='list-disc ml-6'>
+                            <div className='grid grid-cols-4 gap-6 p-4'>
                                 {services.map(service => (
-                                    <li key={service.id}>
-                                        <p><strong>Nome:</strong> {service.name}</p>
-                                        <p><strong>Tipo:</strong> {service.type}</p>
-                                        <p><strong>Data:</strong> {new Date(service.date).toLocaleDateString()}</p>
-                                        <p><strong>Quilometragem:</strong> {service.kilometers}</p>
-                                        {service.price && <p><strong>Preço:</strong> R$ {service.price}</p>}
+                                    <div key={service.id} className='p-2 shadow-md border  rounded-xl border-shineray-color-dark'>
+                                        <p className='text-center'><strong>{service.name}</strong></p>
+                                        <div className='flex justify-between'>
+                                            <p>{service.type}</p>
+                                            {service.price && <p> R$ {service.price}</p>}
+                                        </div>
+                                        <p><span className='text-sm'>Data:</span> {new Date(service.date).toLocaleDateString()}</p>
+                                        <p><span className='text-sm'>Quilometragem:</span > {service.kilometers} KM</p>
                                         {service.rating && <p><strong>Avaliação:</strong> {service.rating}</p>}
-                                        {service.message && <p><strong>Mensagem:</strong> {service.message}</p>}
-                                    </li>
+                                        {service.message && <p className='flex flex-col items-center'><span className='text-sm'>Mensagem:</span > {service.message}</p>}
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
                         ) : (
                             <p>Sem serviços</p>
                         )}
