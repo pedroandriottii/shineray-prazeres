@@ -58,7 +58,7 @@ const LoginSection: React.FC = () => {
         <div className="relative w-full h-full md:h-screen">
             <div className="block md:hidden">
                 <Image
-                    src={'/login/coverImage.jpg'}
+                    src={'/login/cover.jpg'}
                     alt="Hero Background Mobile"
                     width={1920}
                     height={1080}
@@ -69,7 +69,7 @@ const LoginSection: React.FC = () => {
             </div>
             <div className="hidden md:block relative w-full h-full">
                 <Image
-                    src={'/login/coverImageDesk.jpg'}
+                    src={'/login/coverDesk.jpg'}
                     alt="Hero Background Desktop"
                     fill
                     style={{ objectFit: 'cover' }}

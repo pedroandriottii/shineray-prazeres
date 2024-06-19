@@ -98,7 +98,7 @@ const Page: React.FC = () => {
                             width={16}
                             height={16}
                         />
-                        <p className='ml-2'>(81) 98814-5903</p>
+                        <a href='https://api.whatsapp.com/send?phone=5581999564461' target='__blank' className='ml-2'>(81) 99956-4461</a>
                     </div>
                 </div>
             </div >
