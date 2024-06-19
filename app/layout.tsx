@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/base/navbar";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { AuthProvider } from "@/context/AuthContext";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Font = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
@@ -22,6 +24,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Analytics />
+      <SpeedInsights />
       <AuthProvider>
         <body className={`${Font.className} font-light`}>
           <Navbar />

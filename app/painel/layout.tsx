@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Logout from '@/components/base/logout';
 import { Montserrat } from "next/font/google";
 import Cookies from 'js-cookie';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Font = Montserrat({ subsets: ["latin"], weight: ["400"] });
 const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -22,8 +24,9 @@ const PainelLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     }
     return (
         <html lang="en">
+            <Analytics />
+            <SpeedInsights />
             {role === 'ADMIN' && (
-
                 <AuthProvider>
                     <body className={`${Font.className} font-light bg-[#121212]`} >
                         <div className="white px-6 py-4 flex justify-between items-center">
