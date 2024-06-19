@@ -60,19 +60,6 @@ const Navbar: React.FC = () => {
                             </Link>
                         </div>
                         <div className='flex text-white text-lg'>
-                            <Link href={'/#sobre-nos'} onClick={() => setMenuOpen(false)}>
-                                <span className='flex items-center gap-3 hover:text-shineray-color-dark'>
-                                    <Image
-                                        src={motorcycle}
-                                        width={25}
-                                        height={25}
-                                        alt='sore nós'
-                                    />
-                                    Sobre nos
-                                </span>
-                            </Link>
-                        </div>
-                        <div className='flex text-white text-lg'>
                             <Link href={'/catalogo'} onClick={() => setMenuOpen(false)}>
                                 <span className='flex items-center gap-3 hover:text-shineray-color-dark'>
                                     <Image
@@ -114,19 +101,6 @@ const Navbar: React.FC = () => {
                                     alt='Home'
                                 />
                                 Início
-                            </span>
-                        </div>
-                    </Link>
-                    <Link href={'/#sobre-nos'}>
-                        <div className='flex text-white text-lg'>
-                            <span className='flex items-center gap-3 hover:text-shineray-color-dark'>
-                                <Image
-                                    src={motorcycle}
-                                    width={25}
-                                    height={25}
-                                    alt='sore nós'
-                                />
-                                Sobre nos
                             </span>
                         </div>
                     </Link>
