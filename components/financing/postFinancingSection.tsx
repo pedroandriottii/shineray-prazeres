@@ -8,9 +8,10 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import relampago from '@/public/catalog/relampago.svg'
 import zap from '@/public/catalog/zap.svg'
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import Image from 'next/image';
 import InputMask from 'react-input-mask';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
 
 
 const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId, motorcycleName }) => {
@@ -65,26 +66,26 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId, motorcycl
   return (
     <div className='w-full flex p-4 lg:py-12 items-center flex-col bg-shineray-color-dark'>
       <ToastContainer />
-      <AlertDialog onOpenChange={() => setOpen(!open)} open={open}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className='self-center'><Image alt="teste" src={relampago} width={60} height={60} /></AlertDialogTitle>
-            <AlertDialogDescription className='font-bold text-2xl self-center text-black'>
+      <Dialog onOpenChange={() => setOpen(!open)} open={open}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className='self-center'><Image alt="teste" src={relampago} width={60} height={60} /></DialogTitle>
+            <DialogDescription className='font-bold text-2xl self-center text-black'>
               Sua simulação foi enviada
-            </AlertDialogDescription>
+            </DialogDescription>
             <p className='uppercase text-xl self-center mt-4'>{motorcycleName}</p>
             <p className='text-center self-center mt-4'>Não se preoucupe, um de nossos vendedores irá entrar em contato com você o mais breve possível!</p>
             <p className=' text-center self-center mt-4'>Surgiu alguma dúvida? Entre em contato conosco através do whatsapp!</p>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
+          </DialogHeader>
+          <DialogFooter>
             <a href="https://api.whatsapp.com/send?phone=5581999564461" target='__blank' className='w-full'>
-              <AlertDialogAction className='w-full bg-red-600 hover:bg-red-700 rounded-full' asChild>
-                <Image alt="teste" src={zap} width={30} height={30} />
-              </AlertDialogAction>
+              <button className='w-full flex justify-center py-2 bg-red-600 hover:bg-red-700 rounded-full'>
+                <Image alt="teste" src={zap} width={25} height={25} />
+              </button>
             </a>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <h3 className="text-center py-3 text-white uppercase font-bold text-2xl">Simule seu financiamento</h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-[800px]">
         <div className='flex flex-col gap-2'>
