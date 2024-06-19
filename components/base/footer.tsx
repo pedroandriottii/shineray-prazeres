@@ -36,9 +36,6 @@ function Footer() {
                 <Link href={'/'}>
                     <p>Início</p>
                 </Link>
-                <Link href={'/#sobre-nos'}>
-                    <p>Sobre Nós</p>
-                </Link>
                 <Link href={'/catalogo'}>
                     <p>Catálogo</p>
                 </Link>
