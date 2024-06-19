@@ -141,7 +141,7 @@ const Page: React.FC = () => {
                 </div>
                 <div className='grid grid-flow-row gap-10 lg:grid-cols-5 p-4'>
                     {motorcycles.map((motorcycle) => (
-                        <Card key={motorcycle.id} className='flex flex-col'>
+                        <Card key={motorcycle.id} className='flex flex-col rounded-b-none'>
                             <Link href={`/painel/motos/${motorcycle.id}`}>
                                 <Image
                                     className='w-full rounded-t-md'

@@ -65,7 +65,7 @@ const Page: React.FC = () => {
 
     return (
         <div className="">
-            <h1 className='w-full text-center text-2xl md:text-4xl uppercase font-semibold my-8'>{motorcycle!.name}</h1>
+            <h1 className='w-full text-center text-2xl md:text-4xl uppercase font-extrabold text-shineray-color-dark my-8'>{motorcycle!.name}</h1>
             <div className='px-4 flex justify-center'>
                 <Carousel setApi={setApi} className='flex-1'>
                     <CarouselContent>
@@ -86,7 +86,7 @@ const Page: React.FC = () => {
             <div className="py-2 text-center text-sm text-muted-foreground">
                 {current} de {count}
             </div>
-            <p className='w-full text-center text-xl md:text-2xl mt-3'>R$ {motorcycle!.price}</p>
+            <p className='w-full text-center text-xl md:text-2xl mt-3 text-shineray-color-dark font-semibold'>R$ {motorcycle!.price}</p>
             <div className='px-4 md:px-8 text-[#2C2C2C] md:leading-9 text-lg md:text-xl my-5'>
                 <p className=''><span className='font-bold text-gray-700'>Nome:</span> {motorcycle!.name}</p>
                 <p className=''><span className='font-bold text-gray-700'>Cor:</span> {motorcycle!.color}</p>
