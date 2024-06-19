@@ -42,6 +42,9 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Client } from '@/lib/types';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import DeleteIcon from '@mui/icons-material/Delete';
+import InfoIcon from '@mui/icons-material/Info';
 
 const Page: React.FC = () => {
     const [clients, setClients] = useState<Client[]>([]);
@@ -185,6 +188,28 @@ const Page: React.FC = () => {
             setLoading(false);
         }
     };
+
+    const handleDelete = async (id: number) => {
+        const token = Cookies.get('accessToken');
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            setClients((prev) => prev.filter((m) => m.id !== id));
+            toast.success('Usuário deletado com sucesso!');
+        } catch (error) {
+            toast.error('Houve um problema ao deletar o usuário.');
+        }
+    }
 
 
     if (loading) {
@@ -357,7 +382,7 @@ const Page: React.FC = () => {
                     </TableHeader>
                     <TableBody>
                         {clients.map(item => (
-                            <TableRow key={item.id} className='hover:bg-shineray-color-dark hover:rounded-2xl cursor-pointer' onClick={() => handleRowClick(item.id)}>
+                            <TableRow key={item.id}>
                                 <TableCell className='text-white font-md'>{item.name}</TableCell>
                                 <TableCell className='text-white font-md'>{item.email}</TableCell>
                                 <TableCell className='text-white font-md'>{item.cpf}</TableCell>
@@ -365,6 +390,32 @@ const Page: React.FC = () => {
                                 <TableCell className='text-white font-md'>
                                     {item.role === 'ADMIN' ? <Badge variant='destructive'>Gestor</Badge> : <Badge variant='default'>Cliente</Badge>}
                                 </TableCell>
+                                <TableCell>
+                                    <span className='text-blue-400 cursor-pointer'>
+                                        <InfoIcon onClick={() => handleRowClick(item.id)} />
+                                    </span>
+                                </TableCell>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <TableCell>
+                                            <span className='text-red-600 cursor-pointer'>
+                                                <DeleteIcon />
+                                            </span>
+                                        </TableCell>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Voce tem certeza?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Esta acao nao pode ser desfeita.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => handleDelete(item.id)}>Continuar</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </TableRow>
                         ))}
                     </TableBody>
