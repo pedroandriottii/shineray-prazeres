@@ -5,6 +5,7 @@ import PostFinancingSection from '@/components/financing/postFinancingSection';
 import { Motorcycle } from '@/lib/types';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Image from 'next/image';
+import Footer from '@/components/base/footer';
 
 const Page: React.FC = () => {
     const pathname = usePathname();
@@ -95,6 +96,7 @@ const Page: React.FC = () => {
             </div>
 
             <PostFinancingSection motorcycleId={motorcycle!.id} motorcycleName={motorcycle?.name || ''} id={0} name={''} phone={''} cpf={''} birthDate={''} hasDriverLicense={false} method={''} isConcluded={false} createdAt={''} updatedAt={''} value={0} />
+            <Footer />
         </div>
     );
 };

@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
                     </Link>
                     <Link href={'/login'}>
                         <div className='flex text-white text-lg'>
-                            <span className='flex items-center gap-3 hover:text-shineray-color-dar'>
+                            <span className='flex items-center gap-3 hover:text-shineray-color-dark'>
                                 <Image
                                     src={profile}
                                     width={25}
