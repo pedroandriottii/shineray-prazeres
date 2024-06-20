@@ -143,13 +143,15 @@ const Page: React.FC = () => {
                     {motorcycles.map((motorcycle) => (
                         <Card key={motorcycle.id} className='flex flex-col rounded-b-none'>
                             <Link href={`/painel/motos/${motorcycle.id}`}>
-                                <Image
-                                    className='w-full rounded-t-md'
-                                    src={motorcycle.imageUrls[0]}
-                                    alt={motorcycle.name}
-                                    width={200}
-                                    height={150}
-                                />
+                                {motorcycle.coverImageUrl && (
+                                    <Image
+                                        className='w-full rounded-t-md'
+                                        src={motorcycle.coverImageUrl}
+                                        alt={motorcycle.name}
+                                        width={200}
+                                        height={150}
+                                    />
+                                )}
                                 <div className='flex flex-col gap-2 p-2'>
                                     <p className='text-center text-xl text-shineray-color-dark uppercase'>{motorcycle.name}</p>
                                     <div className='flex justify-between items-center border-shineray-color-dark border p-1'>

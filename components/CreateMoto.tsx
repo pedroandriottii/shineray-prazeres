@@ -14,6 +14,7 @@ const CreateMoto: React.FC = () => {
   const [color, setColor] = useState('');
   const [specs, setSpecs] = useState('');
   const [images, setImages] = useState<File[]>([]);
+  const [coverImage, setCoverImage] = useState<File | null>(null);
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -39,6 +40,9 @@ const CreateMoto: React.FC = () => {
     formData.append('price', price);
     formData.append('color', color);
     formData.append('specs', specs);
+    if (coverImage) {
+      formData.append('coverImage', coverImage);
+    }
     images.forEach((image) => {
       formData.append('images', image);
     });
@@ -83,6 +87,10 @@ const CreateMoto: React.FC = () => {
         <div className="mb-4">
           <label htmlFor="color" className="block text-sm font-medium text-gray-700">Cor</label>
           <Input type="text" id="color" name="color" placeholder="Cor" className="mt-1 block w-full" value={color} onChange={(e) => setColor(e.target.value)} required />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700">Imagem de Capa</label>
+          <Input type="file" id="coverImage" name="coverImage" className="mt-1 block w-full" onChange={(e) => setCoverImage(e.target.files?.[0] || null)} required />
         </div>
         <div className="mb-4">
           <label htmlFor="image" className="block text-sm font-medium text-gray-700">Imagens (máximo 10)</label>

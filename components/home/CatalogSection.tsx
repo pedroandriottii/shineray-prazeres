@@ -57,7 +57,7 @@ const CatalogSection: React.FC = () => {
                                 <Link href={`catalogo/${motorcycle.id}`}>
                                     <Image
                                         className='w-full'
-                                        src={motorcycle.imageUrls[0]}
+                                        src={motorcycle.coverImageUrl}
                                         alt={motorcycle.name}
                                         width={400}
                                         height={300}
@@ -71,7 +71,7 @@ const CatalogSection: React.FC = () => {
                                 </Link>
                             </CarouselItem>
                         ))}
-                        <CarouselItem className="lg:basis-1/3 flex flex-col relative bg-gradient-to-br from-black to-[#797979] items-center justify-center">
+                        <CarouselItem className="lg:basis-1/3 flex flex-col relative bg-gradient-to-br from-black to-[#797979] items-center justify-center mx-4">
                             <Link href={'/catalogo'}>
                                 <p className='underline text-white font-bold'>Visite nosso catálogo</p>
                             </Link>

@@ -31,6 +31,7 @@ export interface Motorcycle {
     specs: string;
     createdAt: string;
     updatedAt: string;
+    coverImageUrl: string;
 }
 
 export interface Client {
