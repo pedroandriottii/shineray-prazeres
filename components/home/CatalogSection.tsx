@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Motorcycle } from '@/lib/types';
 import { Poppins } from 'next/font/google';
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const Font = Poppins({ subsets: ['latin'], weight: ['400'] });
 
@@ -40,7 +40,6 @@ const CatalogSection: React.FC = () => {
         return <div>Loading...</div>;
     }
 
-
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
@@ -59,22 +58,22 @@ const CatalogSection: React.FC = () => {
             </div>
             {haveMotorcycles === true && (
                 <div className='mb-6'>
-                    <Carousel>
+                    <Carousel className='py-6 relative'>
                         <CarouselContent>
                             {motorcycles.slice(0, 3).map((motorcycle) => (
                                 <CarouselItem key={motorcycle.id} className="lg:basis-1/3 flex flex-col">
                                     <Link href={`catalogo/${motorcycle.id}`}>
-                                        <div className='relative w-full h-0 pb-[75%]'>
-                                            <Image
-                                                className='absolute top-0 left-0 w-full h-full object-contain'
-                                                src={motorcycle.coverImageUrl}
-                                                alt={motorcycle.name}
-                                                layout="fill"
-                                            />
-                                        </div>
+                                        <Image
+                                            className='w-full'
+                                            src={motorcycle.coverImageUrl}
+                                            alt={motorcycle.name}
+                                            width={400}
+                                            height={300}
+                                            layout="responsive"
+                                        />
                                         <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
                                             <p className=''>{motorcycle.name}</p>
-                                            <p className='absolute right-0 p-2 bg-shineray-color-dark text-center max-w-28 min-w-28'>{formatPrice(motorcycle.price)}</p>
+                                            <p className='absolute right-0 p-2 bg-shineray-color-dark max-w-28 min-w-28'>{formatPrice(motorcycle.price)}</p>
                                         </div>
                                     </Link>
                                 </CarouselItem>
@@ -85,6 +84,8 @@ const CatalogSection: React.FC = () => {
                                 </Link>
                             </CarouselItem>
                         </CarouselContent>
+                        <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2" />
+                        <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2" />
                     </Carousel>
                 </div>
             )}
