@@ -89,17 +89,17 @@ const Page: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className={`${FontPoppins.className} flex items-center p-2 bottom-0 bg-shineray-color-dark text-white text-center py-2 px-6 text-xs justify-around md:text-xl`}>
+                <div className={`${FontPoppins.className} flex items-center p-2 bottom-0 bg-shineray-color-dark text-white text-center py-2 px-6 text-xs justify-around md:text-xl relative`}>
                     <p className='mr-4'>Precisa de ajuda? Liga para a gente:</p>
-                    <div className='flex items-center'>
+                    <a href='https://wa.me/5581999564461?text=Ol%C3%A1%2C%20vim%20do%20site%20do%20Shineray%20Prazeres%20e%20queria%20mais%20informa%C3%A7%C3%B5es' target='_blank' className='flex items-center'>
                         <Image
                             src={'/home/phone.svg'}
                             alt='Telefone'
                             width={16}
                             height={16}
                         />
-                        <a href='https://api.whatsapp.com/send?phone=5581999564461' target='__blank' className='ml-2'>(81) 99956-4461</a>
-                    </div>
+                        <p className='ml-2'>(81) 99956-4461</p>
+                    </a>
                 </div>
             </div >
             <div className={` ${FontPoppins.className} grid p-6 grid-flow-row gap-10 md:grid-cols-3`}>

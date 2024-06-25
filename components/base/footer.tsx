@@ -41,7 +41,7 @@ function Footer() {
                 </Link>
             </div>
             <div className='flex justify-center gap-10 p-2 mb-10'>
-                <a href='https://api.whatsapp.com/send?phone=5581999564461' target='__blank' className='text-shineray-color-dark'><WhatsAppIcon fontSize='large' /></a>
+                <a href='https://wa.me/5581999564461?text=Ol%C3%A1%2C%20vim%20do%20site%20do%20Shineray%20Prazeres%20e%20queria%20mais%20informa%C3%A7%C3%B5es' target='__blank' className='text-shineray-color-dark'><WhatsAppIcon fontSize='large' /></a>
                 <a href='https://www.instagram.com/shinerayprazeres/' target='__blank' className='text-shineray-color-dark'><InstagramIcon fontSize='large' /></a>
             </div>
         </div>

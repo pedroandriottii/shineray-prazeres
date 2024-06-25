@@ -19,8 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const phoneNumber = '5581999564461'
-  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}`
+  const whatsappLink = `https://wa.me/5581999564461?text=Ol%C3%A1%2C%20vim%20do%20site%20do%20Shineray%20Prazeres%20e%20queria%20mais%20informa%C3%A7%C3%B5es`
 
   return (
     <html lang="en">
