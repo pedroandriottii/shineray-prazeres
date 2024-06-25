@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/base/navbar";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -36,9 +37,18 @@ export default function RootLayout({
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 right-4 z-50 flex items-center justify-center w-16 h-16 bg-green-600 text-white rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-lg">
             <WhatsAppIcon fontSize="large" />
           </a>
+          <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-16624479946" />
+          <Script id="google-analytics">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'AW-16624479946');
+            `}
+          </Script>
         </body>
       </AuthProvider>
-
     </html>
   );
 }
