@@ -3,15 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import PostFinancingSection from '@/components/financing/postFinancingSection';
 import { Motorcycle } from '@/lib/types';
-import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 import Image from 'next/image';
 import Footer from '@/components/base/footer';
+import { ArrowLeft, ArrowRight } from 'lucide-react'; // Importing arrow icons from Lucide
 
 const Page: React.FC = () => {
     const pathname = usePathname();
     const id = pathname.split('/').pop();
 
-    const [api, setApi] = React.useState<CarouselApi>()
+    const [api, setApi] = React.useState<CarouselApi | undefined>()
     const [current, setCurrent] = React.useState(0)
     const [count, setCount] = React.useState(0)
 
@@ -42,7 +43,7 @@ const Page: React.FC = () => {
         fetchMotorcycle();
     }, [id]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!api) {
             return
         }
@@ -67,20 +68,26 @@ const Page: React.FC = () => {
         <div className="">
             <h1 className='w-full text-center text-2xl md:text-4xl uppercase font-extrabold text-shineray-color-dark my-8'>{motorcycle!.name}</h1>
             <div className='px-4 flex justify-center'>
-                <Carousel setApi={setApi} className='flex-1'>
+                <Carousel setApi={setApi} className='w-full'>
                     <CarouselContent>
                         {motorcycle!.imageUrls.map((url, index) => (
                             <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
                                 <Image
                                     src={url}
-                                    width={200}
-                                    height={150}
+                                    width={400}
+                                    height={300}
                                     alt={motorcycle!.name}
-                                    className="w-full"
+                                    className="w-full h-full object-contain"
                                 />
                             </CarouselItem>
                         ))}
                     </CarouselContent>
+                    <CarouselPrevious className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                        <ArrowLeft className="h-8 w-8 text-white bg-black rounded-full p-2" />
+                    </CarouselPrevious>
+                    <CarouselNext className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                        <ArrowRight className="h-8 w-8 text-white bg-black rounded-full p-2" />
+                    </CarouselNext>
                 </Carousel>
             </div>
             <div className="py-2 text-center text-sm text-muted-foreground">

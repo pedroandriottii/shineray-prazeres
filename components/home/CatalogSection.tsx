@@ -42,7 +42,7 @@ const CatalogSection: React.FC = () => {
 
     return (
         <div className={`${Font.className} flex flex-col px-6 w-full pb-6`}>
-            <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white'>
+            <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white mb-6'>
                 <h2 className='text-xl'>CATÁLOGO</h2>
                 <Link href={'/catalogo'}>
                     <p className='underline pr-6 text-sm'>Ver mais</p>
@@ -50,20 +50,20 @@ const CatalogSection: React.FC = () => {
                 <div className="absolute right-0 bottom-0 border-corner"></div>
             </div>
             {haveMotorcycles === true && (
-                <div>
-                    <Carousel className='pb-6'>
+                <div className='mb-6'>
+                    <Carousel>
                         <CarouselContent>
                             {motorcycles.slice(0, 3).map((motorcycle) => (
                                 <CarouselItem key={motorcycle.id} className="lg:basis-1/3 flex flex-col">
                                     <Link href={`catalogo/${motorcycle.id}`}>
-                                        <Image
-                                            className='w-full'
-                                            src={motorcycle.coverImageUrl}
-                                            alt={motorcycle.name}
-                                            width={400}
-                                            height={300}
-                                            layout="responsive"
-                                        />
+                                        <div className='relative w-full h-0 pb-[75%]'>
+                                            <Image
+                                                className='absolute top-0 left-0 w-full h-full object-contain'
+                                                src={motorcycle.coverImageUrl}
+                                                alt={motorcycle.name}
+                                                layout="fill"
+                                            />
+                                        </div>
                                         <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
                                             <p className=''>{motorcycle.name}</p>
                                             <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ {motorcycle.price}</p>
