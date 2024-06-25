@@ -40,6 +40,14 @@ const CatalogSection: React.FC = () => {
         return <div>Loading...</div>;
     }
 
+
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price);
+    };
+
     return (
         <div className={`${Font.className} flex flex-col px-6 w-full pb-6`}>
             <div className='relative flex flex-1 z-0 justify-between items-center bg-black px-4 py-2 text-white mb-6'>
@@ -66,8 +74,7 @@ const CatalogSection: React.FC = () => {
                                         </div>
                                         <div className='relative flex items-center flex-1 justify-between z-0 bg-gradient-to-r from-black to-[#797979] text-white p-2'>
                                             <p className=''>{motorcycle.name}</p>
-                                            <p className='absolute right-0 p-2 bg-shineray-color-dark pl-6 max-w-28 min-w-28'>R$ {motorcycle.price}</p>
-                                            <div className="absolute right-28 top-0 border-corner-catalog"></div>
+                                            <p className='absolute right-0 p-2 bg-shineray-color-dark text-center max-w-28 min-w-28'>{formatPrice(motorcycle.price)}</p>
                                         </div>
                                     </Link>
                                 </CarouselItem>

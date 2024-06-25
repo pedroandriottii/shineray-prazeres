@@ -120,6 +120,13 @@ const Page: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price);
+    };
+
     return (
         <div className='p-6 flex flex-col gap-6'>
             <Card className='p-2 border-none bg-shineray-color-dark text-center text-2xl uppercase text-white rounded-sm'>
@@ -156,7 +163,7 @@ const Page: React.FC = () => {
                                     <p className='text-center text-xl text-shineray-color-dark uppercase'>{motorcycle.name}</p>
                                     <div className='flex justify-between items-center border-shineray-color-dark border p-1'>
                                         <p>Valor</p>
-                                        <p>R$ {motorcycle.price}</p>
+                                        <p>{formatPrice(motorcycle.price)}</p>
                                     </div>
                                 </div>
                             </Link>

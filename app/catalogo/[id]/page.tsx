@@ -64,6 +64,13 @@ const Page: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price);
+    };
+
     return (
         <div className="">
             <h1 className='w-full text-center text-2xl md:text-4xl uppercase font-extrabold text-shineray-color-dark my-8'>{motorcycle!.name}</h1>
@@ -93,11 +100,11 @@ const Page: React.FC = () => {
             <div className="py-2 text-center text-sm text-muted-foreground">
                 {current} de {count}
             </div>
-            <p className='w-full text-center text-xl md:text-2xl mt-3 text-shineray-color-dark font-semibold'>R$ {motorcycle!.price}</p>
+            <p className='w-full text-center text-xl md:text-2xl mt-3 text-shineray-color-dark font-semibold'>{formatPrice(motorcycle!.price)}</p>
             <div className='px-4 md:px-8 text-[#2C2C2C] md:leading-9 text-lg md:text-xl my-5'>
                 <p className=''><span className='font-bold text-gray-700'>Nome:</span> {motorcycle!.name}</p>
                 <p className=''><span className='font-bold text-gray-700'>Cor:</span> {motorcycle!.color}</p>
-                <p><span className='font-bold text-gray-700'>Preço:</span> {motorcycle!.price}</p>
+                <p><span className='font-bold text-gray-700'>Preço:</span> {formatPrice(motorcycle!.price)}</p>
                 <p className=''><span className='font-bold text-gray-700'>Descrição:</span> {motorcycle!.description}</p>
                 <p><span className='font-bold text-gray-700'>Ficha Técnica:</span> {motorcycle!.specs}</p>
             </div>

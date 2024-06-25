@@ -65,6 +65,13 @@ const Page: React.FC = () => {
         return <div>Error: {error}</div>;
     }
 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(price);
+    };
+
     return (
         <div className='p-6 flex flex-col gap-6'>
             <Card className='flex items-center justify-between p-2 border-none bg-shineray-color-dark text-2xl uppercase text-white rounded-sm'>
@@ -103,7 +110,7 @@ const Page: React.FC = () => {
                         </div>
                         <div className='grid grid-cols-3 gap-4'>
                             <p className='border border-shineray-color-dark rounded-md p-1'>Modelo: {motorcycle.name}</p>
-                            <p className='border border-shineray-color-dark rounded-md p-1'>Preço: R$ {motorcycle.price}</p>
+                            <p className='border border-shineray-color-dark rounded-md p-1'>Preço: {formatPrice(motorcycle.price)}</p>
                             <p className='border border-shineray-color-dark rounded-md p-1'>Cor: {motorcycle.color}</p>
                         </div>
                         <p className='border border-shineray-color-dark rounded-md p-1 mt-4'>Descrição: {motorcycle.description}</p>
