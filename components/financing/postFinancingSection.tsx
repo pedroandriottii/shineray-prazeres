@@ -153,7 +153,7 @@ const PostFinancingSection: React.FC<FinancingItem> = ({ motorcycleId, motorcycl
             />
           </div>
         )}
-        <Button type="submit" variant='default' className='flex w-full rounded-full mt-4 bg-black'>Enviar</Button>
+        <Button id='financing-button' type="submit" variant='default' className='flex w-full rounded-full mt-4 bg-black'>Enviar</Button>
       </form>
     </div>
   );
